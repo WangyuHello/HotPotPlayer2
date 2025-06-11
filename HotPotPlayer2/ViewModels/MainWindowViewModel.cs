@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using HotPotPlayer2.Base;
+using HotPotPlayer2.Views.Pages;
 
 namespace HotPotPlayer2.ViewModels
 {
@@ -12,7 +13,12 @@ namespace HotPotPlayer2.ViewModels
             musicVm.Page = musicPage;
             musicPage.DataContext = musicVm;
 
-            Pages = [musicVm];
+            var videoVm = new VideoPageViewModel();
+            var videoPage = new Video();
+            videoVm.Page = videoPage;
+            videoPage.DataContext = videoVm;
+
+            Pages = [musicVm, videoVm];
             CurrentPage = Pages[0];
         }
 

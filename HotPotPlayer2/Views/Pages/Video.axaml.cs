@@ -4,9 +4,9 @@ using Avalonia.Markup.Xaml;
 
 namespace HotPotPlayer2.Views.Pages;
 
-public partial class Music : UserControl
+public partial class Video : UserControl
 {
-    public Music()
+    public Video()
     {
         InitializeComponent();
     }
