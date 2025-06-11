@@ -48,5 +48,6 @@ namespace HotPotPlayer2
                 BindingPlugins.DataValidators.Remove(plugin);
             }
         }
+
     }
 }

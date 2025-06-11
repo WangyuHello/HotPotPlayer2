@@ -24,6 +24,7 @@ namespace HotPotPlayer2.Base
         private MusicPlayerService? musicPlayer;
         public MusicPlayerService MusicPlayer => musicPlayer ??= new MusicPlayerService(Config, this);
 
+        public abstract string ApplicationVersion { get; }
 
         public void NavigateBack(bool force = false)
         {
