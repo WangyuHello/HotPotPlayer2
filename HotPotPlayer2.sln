@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36203.30 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotPotPlayer2", "HotPotPlayer2\HotPotPlayer2.csproj", "{B15B981E-8FB1-4B35-9388-67AA880271AE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B15B981E-8FB1-4B35-9388-67AA880271AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B15B981E-8FB1-4B35-9388-67AA880271AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B15B981E-8FB1-4B35-9388-67AA880271AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B15B981E-8FB1-4B35-9388-67AA880271AE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AF0446C2-2C6D-476B-878A-BB2E11CA3A04}
+	EndGlobalSection
+EndGlobal
