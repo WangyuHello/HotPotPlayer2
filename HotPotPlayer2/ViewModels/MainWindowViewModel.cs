@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using HotPotPlayer2.Base;
 
 namespace HotPotPlayer2.ViewModels
 {
@@ -8,5 +9,9 @@ namespace HotPotPlayer2.ViewModels
 
         [ObservableProperty]
         public partial int Test { get; set; }
+
+        public void T()
+        {
+        }
     }
 }

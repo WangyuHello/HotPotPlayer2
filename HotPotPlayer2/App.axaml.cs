@@ -1,16 +1,20 @@
 using System.Linq;
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
+using HotPotPlayer2.Base;
 using HotPotPlayer2.ViewModels;
 using HotPotPlayer2.Views;
 
 namespace HotPotPlayer2
 {
-    public partial class App : Application
+    public partial class App : AppBase
     {
+        public override Window MainWindow => MainWindow;
+
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
