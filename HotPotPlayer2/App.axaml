@@ -3,11 +3,12 @@
              x:Class="HotPotPlayer2.App"
              xmlns:local="using:HotPotPlayer2"
              xmlns:base="using:HotPotPlayer2.Base"
+             xmlns:vm="using:HotPotPlayer2.ViewModels"
              RequestedThemeVariant="Default">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
     <Application.DataTemplates>
-        
+        <vm:MainWindowPageTemplate />
     </Application.DataTemplates>
   
     <Application.Styles>

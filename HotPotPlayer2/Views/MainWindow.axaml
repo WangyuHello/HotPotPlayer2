@@ -20,7 +20,7 @@
 		<Grid x:Name="ContentRoot" ColumnDefinitions="48, *">
 			<cont:MainSidebar />
 
-			<!--<Frame x:Name="MainFrame" Grid.Column="1" />-->
+			<TransitioningContentControl Grid.Column="1" Content="{Binding CurrentPage}" />
 		</Grid>
 	</Grid>
 

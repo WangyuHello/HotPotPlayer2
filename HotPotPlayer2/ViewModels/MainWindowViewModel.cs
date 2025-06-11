@@ -5,13 +5,21 @@ namespace HotPotPlayer2.ViewModels
 {
     public partial class MainWindowViewModel : ViewModelBase
     {
-        public string Greeting { get; } = "Welcome to Avalonia!";
+        public MainWindowViewModel()
+        {
+            var musicVm = new MusicPageViewModel();
+            var musicPage = new Music();
+            musicVm.Page = musicPage;
+            musicPage.DataContext = musicVm;
+
+            Pages = [musicVm];
+            CurrentPage = Pages[0];
+        }
+
+        private readonly PageViewModelBase[] Pages;
 
         [ObservableProperty]
-        public partial int Test { get; set; }
-
-        public void T()
-        {
-        }
+        public partial PageViewModelBase CurrentPage { get; set; }
+        
     }
 }
