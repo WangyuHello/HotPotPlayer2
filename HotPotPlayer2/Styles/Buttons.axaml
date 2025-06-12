@@ -1,0 +1,25 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Design.PreviewWith>
+    <Border Padding="20">
+      <!-- Add Controls for Previewer Here -->
+		<Button Classes="MainNavButton">
+			<Label Classes="LabelIcon" Content="&#xE64E;"/>
+		</Button>
+    </Border>
+  </Design.PreviewWith>
+
+	<!-- Add Styles Here -->
+	<Style Selector="Button.MainNavButton">
+		<Setter Property="Width" Value="48" />
+		<Setter Property="Height" Value="40" />
+		<Setter Property="Padding" Value="0,1,0,0" />
+		<Setter Property="Margin" Value="8,0" />
+		<Setter Property="HorizontalAlignment" Value="Center" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="Background" Value="Transparent"/>
+	</Style>
+	<Style Selector="Button.MainNavButton:pointerover /template/ ContentPresenter">
+		<Setter Property="Background" Value="#e1e1e1"/>
+	</Style>
+</Styles>

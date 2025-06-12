@@ -1,0 +1,17 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <!-- Add Controls for Previewer Here -->
+	        <Label Classes="LabelIcon" Content="&#xE64E;"/>
+	    </Border>
+    </Design.PreviewWith>
+
+    <!-- Add Styles Here -->
+	<Style Selector="Label.LabelIcon">
+		<Setter Property="VerticalAlignment" Value="Center"/>
+		<Setter Property="HorizontalAlignment" Value="Center"/>
+		<Setter Property="FontFamily" Value="{DynamicResource SegoeIcons}" />
+		<Setter Property="FontSize" Value="20" />
+	</Style>
+</Styles>
