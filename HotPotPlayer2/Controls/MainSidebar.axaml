@@ -2,7 +2,37 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="48" d:DesignHeight="450"
              x:Class="HotPotPlayer2.Controls.MainSidebar">
-  Side
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="60" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="60" />
+		</Grid.RowDefinitions>
+
+		<Button>
+			<Label />
+		</Button>
+		<Button Grid.Row="2" Margin="0,4" >
+			<Label />
+		</Button>
+		<Button Grid.Row="3" Margin="0,4" >
+			<Label />
+		</Button>
+		<Button Grid.Row="4" Margin="0,4" >
+			<Label />
+		</Button>
+		<Button Grid.Row="5" Margin="0,4" >
+			<Label />
+		</Button>
+		<Button Grid.Row="7">
+			<Label />
+		</Button>
+</Grid>
 </UserControl>
