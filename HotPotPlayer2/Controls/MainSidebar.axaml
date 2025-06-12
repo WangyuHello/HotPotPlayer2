@@ -20,19 +20,19 @@
 			<Label FontFamily="{DynamicResource SegoeIcons}" Content="&#xE64E;"/>
 		</Button>
 		<Button Grid.Row="2" Margin="0,4" >
-			<Label />
+			<Label FontFamily="{DynamicResource SegoeIcons}" Content="&#xE93C;"/>
 		</Button>
 		<Button Grid.Row="3" Margin="0,4" >
-			<Label />
+			<Label FontFamily="{DynamicResource SegoeIcons}" Content="&#xE29B;"/>
 		</Button>
 		<Button Grid.Row="4" Margin="0,4" >
-			<Label />
+			<Label FontFamily="{DynamicResource BiliIcons}" Content="&#xEA01;"/>
 		</Button>
 		<Button Grid.Row="5" Margin="0,4" >
-			<Label />
+			<Label FontFamily="{DynamicResource BiliIcons}" Content="&#xEA08;"/>
 		</Button>
 		<Button Grid.Row="7">
-			<Label />
+			<Label FontFamily="{DynamicResource SegoeIcons}" Content="&#xE713;"/>
 		</Button>
 </Grid>
 </UserControl>
