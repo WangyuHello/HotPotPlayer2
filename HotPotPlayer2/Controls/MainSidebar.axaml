@@ -2,7 +2,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:conv="using:HotPotPlayer2.Converters"
              mc:Ignorable="d" d:DesignWidth="64" d:DesignHeight="450"
+			 x:Name="Self"
              x:Class="HotPotPlayer2.Controls.MainSidebar">
 	<Grid Background="#F1F3F6">
 		<Grid.RowDefinitions>
@@ -16,23 +18,53 @@
 			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
 
-		<Button Margin="0,8,0,0" Classes="MainNavButton">
+		<Button Margin="0,8,0,0" Classes="MainNavButton" Click="BackClick">
 			<Label Classes="LabelIcon" Content="&#xE64E;"/>
 		</Button>
-		<Button Grid.Row="2" Margin="0,4" Classes="MainNavButton">
+		<Button Grid.Row="2" Margin="0,4" Classes="MainNavButton" Click="NavigateClick" Tag="Music" x:Name="Music">
 			<Label Classes="LabelIcon" Content="&#xE93C;"/>
+			<Button.IsEnabled>
+				<MultiBinding Converter="{x:Static conv:CommonConverters.NavButtonEnable}">
+					<Binding Path="$self.Tag"/>
+					<Binding Path="#Self.SelectedPageName"/>
+				</MultiBinding>
+			</Button.IsEnabled>
 		</Button>
-		<Button Grid.Row="3" Margin="0,4" Classes="MainNavButton">
+		<Button Grid.Row="3" Margin="0,4" Classes="MainNavButton" Click="NavigateClick" Tag="Video" x:Name="Video">
 			<Label Classes="LabelIcon" Content="&#xE29B;"/>
+			<Button.IsEnabled>
+				<MultiBinding Converter="{x:Static conv:CommonConverters.NavButtonEnable}">
+					<Binding Path="$self.Tag"/>
+					<Binding Path="#Self.SelectedPageName"/>
+				</MultiBinding>
+			</Button.IsEnabled>
 		</Button>
-		<Button Grid.Row="4" Margin="0,4" Classes="MainNavButton">
+		<Button Grid.Row="4" Margin="0,4" Classes="MainNavButton" Click="NavigateClick" Tag="Bilibili" x:Name="Bilibili">
 			<Label Classes="LabelIcon" FontFamily="{DynamicResource BiliIcons}" Content="&#xEA01;"/>
+			<Button.IsEnabled>
+				<MultiBinding Converter="{x:Static conv:CommonConverters.NavButtonEnable}">
+					<Binding Path="$self.Tag"/>
+					<Binding Path="#Self.SelectedPageName"/>
+				</MultiBinding>
+			</Button.IsEnabled>
 		</Button>
-		<Button Grid.Row="5" Margin="0,4" Classes="MainNavButton">
+		<Button Grid.Row="5" Margin="0,4" Classes="MainNavButton" Click="NavigateClick" Tag="CloudMusic" x:Name="CloudMusic">
 			<Label Classes="LabelIcon" FontFamily="{DynamicResource BiliIcons}" Content="&#xEA08;"/>
+			<Button.IsEnabled>
+				<MultiBinding Converter="{x:Static conv:CommonConverters.NavButtonEnable}">
+					<Binding Path="$self.Tag"/>
+					<Binding Path="#Self.SelectedPageName"/>
+				</MultiBinding>
+			</Button.IsEnabled>
 		</Button>
-		<Button Grid.Row="7" Margin="0,0,0,8" Classes="MainNavButton">
+		<Button Grid.Row="7" Margin="0,0,0,8" Classes="MainNavButton" Click="NavigateClick" Tag="Setting" x:Name="Setting">
 			<Label Classes="LabelIcon" Content="&#xE713;"/>
+			<Button.IsEnabled>
+				<MultiBinding Converter="{x:Static conv:CommonConverters.NavButtonEnable}">
+					<Binding Path="$self.Tag"/>
+					<Binding Path="#Self.SelectedPageName"/>
+				</MultiBinding>
+			</Button.IsEnabled>
 		</Button>
 </Grid>
 </UserControl>
