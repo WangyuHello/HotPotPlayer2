@@ -17,7 +17,7 @@
     </Design.DataContext>
 
 	<Grid x:Name="Root">
-		<Grid x:Name="ContentRoot" ColumnDefinitions="48, *">
+		<Grid x:Name="ContentRoot" ColumnDefinitions="64, *">
 			<cont:MainSidebar />
 
 			<TransitioningContentControl Grid.Column="1" Content="{Binding CurrentPage}" />
