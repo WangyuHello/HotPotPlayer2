@@ -13,5 +13,15 @@
   
     <Application.Styles>
         <FluentTheme />
+		<StyleInclude Source="Styles/Fonts.axaml" />
     </Application.Styles>
+
+	<Application.Resources>
+		<FontFamily x:Key="MiSansNormal">/Assets/Fonts/MiSans-Normal.ttf#MiSans</FontFamily>
+		<FontFamily x:Key="MiSansRegular">/Assets/Fonts/MiSans-Regular.ttf#MiSans</FontFamily>
+		<FontFamily x:Key="MiSansMedium">/Assets/Fonts/MiSans-Medium.ttf#MiSans</FontFamily>
+		<FontFamily x:Key="MiSansBold">/Assets/Fonts/MiSans-Bold.ttf#MiSans</FontFamily>
+		<FontFamily x:Key="SegoeIcons">/Assets/Fonts/SegoeIcons.ttf#Segoe Fluent Icons</FontFamily>
+		<FontFamily x:Key="BiliIcons">/Assets/Fonts/bili.ttf#bili</FontFamily>
+	</Application.Resources>
 </base:Application>

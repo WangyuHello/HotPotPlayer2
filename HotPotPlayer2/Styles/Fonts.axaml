@@ -1,10 +1,13 @@
 <Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-  <Design.PreviewWith>
-    <Border Padding="20">
-      <!-- Add Controls for Previewer Here -->
-    </Border>
-  </Design.PreviewWith>
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <!-- Add Controls for Previewer Here -->
+        </Border>
+    </Design.PreviewWith>
 
-  <!-- Add Styles Here -->
+    <!-- Add Styles Here -->
+	<Style Selector="Window">
+		<Setter Property="FontFamily" Value="{DynamicResource MiSansNormal}" />
+	</Style>
 </Styles>

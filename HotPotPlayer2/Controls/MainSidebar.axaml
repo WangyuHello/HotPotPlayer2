@@ -17,7 +17,7 @@
 		</Grid.RowDefinitions>
 
 		<Button>
-			<Label />
+			<Label FontFamily="{DynamicResource SegoeIcons}" Content="&#xE64E;"/>
 		</Button>
 		<Button Grid.Row="2" Margin="0,4" >
 			<Label />
