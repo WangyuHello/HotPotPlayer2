@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using HotPotPlayer2.ViewModels;
 
 namespace HotPotPlayer2.Views
 {
@@ -8,5 +9,9 @@ namespace HotPotPlayer2.Views
         {
             InitializeComponent();
         }
+
+        void OnBackClick() { ((MainWindowViewModel)DataContext!).OnBackClick(); }
+
+        void SelectedPageNameChanged(string name) { ((MainWindowViewModel)DataContext!).SelectedPageNameChanged(name); }
     }
 }

@@ -18,7 +18,11 @@
 
 	<Grid x:Name="Root">
 		<Grid x:Name="ContentRoot" ColumnDefinitions="64, *">
-			<cont:MainSidebar />
+			<cont:MainSidebar SelectedPageName="{Binding SelectedPageName, Mode=TwoWay}" 
+							  IsBackEnable="{Binding IsBackEnable}"
+							  OnBackClick="OnBackClick"
+							  SelectedPageNameChanged="SelectedPageNameChanged"
+							  />
 
 			<TransitioningContentControl Grid.Column="1" Content="{Binding CurrentPage}" />
 		</Grid>

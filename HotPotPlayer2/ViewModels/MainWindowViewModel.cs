@@ -26,6 +26,21 @@ namespace HotPotPlayer2.ViewModels
 
         [ObservableProperty]
         public partial PageViewModelBase CurrentPage { get; set; }
-        
+
+        [ObservableProperty]
+        public partial string SelectedPageName { get; set; }
+
+        [ObservableProperty]
+        public partial bool IsBackEnable { get; set; }
+
+        public void OnBackClick() 
+        {
+
+        }
+
+        public void SelectedPageNameChanged(string name) 
+        {
+
+        }
     }
 }
