@@ -21,7 +21,22 @@ namespace HotPotPlayer2.ViewModels
             videoVm.Page = videoPage;
             videoPage.DataContext = videoVm;
 
-            Pages = [musicVm, videoVm];
+            var bilibiliVm = new BilibiliPageViewModel();
+            var bilibiliPage = new Views.Pages.Bilibili();
+            bilibiliVm.Page = bilibiliPage;
+            bilibiliPage.DataContext = bilibiliVm;
+
+            var cloudMusicVm = new CloudMusicPageViewModel();
+            var cloudMusicPage = new CloudMusic();
+            cloudMusicVm.Page = cloudMusicPage;
+            cloudMusicPage.DataContext = cloudMusicVm;
+
+            var settingVm = new SettingPageViewModel();
+            var settingPage = new Setting();
+            settingVm.Page = settingPage;
+            settingPage.DataContext = settingVm;
+
+            Pages = [musicVm, videoVm, bilibiliVm, cloudMusicVm, settingVm];
         }
 
         private readonly PageViewModelBase[] Pages;
@@ -38,12 +53,12 @@ namespace HotPotPlayer2.ViewModels
 
         public void OnBackClick() 
         {
-            if (NavigationStack.Count > 1)
+            if (NavigationStack.Count == 1)
             {
                 var top = NavigationStack.Pop();
                 SelectedPageName = top.Name;
                 CurrentPage = top;
-                if(NavigationStack.Count <= 1) { IsBackEnable = false; }
+                if(NavigationStack.Count == 0) { IsBackEnable = false; }
             }
         }
 
