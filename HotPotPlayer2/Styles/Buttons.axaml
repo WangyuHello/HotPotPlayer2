@@ -19,6 +19,6 @@
 		<Setter Property="Background" Value="Transparent"/>
 	</Style>
 	<Style Selector="Button.MainNavButton:pointerover /template/ ContentPresenter">
-		<Setter Property="Background" Value="#e1e1e1"/>
+		<Setter Property="Background" Value="#DEE3EE"/>
 	</Style>
 </Styles>
