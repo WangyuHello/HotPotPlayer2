@@ -53,7 +53,7 @@ namespace HotPotPlayer2.ViewModels
 
         public void OnBackClick() 
         {
-            if (NavigationStack.Count == 1)
+            if (NavigationStack.Count >= 1)
             {
                 var top = NavigationStack.Pop();
                 SelectedPageName = top.Name;
