@@ -1,6 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using HotPotPlayer2.Base;
 using HotPotPlayer2.Views.Pages;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HotPotPlayer2.ViewModels
 {
@@ -19,28 +22,40 @@ namespace HotPotPlayer2.ViewModels
             videoPage.DataContext = videoVm;
 
             Pages = [musicVm, videoVm];
-            CurrentPage = Pages[0];
         }
 
         private readonly PageViewModelBase[] Pages;
+        private readonly Stack<PageViewModelBase> NavigationStack = new();
 
         [ObservableProperty]
-        public partial PageViewModelBase CurrentPage { get; set; }
+        public partial PageViewModelBase? CurrentPage { get; set; }
 
         [ObservableProperty]
-        public partial string SelectedPageName { get; set; }
+        public partial string? SelectedPageName { get; set; }
 
         [ObservableProperty]
         public partial bool IsBackEnable { get; set; }
 
         public void OnBackClick() 
         {
-
+            if (NavigationStack.Count > 1)
+            {
+                var top = NavigationStack.Pop();
+                SelectedPageName = top.Name;
+                CurrentPage = top;
+                if(NavigationStack.Count <= 1) { IsBackEnable = false; }
+            }
         }
 
         public void SelectedPageNameChanged(string name) 
         {
-
+            var selectVm = Pages.FirstOrDefault(p => p.Name == name);
+            if (selectVm != null)
+            {
+                CurrentPage = selectVm;
+                NavigationStack.Push(selectVm);
+                IsBackEnable = true;
+            }
         }
     }
 }

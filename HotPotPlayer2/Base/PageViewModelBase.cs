@@ -10,5 +10,6 @@ namespace HotPotPlayer2.Base
     public class PageViewModelBase : ViewModelBase
     {
         public UserControl? Page { get; set; }
+        public virtual string? Name { get; }
     }
 }

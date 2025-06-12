@@ -9,5 +9,6 @@ namespace HotPotPlayer2.ViewModels
 {
     public class MusicPageViewModel : PageViewModelBase
     {
+        public override string? Name => "Music";
     }
 }

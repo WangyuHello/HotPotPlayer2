@@ -8,7 +8,7 @@
              x:Class="HotPotPlayer2.Controls.MainSidebar">
 	<Grid Background="#F1F3F6">
 		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto" />
+			<RowDefinition Height="48" />
 			<RowDefinition Height="*" />
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="Auto" />
@@ -18,7 +18,7 @@
 			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
 
-		<Button Margin="0,8,0,0" Classes="MainNavButton" Click="BackClick">
+		<Button Margin="0,8,0,0" Classes="MainNavButton" Click="BackClick" x:Name="Back" IsVisible="{Binding #Self.IsBackEnable}">
 			<Label Classes="LabelIcon" Content="&#xE64E;"/>
 		</Button>
 		<Button Grid.Row="2" Margin="0,4" Classes="MainNavButton" Click="NavigateClick" Tag="Music" x:Name="Music">

@@ -9,5 +9,6 @@ namespace HotPotPlayer2.ViewModels
 {
     public class VideoPageViewModel : PageViewModelBase
     {
+        public override string? Name => "Video";
     }
 }
