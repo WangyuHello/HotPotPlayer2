@@ -7,7 +7,9 @@
       </Design.PreviewWith>
 
     <!-- Add Styles Here -->
-	<Style Selector="GridView.CardGridView">
-		<Setter Property="SelectionMode" Value="Single" />
+	<Style Selector="ItemsRepeater.CardGridView">
+		<Setter Property="Layout">
+			<UniformGridLayout />
+		</Setter>
 	</Style>
 </Styles>

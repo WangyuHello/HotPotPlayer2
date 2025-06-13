@@ -28,9 +28,17 @@ namespace HotPotPlayer2
                 // Avoid duplicate validations from both Avalonia and the CommunityToolkit. 
                 // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
                 DisableAvaloniaDataAnnotationValidation();
+
+                var width = Config.GetConfig("width", 0);
+                var height = Config.GetConfig("height", 0);
+
                 desktop.MainWindow = new MainWindow
                 {
                     DataContext = new MainWindowViewModel(),
+                    ExtendClientAreaToDecorationsHint = true,
+                    WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                    Width = width,
+                    Height = height,
                 };
                 desktop.MainWindow.Closing += MainWindow_Closing;
             }
