@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Avalonia.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,5 +17,10 @@ namespace HotPotPlayer2
 			var version = "1.0.0.0";
 			return version;
 		}
-	}
+
+        private void MainWindow_Closing(object? sender, WindowClosingEventArgs e)
+        {
+            Config.SaveSettings();
+        }
+    }
 }

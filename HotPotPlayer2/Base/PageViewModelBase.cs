@@ -11,5 +11,7 @@ namespace HotPotPlayer2.Base
     {
         public UserControl? Page { get; set; }
         public virtual string? Name { get; }
+
+        public virtual void OnNavigatedTo(object? args) { }
     }
 }

@@ -32,6 +32,7 @@ namespace HotPotPlayer2
                 {
                     DataContext = new MainWindowViewModel(),
                 };
+                desktop.MainWindow.Closing += MainWindow_Closing;
             }
 
             base.OnFrameworkInitializationCompleted();

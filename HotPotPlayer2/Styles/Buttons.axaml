@@ -24,6 +24,10 @@
 	<Style Selector="Button.MainNavButton:pointerover /template/ ContentPresenter">
 		<Setter Property="Background" Value="#DEE3EE"/>
 	</Style>
+	<Style Selector="Button.MainNavButton:disabled /template/ ContentPresenter">
+		<Setter Property="Foreground" Value="#5843be"/>
+		<Setter Property="Background" Value="#d1d6e1"/>
+	</Style>
 
 	<Style Selector="Button.TransparentButton">
 		<Setter Property="Background" Value="Transparent" />

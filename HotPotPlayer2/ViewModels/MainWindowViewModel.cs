@@ -100,6 +100,7 @@ namespace HotPotPlayer2.ViewModels
                 {
                     IsBackEnable = true;
                 }
+                CurrentPage.OnNavigatedTo(null);
             }
         }
     }

@@ -7,6 +7,7 @@ using Jellyfin.Sdk.Generated.Models;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -46,7 +47,7 @@ namespace HotPotPlayer2.Service
                 {
                     sdkClientSettings = new JellyfinSdkSettings();
                     sdkClientSettings.Initialize(
-                        "HotPotPlayer",
+                        "HotPotPlayer2",
                         App.ApplicationVersion,
                         Environment.MachineName,
                         DevideId);
@@ -161,7 +162,7 @@ namespace HotPotPlayer2.Service
             return VideoLibraryDto;
         }
 
-        public async Task<List<BaseItemDto>?> GetJellyfinAlbumListAsync(Func<BaseItemDto> library, CancellationToken token, int startIndex = 0, int limit = 50)
+        public async Task<List<BaseItemDto>?> GetJellyfinAlbumListAsync(Func<BaseItemDto> library, CancellationToken token = default, int startIndex = 0, int limit = 50)
         {
             if (!IsLogin)
             {
@@ -271,8 +272,9 @@ namespace HotPotPlayer2.Service
             return result?.Items;
         }
 
-        private Uri? GetPrimaryJellyfinImageBase(BaseItemDto_ImageTags tag, Guid? parentId, int widthHeigh, string tagStr = "Primary")
+        private Uri? GetPrimaryJellyfinImageBase(BaseItemDto_ImageTags? tag, Guid? parentId, int widthHeigh, string tagStr = "Primary")
         {
+            if (tag == null) return null;
             if (!tag.AdditionalData.TryGetValue(tagStr, out object? value)) return null;
             var requestInformation = JellyfinApiClient.Items[parentId!.Value].Images[ImageType.Primary.ToString()].ToGetRequestInformation(param =>
             {
@@ -288,7 +290,7 @@ namespace HotPotPlayer2.Service
             return uri;
         }
 
-        public Uri? GetPrimaryJellyfinImage(BaseItemDto_ImageTags tag, Guid? parentId)
+        public Uri? GetPrimaryJellyfinImage(BaseItemDto_ImageTags? tag, Guid? parentId)
         {
             return GetPrimaryJellyfinImageBase(tag, parentId, 300);
         }

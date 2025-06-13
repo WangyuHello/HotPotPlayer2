@@ -2,6 +2,7 @@
 using HotPotPlayer2.Models.Jellyfin;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,8 +11,8 @@ namespace HotPotPlayer2.Service
 {
     public class AppConfig : ConfigBase
     {
-        public override string CacheFolder => throw new NotImplementedException();
-        public override string LocalFolder => throw new NotImplementedException();
+        public override string CacheFolder => Path.Combine(AppContext.BaseDirectory, "Cache");
+        public override string LocalFolder => AppContext.BaseDirectory;
 
         private List<JellyfinServerItem>? _jellyfinServers;
         public override List<JellyfinServerItem> JellyfinServers

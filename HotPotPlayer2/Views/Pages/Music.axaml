@@ -3,12 +3,106 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:vm="using:HotPotPlayer2.ViewModels"
+			 xmlns:conv="using:HotPotPlayer2.Converters"
+			 xmlns:jmodel="using:Jellyfin.Sdk.Generated.Models"
+			 xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 x:DataType="vm:MusicPageViewModel"
              x:Class="HotPotPlayer2.Views.Pages.Music">
 	<Design.DataContext>
 		<vm:MusicPageViewModel />
 	</Design.DataContext>
+
+	<UserControl.Resources>
+		<DataTemplate x:Key="AlbumCardViewTemplate" x:DataType="jmodel:BaseItemDto">
+			<Grid Width="170" Background="White">
+				<StackPanel Spacing="8">
+					<Image
+						asyncImageLoader:ImageLoader.Source="{Binding, Converter={x:Static conv:JellyfinImageConverters.PrimaryImage}}"
+						Width="170"
+						Height="170"
+						Stretch="UniformToFill"
+						VerticalAlignment="Center"
+						HorizontalAlignment="Center"
+						/>
+					<TextBlock
+						Margin="8,0"
+						Text="{Binding Name}"
+						FontSize="14"
+						MaxLines="2"
+						TextTrimming="CharacterEllipsis"
+						TextWrapping="Wrap"
+						Height="40"
+						ToolTip.Tip="{Binding Name}"
+						FontFamily="{DynamicResource MiSansBold}"
+					/>
+					<TextBlock
+						Margin="8,0"
+						Text="{Binding AlbumArtist}"
+						Foreground="Gray"
+						ToolTip.Tip="{Binding AlbumArtist}"
+						FontFamily="{DynamicResource MiSansRegular}"
+					/>
+					<TextBlock
+						Margin="8,0"
+						Text="{Binding ProductionYear}"
+						Foreground="Gray"
+						ToolTip.Tip="{Binding ProductionYear}"
+						FontSize="14"
+                />
+				</StackPanel>
+				<Grid x:Name="HiddenContent" IsVisible="False">
+					<Button Classes="TransparentButton"
+							HorizontalAlignment="Center"
+							Padding="12"
+							Margin="0,-70,0,0"
+							CornerRadius="32"
+							Background="#99FFFFFF"
+							Tag="{Binding }">
+						<Label Classes="LabelIcon" Content="&#xE768;" FontSize="24"/>
+					</Button>
+					<StackPanel
+						Margin="0,0,8,0"
+						HorizontalAlignment="Right"
+						VerticalAlignment="Bottom"
+						Orientation="Horizontal"
+						Spacing="8"
+						Background="White"
+					>
+						<Button Classes="TransparentButton" Foreground="Gray" >
+							<Label Classes="LabelIcon" Content="&#xE734;" FontSize="18"/>
+						</Button>
+						<Button Classes="TransparentButton" Foreground="Gray" >
+							<Label Classes="LabelIcon" Content="&#xE712;" FontSize="18"/>
+						</Button>
+					</StackPanel>
+				</Grid>
+			</Grid>
+		</DataTemplate>
+	</UserControl.Resources>
+
+	<Grid Margin="36,28,0,0">
+
+		<TabControl>
+			<TabItem Header="专辑">
+				<GridView x:Name="AlbumGridView"
+						  ItemsSource="{Binding JellyfinAlbumList}"
+						  ItemClick="AlbumGridView_ItemClick"
+						  Classes="CardGridView"
+						  ItemTemplate="{StaticResource AlbumCardViewTemplate}"
+						  >
+				</GridView>
+			</TabItem>
+			<TabItem Header="艺术家">
+				<GridView />
+			</TabItem>
+			<TabItem Header="播放列表">
+				<GridView />
+			</TabItem>
+			<TabItem Header="歌曲">
+				<GridView />
+			</TabItem>
+		</TabControl>
+	</Grid>
 	
-  Music
 </UserControl>
