@@ -52,4 +52,12 @@
 		<Setter Property="Foreground" Value="White"/>
 		<Setter Property="Background" Value="#292b3a"/>
 	</Style>
+	<Style Selector="ToggleButton.BiliHeaderToggleButton:checked:pointerover /template/ ContentPresenter">
+		<Setter Property="Foreground" Value="White"/>
+		<Setter Property="Background" Value="#3a3d53"/>
+	</Style>
+	<Style Selector="ToggleButton.BiliHeaderToggleButton:checked:pressed /template/ ContentPresenter">
+		<Setter Property="Foreground" Value="White"/>
+		<Setter Property="Background" Value="Black"/>
+	</Style>
 </Styles>
