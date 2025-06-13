@@ -19,46 +19,46 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <ToggleButton IsChecked="True" Classes="BiliHeaderToggleButton">
+            <ToggleButton IsChecked="True" Classes="BiliHeaderToggleButton" Click="HeaderItemClick">
                 <StackPanel Orientation="Horizontal" Spacing="4">
                     <Label Padding="0" Classes="BiliLabelIcon" Content="&#xEA1A;" />
                     <TextBlock Text="推荐" />
                 </StackPanel>
             </ToggleButton>
 
-            <ToggleButton Grid.Column="1" Margin="8,0,0,0" Classes="BiliHeaderToggleButton">
+            <ToggleButton Grid.Column="1" Margin="8,0,0,0" Classes="BiliHeaderToggleButton" Click="HeaderItemClick">
                 <StackPanel Orientation="Horizontal" Spacing="4">
                     <Label Padding="0" Classes="BiliLabelIcon" Content="&#xEA1A;" />
                     <TextBlock Text="热门" />
                 </StackPanel>
             </ToggleButton>
 
-            <ToggleButton Grid.Column="2" Margin="8,0,0,0" Classes="BiliHeaderToggleButton">
+            <ToggleButton Grid.Column="2" Margin="8,0,0,0" Classes="BiliHeaderToggleButton" Click="HeaderItemClick">
                 <StackPanel Orientation="Horizontal" Spacing="4">
                     <Label Padding="0" Classes="BiliLabelIcon" Content="&#xEA1B;" />
                     <TextBlock Text="动态" />
                 </StackPanel>
             </ToggleButton>
 
-            <ToggleButton Grid.Column="3" Margin="8,0,0,0" Classes="BiliHeaderToggleButton">
+            <ToggleButton Grid.Column="3" Margin="8,0,0,0" Classes="BiliHeaderToggleButton" Click="HeaderItemClick">
                 <StackPanel Orientation="Horizontal" Spacing="4">
                     <Label Padding="0" Classes="BiliLabelIcon" Content="&#xEA0E;" />
                 </StackPanel>
             </ToggleButton>
 
-            <ToggleButton Grid.Column="4" Margin="8,0,0,0" Classes="BiliHeaderToggleButton">
+            <ToggleButton Grid.Column="4" Margin="8,0,0,0" Classes="BiliHeaderToggleButton" Click="HeaderItemClick">
                 <StackPanel Orientation="Horizontal" Spacing="4">
                     <Label Padding="0" Classes="BiliLabelIcon" Content="&#xEA13;" />
                 </StackPanel>
             </ToggleButton>
 
-            <ToggleButton Grid.Column="5" Margin="8,0,0,0" Classes="BiliHeaderToggleButton">
+            <ToggleButton Grid.Column="5" Margin="8,0,0,0" Classes="BiliHeaderToggleButton" Click="HeaderItemClick">
                 <StackPanel Orientation="Horizontal" Spacing="4">
                     <Label Padding="0" Classes="BiliLabelIcon" Content="&#xEA15;" />
                 </StackPanel>
             </ToggleButton>
 
-            <ToggleButton Grid.Column="6" Margin="8,0,0,0" Classes="BiliHeaderToggleButton">
+            <ToggleButton Grid.Column="6" Margin="8,0,0,0" Classes="BiliHeaderToggleButton" Click="HeaderItemClick">
                 <StackPanel Orientation="Horizontal" Spacing="4">
                     <TextBlock Text="推荐" />
                 </StackPanel>
