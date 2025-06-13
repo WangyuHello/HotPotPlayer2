@@ -25,6 +25,11 @@
 		<Setter Property="Background" Value="#DEE3EE"/>
 	</Style>
 
+	<Style Selector="Button.TransparentButton">
+		<Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+	</Style>
+
 	<Style Selector="ToggleButton.BiliHeaderToggleButton">
 		<Setter Property="Height" Value="36" />
 		<Setter Property="Background" Value="#f2f5f6" />

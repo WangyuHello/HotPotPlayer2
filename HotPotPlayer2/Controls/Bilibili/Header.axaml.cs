@@ -1,5 +1,6 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using System;
 
@@ -22,4 +23,9 @@ public partial class Header : UserControl
         AvaloniaProperty.Register<Header, int?>("SelectedIndex");
 
     public event Action? OnRefreshClick;
+
+    void RefreshClick(object sender, RoutedEventArgs e)
+    {
+        OnRefreshClick?.Invoke();
+    }
 }

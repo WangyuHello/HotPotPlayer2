@@ -2,63 +2,81 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="1400" d:DesignHeight="450"
              x:Class="HotPotPlayer2.Controls.Bilibili.Header">
 
-	<Grid Height="64" x:Name="HeaderContainer" HorizontalAlignment="Center" VerticalAlignment="Top">
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="Auto" />
-			<ColumnDefinition Width="Auto" />
-			<ColumnDefinition Width="Auto" />
-			<ColumnDefinition Width="Auto" />
-			<ColumnDefinition Width="Auto" />
-			<ColumnDefinition Width="Auto" />
-			<ColumnDefinition Width="Auto" />
-		</Grid.ColumnDefinitions>
+    <Grid Background="#f6f9f8">
 
-		<ToggleButton IsChecked="True" Classes="BiliHeaderToggleButton">
-			<StackPanel Orientation="Horizontal" Spacing="4">
-				<Label Padding="0" Classes="BiliLabelIcon" Content="&#xEA1A;" />
-				<TextBlock Text="推荐" />
-			</StackPanel>
-		</ToggleButton>
 
-		<ToggleButton Grid.Column="1" Margin="8,0,0,0" Classes="BiliHeaderToggleButton">
-			<StackPanel Orientation="Horizontal" Spacing="4">
-				<Label Padding="0" Classes="BiliLabelIcon" Content="&#xEA1A;" />
-				<TextBlock Text="热门" />
-			</StackPanel>
-		</ToggleButton>
+        <Grid Height="64" x:Name="HeaderContainer" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
 
-		<ToggleButton Grid.Column="2" Margin="8,0,0,0" Classes="BiliHeaderToggleButton">
-			<StackPanel Orientation="Horizontal" Spacing="4">
-				<Label Padding="0" Classes="BiliLabelIcon" Content="&#xEA1B;" />
-				<TextBlock Text="动态" />
-			</StackPanel>
-		</ToggleButton>
+            <ToggleButton IsChecked="True" Classes="BiliHeaderToggleButton">
+                <StackPanel Orientation="Horizontal" Spacing="4">
+                    <Label Padding="0" Classes="BiliLabelIcon" Content="&#xEA1A;" />
+                    <TextBlock Text="推荐" />
+                </StackPanel>
+            </ToggleButton>
 
-		<ToggleButton Grid.Column="3" Margin="8,0,0,0" Classes="BiliHeaderToggleButton">
-			<StackPanel Orientation="Horizontal" Spacing="4">
-				<Label Padding="0" Classes="BiliLabelIcon" Content="&#xEA0E;" />
-			</StackPanel>
-		</ToggleButton>
+            <ToggleButton Grid.Column="1" Margin="8,0,0,0" Classes="BiliHeaderToggleButton">
+                <StackPanel Orientation="Horizontal" Spacing="4">
+                    <Label Padding="0" Classes="BiliLabelIcon" Content="&#xEA1A;" />
+                    <TextBlock Text="热门" />
+                </StackPanel>
+            </ToggleButton>
 
-		<ToggleButton Grid.Column="4" Margin="8,0,0,0" Classes="BiliHeaderToggleButton">
-			<StackPanel Orientation="Horizontal" Spacing="4">
-				<Label Padding="0" Classes="BiliLabelIcon" Content="&#xEA13;" />
-			</StackPanel>
-		</ToggleButton>
+            <ToggleButton Grid.Column="2" Margin="8,0,0,0" Classes="BiliHeaderToggleButton">
+                <StackPanel Orientation="Horizontal" Spacing="4">
+                    <Label Padding="0" Classes="BiliLabelIcon" Content="&#xEA1B;" />
+                    <TextBlock Text="动态" />
+                </StackPanel>
+            </ToggleButton>
 
-		<ToggleButton Grid.Column="5" Margin="8,0,0,0" Classes="BiliHeaderToggleButton">
-			<StackPanel Orientation="Horizontal" Spacing="4">
-				<Label Padding="0" Classes="BiliLabelIcon" Content="&#xEA15;" />
-			</StackPanel>
-		</ToggleButton>
+            <ToggleButton Grid.Column="3" Margin="8,0,0,0" Classes="BiliHeaderToggleButton">
+                <StackPanel Orientation="Horizontal" Spacing="4">
+                    <Label Padding="0" Classes="BiliLabelIcon" Content="&#xEA0E;" />
+                </StackPanel>
+            </ToggleButton>
 
-		<ToggleButton Grid.Column="6" Margin="8,0,0,0" Classes="BiliHeaderToggleButton">
-			<StackPanel Orientation="Horizontal" Spacing="4">
-				<TextBlock Text="推荐" />
-			</StackPanel>
-		</ToggleButton>
-	</Grid>
+            <ToggleButton Grid.Column="4" Margin="8,0,0,0" Classes="BiliHeaderToggleButton">
+                <StackPanel Orientation="Horizontal" Spacing="4">
+                    <Label Padding="0" Classes="BiliLabelIcon" Content="&#xEA13;" />
+                </StackPanel>
+            </ToggleButton>
+
+            <ToggleButton Grid.Column="5" Margin="8,0,0,0" Classes="BiliHeaderToggleButton">
+                <StackPanel Orientation="Horizontal" Spacing="4">
+                    <Label Padding="0" Classes="BiliLabelIcon" Content="&#xEA15;" />
+                </StackPanel>
+            </ToggleButton>
+
+            <ToggleButton Grid.Column="6" Margin="8,0,0,0" Classes="BiliHeaderToggleButton">
+                <StackPanel Orientation="Horizontal" Spacing="4">
+                    <TextBlock Text="推荐" />
+                </StackPanel>
+            </ToggleButton>
+        </Grid>
+
+        <StackPanel Margin="0,24,16,0" VerticalAlignment="Top" HorizontalAlignment="Right">
+            <Button Width="36" Height="36" Margin="12,0,0,0" Padding="0"
+                    Classes="TransparentButton" Click="RefreshClick">
+                <Label Classes="LabelIcon" Content="&#xE149;" FontSize="18"/>
+            </Button>
+        </StackPanel>
+
+        <Border x:Name="Search" Margin="24,16" VerticalAlignment="Top" HorizontalAlignment="Left" Height="32" Width="260" CornerRadius="16" Background="White" BorderThickness="0.8" BorderBrush="{DynamicResource ThemeBorderLowBrush}">
+            <Grid >
+                <TextBlock Margin="12,0" Foreground="Gray" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label Classes="LabelIcon" Content="&#xE11A;" Margin="12,0" HorizontalAlignment="Right" FontSize="16" />
+            </Grid>
+        </Border>
+    </Grid>
 </UserControl>
