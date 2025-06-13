@@ -11,7 +11,8 @@ namespace HotPotPlayer2.ViewModels
     {
         public MainWindowViewModel()
         {
-
+            SelectedPageNameChanged("Music");
+            SelectedPageName = "Music";
         }
 
         private readonly Dictionary<string, PageViewModelBase> PageCache = [];
