@@ -11,35 +11,10 @@ namespace HotPotPlayer2.ViewModels
     {
         public MainWindowViewModel()
         {
-            var musicVm = new MusicPageViewModel();
-            var musicPage = new Music();
-            musicVm.Page = musicPage;
-            musicPage.DataContext = musicVm;
 
-            var videoVm = new VideoPageViewModel();
-            var videoPage = new Video();
-            videoVm.Page = videoPage;
-            videoPage.DataContext = videoVm;
-
-            var bilibiliVm = new BilibiliPageViewModel();
-            var bilibiliPage = new Views.Pages.Bilibili();
-            bilibiliVm.Page = bilibiliPage;
-            bilibiliPage.DataContext = bilibiliVm;
-
-            var cloudMusicVm = new CloudMusicPageViewModel();
-            var cloudMusicPage = new CloudMusic();
-            cloudMusicVm.Page = cloudMusicPage;
-            cloudMusicPage.DataContext = cloudMusicVm;
-
-            var settingVm = new SettingPageViewModel();
-            var settingPage = new Setting();
-            settingVm.Page = settingPage;
-            settingPage.DataContext = settingVm;
-
-            Pages = [musicVm, videoVm, bilibiliVm, cloudMusicVm, settingVm];
         }
 
-        private readonly PageViewModelBase[] Pages;
+        private readonly Dictionary<string, PageViewModelBase> PageCache = [];
         private readonly Stack<PageViewModelBase> NavigationStack = new();
 
         [ObservableProperty]
@@ -64,12 +39,67 @@ namespace HotPotPlayer2.ViewModels
 
         public void SelectedPageNameChanged(string name) 
         {
-            var selectVm = Pages.FirstOrDefault(p => p.Name == name);
+            var has = PageCache.TryGetValue(name, out var selectVm);
+            if (!has)
+            {
+                switch (name)
+                {
+                    case "Music":
+                        var musicVm = new MusicPageViewModel();
+                        var musicPage = new Music();
+                        musicVm.Page = musicPage;
+                        musicPage.DataContext = musicVm;
+                        selectVm = musicVm;
+                        PageCache.Add(name, selectVm);
+                        break;
+
+                    case "Video":
+                        var videoVm = new VideoPageViewModel();
+                        var videoPage = new Video();
+                        videoVm.Page = videoPage;
+                        videoPage.DataContext = videoVm;
+                        selectVm = videoVm;
+                        PageCache.Add(name, selectVm);
+                        break;
+
+                    case "Bilibili":
+                        var bilibiliVm = new BilibiliPageViewModel();
+                        var bilibiliPage = new Views.Pages.Bilibili();
+                        bilibiliVm.Page = bilibiliPage;
+                        bilibiliPage.DataContext = bilibiliVm;
+                        selectVm = bilibiliVm;
+                        PageCache.Add(name, selectVm);
+                        break;
+
+                    case "CloudMusic":
+                        var cloudMusicVm = new CloudMusicPageViewModel();
+                        var cloudMusicPage = new CloudMusic();
+                        cloudMusicVm.Page = cloudMusicPage;
+                        cloudMusicPage.DataContext = cloudMusicVm;
+                        selectVm = cloudMusicVm;
+                        PageCache.Add(name, selectVm);
+                        break;
+
+                    case "Setting":
+                        var settingVm = new SettingPageViewModel();
+                        var settingPage = new Setting();
+                        settingVm.Page = settingPage;
+                        settingPage.DataContext = settingVm;
+                        selectVm = settingVm;
+                        PageCache.Add(name, selectVm);
+                        break;
+                    default:
+                        break;
+                }
+            }
             if (selectVm != null)
             {
                 CurrentPage = selectVm;
                 NavigationStack.Push(selectVm);
-                IsBackEnable = true;
+                if (NavigationStack.Count > 1)
+                {
+                    IsBackEnable = true;
+                }
             }
         }
     }
