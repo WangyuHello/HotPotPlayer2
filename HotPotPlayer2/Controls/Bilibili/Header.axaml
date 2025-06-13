@@ -1,0 +1,64 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="HotPotPlayer2.Controls.Bilibili.Header">
+
+	<Grid Height="64" x:Name="HeaderContainer" HorizontalAlignment="Center" VerticalAlignment="Top">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="Auto" />
+		</Grid.ColumnDefinitions>
+
+		<ToggleButton IsChecked="True">
+			<StackPanel Orientation="Horizontal" Spacing="4">
+				<Label Margin="0,0,0,-4" Classes="BiliLabelIcon" Content="&#xEA1A;" />
+				<TextBlock Text="推荐" />
+			</StackPanel>
+		</ToggleButton>
+
+		<ToggleButton Grid.Column="1" Margin="8,0,0,0">
+			<StackPanel Orientation="Horizontal" Spacing="4">
+				<Label Margin="0,0,0,-4" Classes="BiliLabelIcon" Content="&#xEA1A;" />
+				<TextBlock Text="热门" />
+			</StackPanel>
+		</ToggleButton>
+
+		<ToggleButton Grid.Column="2" Margin="8,0,0,0">
+			<StackPanel Orientation="Horizontal" Spacing="4">
+				<Label Margin="0,0,0,-4" Classes="BiliLabelIcon" Content="&#xEA1B;" />
+				<TextBlock Text="动态" />
+			</StackPanel>
+		</ToggleButton>
+
+		<ToggleButton Grid.Column="3" Margin="8,0,0,0">
+			<StackPanel Orientation="Horizontal" Spacing="4">
+				<Label Margin="0,0,0,-4" Classes="BiliLabelIcon" Content="&#xEA0E;" />
+			</StackPanel>
+		</ToggleButton>
+
+		<ToggleButton Grid.Column="4" Margin="8,0,0,0">
+			<StackPanel Orientation="Horizontal" Spacing="4">
+				<Label Margin="0,0,0,-4" Classes="BiliLabelIcon" Content="&#xEA13;" />
+			</StackPanel>
+		</ToggleButton>
+
+		<ToggleButton Grid.Column="5" Margin="8,0,0,0">
+			<StackPanel Orientation="Horizontal" Spacing="4">
+				<Label Margin="0,0,0,-4" Classes="BiliLabelIcon" Content="&#xEA15;" />
+			</StackPanel>
+		</ToggleButton>
+
+		<ToggleButton Grid.Column="6" Margin="8,0,0,0">
+			<StackPanel Orientation="Horizontal" Spacing="4">
+				<TextBlock Text="推荐" />
+			</StackPanel>
+		</ToggleButton>
+	</Grid>
+</UserControl>

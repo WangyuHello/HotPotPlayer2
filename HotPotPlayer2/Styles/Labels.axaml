@@ -14,4 +14,11 @@
 		<Setter Property="FontFamily" Value="{DynamicResource SegoeIcons}" />
 		<Setter Property="FontSize" Value="20" />
 	</Style>
+
+	<Style Selector="Label.BiliLabelIcon">
+		<Setter Property="VerticalAlignment" Value="Center"/>
+		<Setter Property="HorizontalAlignment" Value="Center"/>
+		<Setter Property="FontFamily" Value="{DynamicResource BiliIcons}" />
+		<Setter Property="FontSize" Value="20" />
+	</Style>
 </Styles>
