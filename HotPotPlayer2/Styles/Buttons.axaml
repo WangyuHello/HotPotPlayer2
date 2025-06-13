@@ -3,9 +3,12 @@
   <Design.PreviewWith>
     <Border Padding="20">
       <!-- Add Controls for Previewer Here -->
-		<Button Classes="MainNavButton">
-			<Label Classes="LabelIcon" Content="&#xE64E;"/>
-		</Button>
+		<ToggleButton IsChecked="True" Classes="BiliHeaderToggleButton">
+			<StackPanel Orientation="Horizontal" Spacing="4">
+				<Label Padding="0" Classes="BiliLabelIcon" Content="&#xEA1A;" />
+				<TextBlock Text="推荐" />
+			</StackPanel>
+		</ToggleButton>
     </Border>
   </Design.PreviewWith>
 
@@ -20,5 +23,33 @@
 	</Style>
 	<Style Selector="Button.MainNavButton:pointerover /template/ ContentPresenter">
 		<Setter Property="Background" Value="#DEE3EE"/>
+	</Style>
+
+	<Style Selector="ToggleButton.BiliHeaderToggleButton">
+		<Setter Property="Height" Value="36" />
+		<Setter Property="Background" Value="#f2f5f6" />
+		<Setter Property="CornerRadius" Value="18" />
+		<Setter Property="Padding" Value="16,4" />
+		<Setter Property="HorizontalAlignment" Value="Center" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="FontSize" Value="16" />
+		<Setter Property="BorderThickness" Value="1" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+	</Style>
+	<Style Selector="ToggleButton.BiliHeaderToggleButton /template/ ContentPresenter">
+		<Setter Property="Foreground" Value="#3b3f48"/>
+		<Setter Property="Background" Value="#f2f5f6"/>
+	</Style>
+	<Style Selector="ToggleButton.BiliHeaderToggleButton:pointerover /template/ ContentPresenter">
+		<Setter Property="Foreground" Value="#3b3f48"/>
+		<Setter Property="Background" Value="LightGray"/>
+	</Style>
+	<Style Selector="ToggleButton.BiliHeaderToggleButton:pressed /template/ ContentPresenter">
+		<Setter Property="Foreground" Value="White"/>
+		<Setter Property="Background" Value="#3a3d53"/>
+	</Style>
+	<Style Selector="ToggleButton.BiliHeaderToggleButton:checked /template/ ContentPresenter">
+		<Setter Property="Foreground" Value="White"/>
+		<Setter Property="Background" Value="#292b3a"/>
 	</Style>
 </Styles>
