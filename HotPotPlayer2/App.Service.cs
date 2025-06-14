@@ -25,9 +25,21 @@ namespace HotPotPlayer2
             Config.SaveSettings();
         }
 
-        public override Window MainWindow => MainWindow;
+        Window? mainWindow;
+        public override Window MainWindow => mainWindow!;
 
-        public override nint MainWindowHandle => throw new System.NotImplementedException();
+        private nint _mainWindowHandle;
+        public override nint MainWindowHandle
+        {
+            get
+            {
+                if(_mainWindowHandle == 0)
+                {
+                    _mainWindowHandle = MainWindow.TryGetPlatformHandle()!.Handle;
+                }
+                return _mainWindowHandle;
+            }
+        }
 
         public override Rect Bounds => throw new System.NotImplementedException();
     }
