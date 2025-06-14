@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotPotPlayer2", "HotPotPlay
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mpv.NET", "ThirdParty\Mpv.NET-lib-\src\Mpv.NET\Mpv.NET.csproj", "{E7501631-6E68-6086-E58E-05355F4BCE8E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotPotPlayer2.Native", "HotPotPlayer2.Native\HotPotPlayer2.Native.csproj", "{C72D057C-BF77-4B78-9E0E-7607E71FF406}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{E7501631-6E68-6086-E58E-05355F4BCE8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7501631-6E68-6086-E58E-05355F4BCE8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7501631-6E68-6086-E58E-05355F4BCE8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C72D057C-BF77-4B78-9E0E-7607E71FF406}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C72D057C-BF77-4B78-9E0E-7607E71FF406}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C72D057C-BF77-4B78-9E0E-7607E71FF406}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C72D057C-BF77-4B78-9E0E-7607E71FF406}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

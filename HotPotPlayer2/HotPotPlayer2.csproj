@@ -60,12 +60,7 @@
 	</ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\HotPotPlayer2.Native\HotPotPlayer2.Native.csproj" />
       <ProjectReference Include="..\ThirdParty\Mpv.NET-lib-\src\Mpv.NET\Mpv.NET.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <None Update="NativeLibs\mpv-2.dll">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
     </ItemGroup>
 </Project>
