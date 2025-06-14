@@ -9,7 +9,7 @@
 			 x:DataType="vm:PlayBarViewModel"
              x:Class="HotPotPlayer2.Controls.PlayBar">
 
-	<Border Background="LightBlue" CornerRadius="8" Height="80">
+	<Border Background="LightBlue" CornerRadius="8" Height="80" ClipToBounds="True">
 		<Grid>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*" />
