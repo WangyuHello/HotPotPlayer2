@@ -1,0 +1,104 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:ail="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+			 xmlns:vm="using:HotPotPlayer2.ViewModels"
+			 xmlns:cont="using:HotPotPlayer2.Controls"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="80"
+			 x:DataType="vm:PlayBarViewModel"
+             x:Class="HotPotPlayer2.Controls.PlayBar">
+
+	<Border Background="LightBlue" CornerRadius="8" Height="80">
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="1*" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+				
+				<Image x:Name="Cover" 
+					   Width="80" 
+					   Height="80"
+					   Stretch="UniformToFill"
+					   ail:ImageLoader.Source="{Binding MusicPlayer.CurrentPlaying, Converter={x:Static cont:PlayBarConverters.GetPlayBarImage}}"
+					   IsVisible="True"
+					   />
+				<StackPanel x:Name="TitlePanel" Grid.Column="1" Margin="8,4" VerticalAlignment="Center" Spacing="4" IsVisible="True">
+					<TextBlock MaxLines="2" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" FontSize="18" Text="{Binding MusicPlayer.CurrentPlaying.Name}" FontFamily="{DynamicResource MiSansMedium}" />
+					<Button Classes="TextButton">
+						<TextBlock FontSize="12" Foreground="DimGray" TextTrimming="CharacterEllipsis" Text="{Binding MusicPlayer.CurrentPlaying, Converter={x:Static cont:PlayBarConverters.GetSubtitle}}" FontFamily="{DynamicResource MiSansRegular}"/>
+					</Button>
+				</StackPanel>
+			</Grid>
+
+			<Grid Grid.Column="1">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*" />
+					<RowDefinition Height="Auto" />
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+
+				<StackPanel Margin="0,0,0,-8" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="4">
+					<Button>
+						<Label Classes="LabelIcon" Content="" />
+					</Button>
+					<Button>
+						<Label Classes="LabelIcon" Content="&#xF8AC;" />
+					</Button>
+					<Button Click="PlayButtonClick">
+						<Label Classes="LabelIcon" Content="{Binding MusicPlayer.IsPlaying, Converter={x:Static cont:PlayBarConverters.GetPlayButtonIcon}}" />
+					</Button>
+					<Button>
+						<Label Classes="LabelIcon" Content="&#xF8AD;" />
+					</Button>
+					<Button>
+						<Label Classes="LabelIcon" Content="&#xE72C;" />
+					</Button>
+				</StackPanel>
+				<TextBlock Grid.Row="1"
+						   Margin="0,0,8,-3"
+						   Width="34"
+						   VerticalAlignment="Center"
+						   Text="{Binding MusicPlayer.CurrentTime, StringFormat='mm\\:ss'}"
+						   FontFamily="{DynamicResource MiSansRegular}"
+						   FontSize="12" />
+				<Slider x:Name="PlaySlider"
+						Grid.Row="1"
+						Grid.Column="1"
+							>
+				</Slider>
+				<TextBlock Grid.Row="1"
+						   Grid.Column="2"
+						   Margin="8,0,0,-3"
+						   Width="34"
+						   VerticalAlignment="Center"
+						   Text="{Binding MusicPlayer.CurrentPlayingDuration, StringFormat='mm\\:ss'}"
+						   FontFamily="{DynamicResource MiSansRegular}"
+						   FontSize="12"/>
+			</Grid>
+
+			<StackPanel Grid.Column="2" Margin="8,0" Orientation="Horizontal" Spacing="8" HorizontalAlignment="Right">
+				<Button >
+
+				</Button>
+				<Button >
+					<Label Classes="LabelIcon" Content="&#xE019;" />
+				</Button>
+				<Button >
+					<Label Classes="LabelIcon" Content="&#xE762;" />
+				</Button>
+			</StackPanel>
+		</Grid>
+	</Border>
+</UserControl>

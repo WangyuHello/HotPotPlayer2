@@ -43,7 +43,7 @@ namespace HotPotPlayer2.ViewModels
             {
                 return;
             }
-            
+            MusicPlayer.PlayNext(item);
         }
     }
 }

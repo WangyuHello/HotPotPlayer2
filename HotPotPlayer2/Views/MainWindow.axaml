@@ -26,6 +26,14 @@
 
 			<TransitioningContentControl Grid.Column="1" Content="{Binding CurrentPage}" />
 		</Grid>
+
+		<cont:PlayBar x:Name="PlayBar"
+					  VerticalAlignment="Bottom"
+                      HorizontalAlignment="Stretch"
+					  Margin="180,0,124,16"
+					  IsVisible="{Binding MusicPlayer.IsPlayBarVisible}">
+			
+		</cont:PlayBar>
 	</Grid>
 
 </Window>

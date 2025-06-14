@@ -295,7 +295,7 @@ namespace HotPotPlayer2.Service
             return GetPrimaryJellyfinImageBase(tag, parentId, 300);
         }
 
-        public Uri? GetPrimaryJellyfinImageWidth(BaseItemDto_ImageTags tag, Guid? parentId, int widthheight)
+        public Uri? GetPrimaryJellyfinImageWidth(BaseItemDto_ImageTags? tag, Guid? parentId, int widthheight)
         {
             return GetPrimaryJellyfinImageBase(tag, parentId, widthheight);
         }

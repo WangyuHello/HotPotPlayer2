@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Avalonia.Threading;
+using CommunityToolkit.Mvvm.ComponentModel;
 using HotPotPlayer2.Base;
 using HotPotPlayer2.Models;
 using Jellyfin.Sdk.Generated.Models;
@@ -336,10 +337,11 @@ namespace HotPotPlayer2.Service
             _playerTimer?.Stop();
             _mpv?.Pause();
             isPauseAsStoped = true;
-            //UIQueue.TryEnqueue(() =>
-            //{
-            //    IsPlaying = false;
-            //});
+            Dispatcher.UIThread.Post
+            (() =>
+            {
+                IsPlaying = false;
+            });
             CustomPauseAsStop();
         }
 
@@ -384,17 +386,17 @@ namespace HotPotPlayer2.Service
         private void PlayerTimerElapsed(object? sender, ElapsedEventArgs? e)
         {
             var time = _mpv!.Position;
-            //UIQueue.TryEnqueue(() =>
-            //{
-            //    try
-            //    {
-            //        CurrentTime = time;
-            //    }
-            //    catch (Exception)
-            //    {
+            Dispatcher.UIThread.Post(() =>
+            {
+                try
+                {
+                    CurrentTime = time;
+                }
+                catch (Exception)
+                {
 
-            //    }
-            //});
+                }
+            });
 #if WINDOWS
             App.SetSmtcPosition(CurrentTime, CurrentPlayingDuration);
 #endif
@@ -414,28 +416,28 @@ namespace HotPotPlayer2.Service
 
         private void MediaEndedSeeking(object? sender, EventArgs? e)
         {
-            //UIQueue.TryEnqueue(() =>
-            //{
-            //    IsPlaying = true;
-            //    State = PlayerState.Playing;
-            //});
+            Dispatcher.UIThread.Post(() =>
+            {
+                IsPlaying = true;
+                State = PlayerState.Playing;
+            });
         }
 
         private void MediaStartedSeeking(object? sender, EventArgs? e)
         {
-            //UIQueue.TryEnqueue(() =>
-            //{
-            //    IsPlaying = false;
-            //    State = PlayerState.Loading;
-            //});
+            Dispatcher.UIThread.Post(() =>
+            {
+                IsPlaying = false;
+                State = PlayerState.Loading;
+            });
         }
 
         private void MediaUnloaded(object? sender, EventArgs? e)
         {
-            //UIQueue.TryEnqueue(() =>
-            //{
-            //    IsPlaying = false;
-            //});
+            Dispatcher.UIThread.Post(() =>
+            {
+                IsPlaying = false;
+            });
         }
 
         private void PositionChanged(object? sender, MpvPlayerPositionChangedEventArgs? e)
@@ -446,15 +448,15 @@ namespace HotPotPlayer2.Service
         private void MediaFinished(object? sender, EventArgs? e)
         {
             _playerTimer?.Stop();
-            //UIQueue.TryEnqueue(() =>
-            //{
-            //    IsPlaying = false;
-            //});
+            Dispatcher.UIThread.Post(() =>
+            {
+                IsPlaying = false;
+            });
             if (PlayMode != PlayMode.Single)
             {
                 if (!_isMediaSwitching)
                 {
-                    //UIQueue.TryEnqueue(PlayNextInPlayList);
+                    Dispatcher.UIThread.Post(PlayNextInPlayList);
                 }
             }
         }
@@ -475,32 +477,32 @@ namespace HotPotPlayer2.Service
             }
 
             _mpv?.Resume();
-            //UIQueue.TryEnqueue(() =>
-            //{
-            //    IsPlaying = true;
-            //    OnPropertyChanged(nameof(Volume));
-            //    OnPropertyChanged(nameof(CurrentPlayingDuration));
-            //});
+            Dispatcher.UIThread.Post(() =>
+            {
+                IsPlaying = true;
+                OnPropertyChanged(nameof(Volume));
+                OnPropertyChanged(nameof(CurrentPlayingDuration));
+            });
             CustomMediaLoaded();
             OnMediaLoaded?.Invoke();
         }
 
         private void MediaPaused(object? sender, EventArgs? e)
         {
-            //UIQueue.TryEnqueue(() =>
-            //{
-            //    IsPlaying = false;
-            //});
+            Dispatcher.UIThread.Post(() =>
+            {
+                IsPlaying = false;
+            });
         }
 
         protected virtual void CustomMediaResumed() { }
 
         private void MediaResumed(object? sender, EventArgs? e)
         {
-            //UIQueue.TryEnqueue(() =>
-            //{
-            //    IsPlaying = true;
-            //});
+            Dispatcher.UIThread.Post(() =>
+            {
+                IsPlaying = true;
+            });
             CustomMediaResumed();
         }
 
@@ -725,23 +727,23 @@ namespace HotPotPlayer2.Service
             switch (args.Button)
             {
                 case SystemMediaTransportControlsButton.Play:
-                    //UIQueue.TryEnqueue(PlayOrPause);
+                    Dispatcher.UIThread.Post(PlayOrPause);
                     break;
 
                 case SystemMediaTransportControlsButton.Pause:
-                    //UIQueue.TryEnqueue(PlayOrPause);
+                    Dispatcher.UIThread.Post(PlayOrPause);
                     break;
 
                 case SystemMediaTransportControlsButton.Stop:
-                    //UIQueue.TryEnqueue(PlayOrPause);
+                    Dispatcher.UIThread.Post(PlayOrPause);
                     break;
 
                 case SystemMediaTransportControlsButton.Next:
-                    //UIQueue.TryEnqueue(PlayNextInPlayList);
+                    Dispatcher.UIThread.Post(PlayNextInPlayList);
                     break;
 
                 case SystemMediaTransportControlsButton.Previous:
-                    //UIQueue.TryEnqueue(PlayPrevious);
+                    Dispatcher.UIThread.Post(PlayPrevious);
                     break;
             }
         }
