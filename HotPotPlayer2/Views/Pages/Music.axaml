@@ -55,13 +55,13 @@
 								FontSize="14"/>
 						</StackPanel>
 						<Grid x:Name="HiddenContent" IsVisible="False">
-							<Button Classes="TransparentButton"
+							<Button Classes="SemiTransparentButton"
 									HorizontalAlignment="Center"
 									Padding="12"
 									Margin="0,-70,0,0"
 									CornerRadius="32"
 									Width="48" Height="48"
-									Background="#99FFFFFF"
+									
 									Tag="{Binding }">
 								<Label Classes="LabelIcon" Content="&#xE768;" FontSize="20"/>
 							</Button>

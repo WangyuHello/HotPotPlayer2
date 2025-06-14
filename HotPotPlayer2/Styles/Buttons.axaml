@@ -35,6 +35,20 @@
 		<Setter Property="Padding" Value="0" />
 	</Style>
 
+	<Style Selector="Button.SemiTransparentButton">
+		<Setter Property="Background" Value="#99FFFFFF" />
+		<Setter Property="BorderThickness" Value="0" />
+		<Setter Property="Padding" Value="0" />
+	</Style>
+
+	<Style Selector="Button.SemiTransparentButton:pointerover /template/ ContentPresenter">
+		<Setter Property="Background" Value="#ddFFFFFF" />
+	</Style>
+
+	<Style Selector="Button.SemiTransparentButton:pressed /template/ ContentPresenter">
+		<Setter Property="Background" Value="#88FFFFFF" />
+	</Style>
+
 	<Style Selector="ToggleButton.BiliHeaderToggleButton">
 		<Setter Property="Height" Value="36" />
 		<Setter Property="Background" Value="#f2f5f6" />
