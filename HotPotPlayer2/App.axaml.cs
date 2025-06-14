@@ -14,8 +14,6 @@ namespace HotPotPlayer2
 {
     public partial class App : AppBase
     {
-        public override Window MainWindow => MainWindow;
-
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);

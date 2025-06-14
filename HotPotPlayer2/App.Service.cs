@@ -1,4 +1,6 @@
-﻿using Avalonia.Controls;
+﻿using Avalonia;
+using Avalonia.Controls;
+using HotPotPlayer2.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HotPotPlayer2
 {
-    public partial class App
+    public partial class App : AppBase
     {
 		private string? applicationVersion;
 		public override string ApplicationVersion => applicationVersion ??= GetApplicationVersion();
@@ -22,5 +24,11 @@ namespace HotPotPlayer2
         {
             Config.SaveSettings();
         }
+
+        public override Window MainWindow => MainWindow;
+
+        public override nint MainWindowHandle => throw new System.NotImplementedException();
+
+        public override Rect Bounds => throw new System.NotImplementedException();
     }
 }

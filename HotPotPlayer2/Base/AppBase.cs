@@ -1,5 +1,6 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
+using HotPotPlayer2.Interop;
 using HotPotPlayer2.Models;
 using HotPotPlayer2.Service;
 using System;
@@ -7,6 +8,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+#if WINDOWS
+using Windows.Media;
+#endif
 
 namespace HotPotPlayer2.Base
 {
@@ -24,6 +28,15 @@ namespace HotPotPlayer2.Base
         private MusicPlayerService? musicPlayer;
         public MusicPlayerService MusicPlayer => musicPlayer ??= new MusicPlayerService(Config, this);
 
+        private VideoPlayerService? videoPlayer;
+        public VideoPlayerService VideoPlayer => videoPlayer ??= new VideoPlayerService(Config, this);
+
+#if WINDOWS
+        public abstract SystemMediaTransportControls? SMTC { get; set; }
+        public abstract void InitSmtc();
+        public abstract void SetSmtcStatus(MediaPlaybackStatus status, bool init = false);
+        public abstract void SetSmtcPosition(TimeSpan current, TimeSpan? duration);
+#endif
         public abstract string ApplicationVersion { get; }
 
         public void NavigateBack(bool force = false)
@@ -40,5 +53,12 @@ namespace HotPotPlayer2.Base
         {
             throw new NotImplementedException();
         }
+        public abstract IntPtr MainWindowHandle { get; }
+        public abstract Rect Bounds { get; }
+
+#if WINDOWS
+        TaskbarHelper? _taskbar;
+        public TaskbarHelper Taskbar => _taskbar ??= new TaskbarHelper(MainWindowHandle);
+#endif
     }
 }

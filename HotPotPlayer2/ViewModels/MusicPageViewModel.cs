@@ -1,4 +1,5 @@
-﻿using Avalonia.Interactivity;
+﻿using Avalonia.Controls;
+using Avalonia.Interactivity;
 using CommunityToolkit.Mvvm.ComponentModel;
 using HotPotPlayer2.Base;
 using Jellyfin.Sdk.Generated.Models;
@@ -32,9 +33,17 @@ namespace HotPotPlayer2.ViewModels
             }
         }
 
-        public void AlbumGridView_ItemClick(object sender, RoutedEventArgs e)
+        public void AlbumClick(object sender, RoutedEventArgs e)
         {
-
+            if (sender is not Button b)
+            {
+                return;
+            }
+            if(b.DataContext is not BaseItemDto item)
+            {
+                return;
+            }
+            
         }
     }
 }

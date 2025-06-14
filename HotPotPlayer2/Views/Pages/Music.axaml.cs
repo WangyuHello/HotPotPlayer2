@@ -13,8 +13,9 @@ public partial class Music : UserControl
         InitializeComponent();
     }
 
-    private void AlbumGridView_ItemClick(object sender, RoutedEventArgs e)
+    private void AlbumClick(object sender, RoutedEventArgs e)
     {
-        ((MusicPageViewModel)DataContext!).AlbumGridView_ItemClick(sender, e);
+        ((MusicPageViewModel)DataContext!).AlbumClick(sender, e);
     }
+
 }

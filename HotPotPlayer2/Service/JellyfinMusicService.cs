@@ -305,7 +305,7 @@ namespace HotPotPlayer2.Service
             return GetPrimaryJellyfinImageBase(tag, parentId, 600);
         }
 
-        public Uri? GetPrimaryJellyfinImageSmall(BaseItemDto_ImageTags tag, Guid? parentId)
+        public Uri? GetPrimaryJellyfinImageSmall(BaseItemDto_ImageTags? tag, Guid? parentId)
         {
             return GetPrimaryJellyfinImageBase(tag, parentId, 100);
         }
@@ -697,7 +697,7 @@ namespace HotPotPlayer2.Service
             return result;
         }
 
-        public async Task ReportProgress(BaseItemDto video, long positionTicks, bool isPause, bool isMute = false)
+        public async Task ReportProgress(BaseItemDto? video, long positionTicks, bool isPause, bool isMute = false)
         {
             if (video == null || video.Id == null)
             {
@@ -717,7 +717,7 @@ namespace HotPotPlayer2.Service
             });
         }
 
-        public async void ReportStop(BaseItemDto video, long positionTicks)
+        public async void ReportStop(BaseItemDto? video, long positionTicks)
         {
             if (video == null || video.Id == null)
             {
