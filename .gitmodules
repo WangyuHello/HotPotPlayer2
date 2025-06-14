@@ -1,0 +1,3 @@
+[submodule "ThirdParty/Mpv.NET-lib-"]
+	path = ThirdParty/Mpv.NET-lib-
+	url = git@github.com:WangyuHello/Mpv.NET-lib-.git
