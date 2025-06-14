@@ -524,7 +524,7 @@ namespace HotPotPlayer2.Service
             {
                 if (_mpv == null)
                 {
-                    _mpv = new MpvPlayer(@"NativeLibs\mpv-2.dll")
+                    _mpv = new MpvPlayer()
                     {
                         AutoPlay = false,
                         Volume = Volume,
