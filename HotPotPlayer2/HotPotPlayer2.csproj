@@ -51,7 +51,7 @@
 		<PackageReference Include="Dove.Avalonia.Controls.Extensions" Version="2.0.5" />
     </ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)' == 'net9.0-windows10.0.26100.0'">
+	<ItemGroup Condition="$(TargetFramework.StartsWith('net9.0-windows'))">
 		<PackageReference Include="DirectNAot" Version="1.3.1" />
 		<PackageReference Include="DirectNAot.Extensions" Version="1.3.1" />
 		<PackageReference Include="Microsoft.Windows.CsWin32" Version="0.3.183">
