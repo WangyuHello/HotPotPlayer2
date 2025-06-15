@@ -2,22 +2,21 @@
 
 	<PropertyGroup>
 		<TargetFramework>net9.0</TargetFramework>
-		<IsWindowsNativeAssets>true</IsWindowsNativeAssets>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<Content Include="$(MSBuildThisFileDirectory)\lib\libmpv.so">
-			<PackagePath>runtimes/linux-x64/native/libmpv.so</PackagePath>
+			<PackagePath>runtimes/linux-x64/native/</PackagePath>
+			<Pack>true</Pack>
+		</Content>
+		<Content Include="$(MSBuildThisFileDirectory)\lib\mpv.dll">
+			<PackagePath>runtimes/win-x64/native/</PackagePath>
 			<Pack>true</Pack>
 		</Content>
 		<Content Include="$(MSBuildThisFileDirectory)\lib\libmpv.so">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 			<Link>libmpv.so</Link>
 			<Pack>false</Pack>
-		</Content>
-		<Content Include="$(MSBuildThisFileDirectory)\lib\mpv.dll">
-			<PackagePath>runtimes/win-x64/native/mpv.dll</PackagePath>
-			<Pack>true</Pack>
 		</Content>
 		<Content Include="$(MSBuildThisFileDirectory)\lib\mpv.dll">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
