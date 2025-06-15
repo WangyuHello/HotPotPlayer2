@@ -1,0 +1,22 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:cont="using:HotPotPlayer2.Controls"
+             mc:Ignorable="d" d:DesignWidth="80" d:DesignHeight="40"
+			 x:Name="Self"
+             x:Class="HotPotPlayer2.Controls.VolumePresenter">
+	<Border Width="72" Height="36" CornerRadius="18" ClipToBounds="True">
+		<Grid>
+			<Rectangle Fill="#40FFFFFF" Margin="-8" >
+				<Rectangle.RenderTransform>
+					<TranslateTransform X="{Binding #Self.Volume, Converter={x:Static cont:VolumePresenterConverters.GetVolumeTranslation}}" Y="0"/>
+				</Rectangle.RenderTransform>
+			</Rectangle>
+			<StackPanel Orientation="Horizontal" Spacing="4" VerticalAlignment="Center">
+				<Label Margin="6,0,0,0" Classes="LabelIcon" Content="{Binding #Self.Volume, Converter={x:Static cont:VolumePresenterConverters.GetVolumeIcon}}" VerticalAlignment="Center" />
+				<TextBlock VerticalAlignment="Center" TextAlignment="End" Width="32" FontSize="13" Text="{Binding #Self.Volume, Converter={x:Static cont:VolumePresenterConverters.GetVolumeText}}" />
+			</StackPanel>
+		</Grid>
+	</Border>
+</UserControl>

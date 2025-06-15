@@ -4,7 +4,7 @@
     <Border Padding="20">
 		<!-- Add Controls for Previewer Here -->
 		<StackPanel>
-			<Button Classes="PlayButton">
+			<Button Classes="VolumeButton">
 				<Label Classes="LabelIcon" Content="&#xE72C;" />
 			</Button>
 		</StackPanel>
@@ -163,5 +163,23 @@
 	<Style Selector="Button.PlayButton:pressed /template/ ContentPresenter">
 		<Setter Property="Background" Value="#576CCF"/>
 		<Setter Property="BorderBrush" Value="#576CCF"/>
+	</Style>
+
+	<Style Selector="Button.VolumeButton">
+		<Setter Property="Width" Value="72"/>
+		<Setter Property="Height" Value="36"/>
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="BorderBrush" Value="LightGray"/>
+		<Setter Property="BorderThickness" Value="1"/>
+		<Setter Property="Padding" Value="0" />
+		<Setter Property="CornerRadius" Value="18"/>
+		<Setter Property="ClipToBounds" Value="True" />
+	</Style>
+	<Style Selector="Button.VolumeButton /template/ ContentPresenter">
+		<Setter Property="ClipToBounds" Value="True" />
+	</Style>
+	<Style Selector="Button.VolumeButton:pointerover /template/ ContentPresenter">
+		<Setter Property="BorderBrush" Value="LightGray"/>
+		<Setter Property="BorderThickness" Value="1"/>
 	</Style>
 </Styles>

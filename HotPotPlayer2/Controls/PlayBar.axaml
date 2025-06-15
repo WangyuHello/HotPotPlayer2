@@ -9,6 +9,17 @@
 			 x:DataType="vm:PlayBarViewModel"
              x:Class="HotPotPlayer2.Controls.PlayBar">
 
+	<UserControl.Styles>
+		<Style Selector="FlyoutPresenter">
+			<Setter Property="MinWidth" Value="160" />
+			<Setter Property="MaxWidth" Value="160" />
+			<Setter Property="MinHeight" Value="40" />
+			<Setter Property="MaxHeight" Value="40" />
+			<Setter Property="Padding" Value="12,0" />
+			<Setter Property="CornerRadius" Value="16" />
+		</Style>
+	</UserControl.Styles>
+
 	<Border Background="LightBlue" CornerRadius="8" Height="80" ClipToBounds="True">
 		<Grid>
 			<Grid.ColumnDefinitions>
@@ -99,8 +110,13 @@
 			</Grid>
 
 			<StackPanel Grid.Column="2" Margin="8,0" Orientation="Horizontal" Spacing="8" HorizontalAlignment="Right">
-				<Button Classes="PlayOtherButton">
-
+				<Button Classes="VolumeButton">
+					<cont:VolumePresenter Volume="{Binding MusicPlayer.Volume}"/>
+					<Button.Flyout>
+						<Flyout Placement="Top">
+							<Slider Margin="0,-6,0,0" Value="{Binding MusicPlayer.Volume, Mode=TwoWay}"/>
+						</Flyout>
+					</Button.Flyout>
 				</Button>
 				<Button Classes="PlayOtherButton">
 					<Label Classes="LabelIcon" Content="&#xE019;" />
