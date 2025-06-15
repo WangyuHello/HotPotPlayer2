@@ -9,6 +9,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mpv.NET", "ThirdParty\Mpv.N
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotPotPlayer2.Native", "HotPotPlayer2.Native\HotPotPlayer2.Native.csproj", "{C72D057C-BF77-4B78-9E0E-7607E71FF406}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotPotPlayer2.Desktop", "HotPotPlayer2.Desktop\HotPotPlayer2.Desktop.csproj", "{698AA485-E7F0-4434-835A-C0C896E19CDF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决方案项", "{9FA3D6BD-1EC1-3BA5-80CB-CE02773A58D5}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Packages.props = Directory.Packages.props
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +34,10 @@ Global
 		{C72D057C-BF77-4B78-9E0E-7607E71FF406}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C72D057C-BF77-4B78-9E0E-7607E71FF406}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C72D057C-BF77-4B78-9E0E-7607E71FF406}.Release|Any CPU.Build.0 = Release|Any CPU
+		{698AA485-E7F0-4434-835A-C0C896E19CDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{698AA485-E7F0-4434-835A-C0C896E19CDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{698AA485-E7F0-4434-835A-C0C896E19CDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{698AA485-E7F0-4434-835A-C0C896E19CDF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

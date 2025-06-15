@@ -40,6 +40,13 @@ namespace HotPotPlayer2
                 };
                 desktop.MainWindow.Closing += MainWindow_Closing;
             }
+            else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
+            {
+                singleViewPlatform.MainView = new MainView
+                {
+                    DataContext = new MainWindowViewModel()
+                };
+            }
 
             base.OnFrameworkInitializationCompleted();
         }
