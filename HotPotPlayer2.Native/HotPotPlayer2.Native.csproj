@@ -1,18 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<IsWindowsNativeAssets>true</IsWindowsNativeAssets>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Update="lib\libmpv.so">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="lib\mpv.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<Content Include="$(MSBuildThisFileDirectory)\lib\libmpv.so">
+			<PackagePath>runtimes/linux-x64/native/libmpv.so</PackagePath>
+			<Pack>true</Pack>
+		</Content>
+		<Content Include="$(MSBuildThisFileDirectory)\lib\libmpv.so">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+			<Link>libmpv.so</Link>
+			<Pack>false</Pack>
+		</Content>
+		<Content Include="$(MSBuildThisFileDirectory)\lib\mpv.dll">
+			<PackagePath>runtimes/win-x64/native/mpv.dll</PackagePath>
+			<Pack>true</Pack>
+		</Content>
+		<Content Include="$(MSBuildThisFileDirectory)\lib\mpv.dll">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+			<Link>mpv.dll</Link>
+			<Pack>false</Pack>
+		</Content>
+	</ItemGroup>
 
 </Project>
