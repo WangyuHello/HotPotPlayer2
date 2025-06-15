@@ -74,6 +74,7 @@ public static class PlayBarConverters
     const string Loop = "\uE1CD";
     const string SingleLoop = "\uE1CC";
     const string Shuffle = "\uE8B1";
+    const string Single = "\uE776";
 
     public static FuncValueConverter<PlayMode, string> GetPlayModeIcon = new(i =>
     {
@@ -82,7 +83,8 @@ public static class PlayBarConverters
             PlayMode.Loop => Loop,
             PlayMode.SingleLoop => SingleLoop,
             PlayMode.Shuffle => Shuffle,
-            _ => Loop,
+            PlayMode.Single => Single,
+            _ => Single,
         };
     });
 
