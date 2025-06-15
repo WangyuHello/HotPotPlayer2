@@ -2,13 +2,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <Design.PreviewWith>
     <Border Padding="20">
-      <!-- Add Controls for Previewer Here -->
-		<ToggleButton IsChecked="True" Classes="BiliHeaderToggleButton">
-			<StackPanel Orientation="Horizontal" Spacing="4">
-				<Label Padding="0" Classes="BiliLabelIcon" Content="&#xEA1A;" />
-				<TextBlock Text="推荐" />
-			</StackPanel>
-		</ToggleButton>
+		<!-- Add Controls for Previewer Here -->
+		<StackPanel>
+			<Button Classes="PlayButton">
+				<Label Classes="LabelIcon" Content="&#xE72C;" />
+			</Button>
+		</StackPanel>
     </Border>
   </Design.PreviewWith>
 
@@ -106,5 +105,63 @@
 		<Setter Property="Background" Value="Transparent" />
 		<Setter Property="Padding" Value="0" />
 		<Setter Property="BorderThickness" Value="2" />
+	</Style>
+
+	<Style Selector="Button.TextButton:pointerover /template/ ContentPresenter">
+		<Setter Property="Background" Value="Transparent" />
+	</Style>
+
+	<Style Selector="Button.TextButton:pressed /template/ ContentPresenter">
+		<Setter Property="Background" Value="Transparent" />
+	</Style>
+
+	<Style Selector="Button.PlayOtherButton">
+		<Setter Property="Width" Value="36"/>
+		<Setter Property="Height" Value="36"/>
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="Foreground" Value="DimGray"/>
+		<Setter Property="BorderThickness" Value="0"/>
+		<Setter Property="Padding" Value="0"/>
+		<Setter Property="CornerRadius" Value="18"/>
+	</Style>
+
+	<Style Selector="Button.PlayOtherButton:pressed /template/ ContentPresenter">
+		<Setter Property="Background" Value="#d1d6e1"/>
+	</Style>
+
+	<Style Selector="Button.NextPreviousButton">
+		<Setter Property="Width" Value="36"/>
+		<Setter Property="Height" Value="36"/>
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="Foreground" Value="#6982f9"/>
+		<Setter Property="BorderThickness" Value="0"/>
+		<Setter Property="Padding" Value="0"/>
+		<Setter Property="CornerRadius" Value="18"/>
+	</Style>
+	<Style Selector="Button.NextPreviousButton:pointerover /template/ ContentPresenter">
+		<Setter Property="Foreground" Value="#6982f9"/>
+	</Style>
+	<Style Selector="Button.NextPreviousButton:pressed /template/ ContentPresenter">
+		<Setter Property="Background" Value="#d1d6e1"/>
+	</Style>
+
+	<Style Selector="Button.PlayButton">
+		<Setter Property="Width" Value="44"/>
+		<Setter Property="Height" Value="44"/>
+		<Setter Property="Background" Value="#6982f9"/>
+		<Setter Property="Foreground" Value="White"/>
+		<Setter Property="BorderBrush" Value="White"/>
+		<Setter Property="BorderThickness" Value="2"/>
+		<Setter Property="Padding" Value="0"/>
+		<Setter Property="CornerRadius" Value="22"/>
+	</Style>
+	<Style Selector="Button.PlayButton:pointerover /template/ ContentPresenter">
+		<Setter Property="Background" Value="#576CCF"/>
+		<Setter Property="Foreground" Value="White"/>
+		<Setter Property="BorderBrush" Value="White"/>
+	</Style>
+	<Style Selector="Button.PlayButton:pressed /template/ ContentPresenter">
+		<Setter Property="Background" Value="#576CCF"/>
+		<Setter Property="BorderBrush" Value="#576CCF"/>
 	</Style>
 </Styles>

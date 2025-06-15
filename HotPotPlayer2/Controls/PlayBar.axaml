@@ -5,7 +5,7 @@
 			 xmlns:ail="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
 			 xmlns:vm="using:HotPotPlayer2.ViewModels"
 			 xmlns:cont="using:HotPotPlayer2.Controls"
-             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="80"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="80"
 			 x:DataType="vm:PlayBarViewModel"
              x:Class="HotPotPlayer2.Controls.PlayBar">
 
@@ -49,38 +49,48 @@
 					<ColumnDefinition Width="Auto" />
 				</Grid.ColumnDefinitions>
 
-				<StackPanel Margin="0,0,0,-8" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="4">
-					<Button>
-						<Label Classes="LabelIcon" Content="" />
+				<StackPanel Margin="0,0,0,-16" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="4">
+					<Button Click="PlayModeButtonClick" Classes="PlayOtherButton">
+						<Label Classes="LabelIcon" Content="{Binding MusicPlayer.PlayMode, Converter={x:Static cont:PlayBarConverters.GetPlayModeIcon}}" />
 					</Button>
-					<Button>
+					<Button Click="PlayPreviousButtonClick" Classes="NextPreviousButton">
 						<Label Classes="LabelIcon" Content="&#xF8AC;" />
 					</Button>
-					<Button Click="PlayButtonClick">
+					<Button Click="PlayButtonClick" Classes="PlayButton">
 						<Label Classes="LabelIcon" Content="{Binding MusicPlayer.IsPlaying, Converter={x:Static cont:PlayBarConverters.GetPlayButtonIcon}}" />
 					</Button>
-					<Button>
+					<Button Click="PlayNextButtonClick" Classes="NextPreviousButton">
 						<Label Classes="LabelIcon" Content="&#xF8AD;" />
 					</Button>
-					<Button>
+					<Button Classes="PlayOtherButton">
 						<Label Classes="LabelIcon" Content="&#xE72C;" />
 					</Button>
 				</StackPanel>
 				<TextBlock Grid.Row="1"
-						   Margin="0,0,8,-3"
+						   Margin="0,0,8,-10"
 						   Width="34"
 						   VerticalAlignment="Center"
 						   Text="{Binding MusicPlayer.CurrentTime, StringFormat='mm\\:ss'}"
 						   FontFamily="{DynamicResource MiSansRegular}"
 						   FontSize="12" />
 				<Slider x:Name="PlaySlider"
+						Margin="0,0,0,-10"
+						Classes="PlaySliderStyle"
 						Grid.Row="1"
 						Grid.Column="1"
-							>
+						Thumb.DragStarted="PlaySlider_DragStarted"
+						Thumb.DragCompleted="PlaySlider_DragCompleted"
+						>
+					<Slider.Value>
+						<MultiBinding Converter="{x:Static cont:PlayBarConverters.GetSliderValue}">
+							<Binding Path="MusicPlayer.CurrentTime" />
+							<Binding Path="MusicPlayer.CurrentPlayingDuration" />
+						</MultiBinding>
+					</Slider.Value>
 				</Slider>
 				<TextBlock Grid.Row="1"
 						   Grid.Column="2"
-						   Margin="8,0,0,-3"
+						   Margin="8,0,0,-10"
 						   Width="34"
 						   VerticalAlignment="Center"
 						   Text="{Binding MusicPlayer.CurrentPlayingDuration, StringFormat='mm\\:ss'}"
@@ -89,13 +99,13 @@
 			</Grid>
 
 			<StackPanel Grid.Column="2" Margin="8,0" Orientation="Horizontal" Spacing="8" HorizontalAlignment="Right">
-				<Button >
+				<Button Classes="PlayOtherButton">
 
 				</Button>
-				<Button >
+				<Button Classes="PlayOtherButton">
 					<Label Classes="LabelIcon" Content="&#xE019;" />
 				</Button>
-				<Button >
+				<Button Classes="PlayOtherButton">
 					<Label Classes="LabelIcon" Content="&#xE762;" />
 				</Button>
 			</StackPanel>
