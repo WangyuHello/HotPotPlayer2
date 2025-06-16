@@ -118,11 +118,17 @@ jobs:
       run: |
         dotnet tool install -g KuiperZone.PupNet
 
-    - name: Install pack tool
+    - name: Install flatpak
+      if: ${{ matrix.pack == 'flatpak' }}
       run: |
         sudo apt-get install flatpak flatpak-builder rpm elfutils --no-install-recommends -y
         sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
         sudo flatpak install -y flathub org.freedesktop.Platform//24.08 org.freedesktop.Sdk//24.08
+    
+    - name: Install rpm
+      if: ${{ matrix.pack == 'rpm' }}
+      run: |
+        sudo apt-get install rpm --no-install-recommends -y
 
     - name: Create the app package ${{ matrix.pack }}
       run: pupnet HotPotPlayer2.pupnet.conf --kind ${{ matrix.pack }} --app-version 0.${{ github.run_number }}.${{ github.run_attempt }}[1] -y
