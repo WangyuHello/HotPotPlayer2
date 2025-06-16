@@ -117,7 +117,7 @@ jobs:
 
     - name: Install pack tool
       run: |
-        sudo apt-get install flatpak flatpak-builder rpm --no-install-recommends -y
+        sudo apt-get install flatpak flatpak-builder rpm elfutils --no-install-recommends -y
         sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
         sudo flatpak install -y flathub org.freedesktop.Platform//24.08 org.freedesktop.Sdk//24.08
 
