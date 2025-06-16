@@ -11,8 +11,11 @@ namespace HotPotPlayer2.Service
 {
     public class AppConfig : ConfigBase
     {
-        public override string CacheFolder => Path.Combine(AppContext.BaseDirectory, "Cache");
-        public override string LocalFolder => AppContext.BaseDirectory;
+        public override string CacheFolder => Path.Combine(LocalFolder, "Cache");
+
+        private string? localFolder;
+        public override string LocalFolder => localFolder ??= 
+            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "HotPotPlayer2");
 
         private List<JellyfinServerItem>? _jellyfinServers;
         public override List<JellyfinServerItem> JellyfinServers
