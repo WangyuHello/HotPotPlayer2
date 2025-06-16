@@ -154,8 +154,8 @@ jobs:
     - name: Create GH release
       uses: softprops/action-gh-release@v2
       with:
-        name: '0.${{ github.run_number }}.${{ github.run_attempt }}.0'
-        tag_name: 'v0.${{ github.run_number }}.${{ github.run_attempt }}.0'
+        name: '0.${{ github.run_number }}.${{ github.run_attempt }}'
+        tag_name: 'v0.${{ github.run_number }}.${{ github.run_attempt }}'
         body:
         files: |
           artis/**/*
