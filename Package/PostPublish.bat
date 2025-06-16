@@ -1,0 +1,1 @@
+del "%BUILD_APP_BIN%\libmpv.so"
