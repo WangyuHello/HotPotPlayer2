@@ -95,6 +95,9 @@ jobs:
 
   linux:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        pack: ["flatpak", "deb", "rpm"]
     env:
       Solution_Name: HotPotPlayer2
       Configuration: Release
@@ -121,19 +124,13 @@ jobs:
         sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
         sudo flatpak install -y flathub org.freedesktop.Platform//24.08 org.freedesktop.Sdk//24.08
 
-    - name: Create the app package deb
-      run: pupnet HotPotPlayer2.pupnet.conf --kind deb --app-version 0.${{ github.run_number }}.${{ github.run_attempt }}[1] -y
-
-    - name: Create the app package rpm
-      run: pupnet HotPotPlayer2.pupnet.conf --kind rpm --app-version 0.${{ github.run_number }}.${{ github.run_attempt }}[1] -y
-
-    - name: Create the app package flatpak
-      run: pupnet HotPotPlayer2.pupnet.conf --kind flatpak --app-version 0.${{ github.run_number }}.${{ github.run_attempt }}[1] -y
+    - name: Create the app package ${{ matrix.pack }}
+      run: pupnet HotPotPlayer2.pupnet.conf --kind ${{ matrix.pack }} --app-version 0.${{ github.run_number }}.${{ github.run_attempt }}[1] -y
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
-        name: linux
+        name: linux-${{ matrix.pack }}
         path: |
           Package/bin/*
 
@@ -155,5 +152,5 @@ jobs:
         tag_name: 'v0.${{ github.run_number }}.${{ github.run_attempt }}.0'
         body:
         files: |
-          artis/*
+          artis/**/*
         fail_on_unmatched_files: true
