@@ -14,7 +14,7 @@
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
-		<TextBlock Margin="36,0,0,12" FontSize="24" FontFamily="{DynamicResource MiSansMedium}">设置</TextBlock>
+		<TextBlock Margin="36,0,0,12" FontSize="24" FontFamily="{StaticResource MiSansMedium}">设置</TextBlock>
 
 		<ScrollViewer Grid.Row="2">
 			<Grid Margin="36,0,36,0">
@@ -23,12 +23,12 @@
                             HorizontalAlignment="Stretch"
                             Spacing="4"
                             >
-					<TextBlock Margin="0,12" FontSize="18" FontFamily="{DynamicResource MiSansMedium}">Jellyfin</TextBlock>
+					<TextBlock Margin="0,12" FontSize="18" FontFamily="{StaticResource MiSansMedium}">Jellyfin</TextBlock>
 
 					<Border BorderThickness="0.5" BorderBrush="LightGray" CornerRadius="2">
 						<Grid RowDefinitions="*,*" ColumnDefinitions="Auto,*,Auto,Auto,Auto,Auto" Margin="16,16">
 							<Label Grid.RowSpan="2" Classes="LabelIcon" Content="&#xE977;" FontSize="24" />
-							<TextBlock Margin="12,0,0,0" Grid.Column="1" FontSize="14" FontFamily="{DynamicResource MiSansMedium}" VerticalAlignment="Bottom">服务器</TextBlock>
+							<TextBlock Margin="12,0,0,0" Grid.Column="1" FontSize="14" FontFamily="{StaticResource MiSansMedium}" VerticalAlignment="Bottom">服务器</TextBlock>
 							<TextBlock Margin="12,0,0,0" Grid.Column="1" Grid.Row="1" FontSize="14" VerticalAlignment="Top">列表</TextBlock>
 							<TextBox Grid.Column="2" Grid.RowSpan="2" Text="{Binding JellyfinUrl, Mode=TwoWay}"></TextBox>
 							<TextBox Grid.Column="3" Grid.RowSpan="2" Margin="20,0,0,0" Text="{Binding JellyfinUserName, Mode=TwoWay}"></TextBox>
@@ -40,7 +40,7 @@
 					<Border BorderThickness="0.5" BorderBrush="LightGray" CornerRadius="2">
 						<Grid RowDefinitions="*,*" ColumnDefinitions="Auto,*,Auto" Margin="16,16">
 							<Label Grid.RowSpan="2" Classes="LabelIcon" Content="&#xEC4F;" FontSize="24" />
-							<TextBlock Margin="12,0,0,0" Grid.Column="1" FontSize="14" FontFamily="{DynamicResource MiSansMedium}" VerticalAlignment="Bottom">选择音乐库</TextBlock>
+							<TextBlock Margin="12,0,0,0" Grid.Column="1" FontSize="14" FontFamily="{StaticResource MiSansMedium}" VerticalAlignment="Bottom">选择音乐库</TextBlock>
 							<TextBlock Margin="12,0,0,0" Grid.Column="1" Grid.Row="1" FontSize="14" VerticalAlignment="Top">只能选择一个音乐库</TextBlock>
 							<ComboBox Grid.Column="2" 
 									  Grid.RowSpan="2" 
@@ -58,16 +58,16 @@
 					<Border BorderThickness="0.5" BorderBrush="LightGray" CornerRadius="2">
 						<Grid RowDefinitions="*,*" ColumnDefinitions="Auto,*,Auto" Margin="16,16">
 							<Label Grid.RowSpan="2" Classes="LabelIcon" Content="&#xE77C;" FontSize="24" />
-							<TextBlock Margin="12,0,0,0" Grid.Column="1" Grid.RowSpan="2" FontSize="14" FontFamily="{DynamicResource MiSansMedium}" VerticalAlignment="Center">恢复上一次播放进度</TextBlock>
+							<TextBlock Margin="12,0,0,0" Grid.Column="1" Grid.RowSpan="2" FontSize="14" FontFamily="{StaticResource MiSansMedium}" VerticalAlignment="Center">恢复上一次播放进度</TextBlock>
 							<ToggleSwitch Grid.Column="2" Grid.RowSpan="2" OnContent="开启" OffContent="关闭" IsChecked="{Binding EnableRestorePrevLocation, Mode=TwoWay}"/>
 						</Grid>
 					</Border>
 
-					<TextBlock Margin="0,24,0,12" FontSize="18" FontFamily="{DynamicResource MiSansMedium}">MPV</TextBlock>
+					<TextBlock Margin="0,24,0,12" FontSize="18" FontFamily="{StaticResource MiSansMedium}">MPV</TextBlock>
 					<Border BorderThickness="0.5" BorderBrush="LightGray" CornerRadius="2">
 						<Grid RowDefinitions="*,*" ColumnDefinitions="Auto,*,Auto" Margin="16,16">
 							<Label Grid.RowSpan="2" Classes="LabelIcon" Content="&#xE8D6;" FontSize="24" />
-							<TextBlock Margin="12,0,0,0" Grid.Column="1" FontSize="14" FontFamily="{DynamicResource MiSansMedium}" VerticalAlignment="Bottom">回放增益</TextBlock>
+							<TextBlock Margin="12,0,0,0" Grid.Column="1" FontSize="14" FontFamily="{StaticResource MiSansMedium}" VerticalAlignment="Bottom">回放增益</TextBlock>
 							<TextBlock Margin="12,0,0,0" Grid.Column="1" Grid.Row="1" FontSize="14" VerticalAlignment="Top">根据元数据中的值调整音量增益</TextBlock>
 							<ToggleSwitch Grid.Column="2" Grid.RowSpan="2" OnContent="开启" OffContent="关闭" IsChecked="{Binding EnableReplayGain, Mode=TwoWay}"/>
 						</Grid>
@@ -75,12 +75,12 @@
 					<Border BorderThickness="0.5" BorderBrush="LightGray" CornerRadius="2">
 						<Grid RowDefinitions="*,*" ColumnDefinitions="Auto,*,Auto" Margin="16,16">
 							<Label Grid.RowSpan="2" Classes="LabelIcon" Content="&#xE8D6;" FontSize="24" />
-							<TextBlock Margin="12,0,0,0" Grid.Column="1" FontSize="14" FontFamily="{DynamicResource MiSansMedium}" VerticalAlignment="Bottom">版本</TextBlock>
+							<TextBlock Margin="12,0,0,0" Grid.Column="1" FontSize="14" FontFamily="{StaticResource MiSansMedium}" VerticalAlignment="Bottom">版本</TextBlock>
 							<TextBlock Margin="12,0,0,0" Grid.Column="1" Grid.Row="1" FontSize="14" VerticalAlignment="Top"></TextBlock>
 						</Grid>
 					</Border>
 
-					<TextBlock Margin="0,24,0,12" FontSize="18" FontFamily="{DynamicResource MiSansMedium}">调试</TextBlock>
+					<TextBlock Margin="0,24,0,12" FontSize="18" FontFamily="{StaticResource MiSansMedium}">调试</TextBlock>
 					<Button BorderBrush="LightGray" 
 							CornerRadius="2" 
 							HorizontalAlignment="Stretch" 
