@@ -173,7 +173,7 @@ jobs:
         Get-ChildItem .
 
     - name: Create the app package
-      run: dotnet publish -f ${{env.Framework}} -c ${{env.Configuration}} -p:AndroidKeyStore=true -p:AndroidSigningKeyStore=${{env.Name}}.keystore -p:AndroidSigningKeyAlias=${{env.Name}} -p:AndroidSigningKeyPass=${{secrets.KeystorePassword}} -p:AndroidSigningStorePass=${{secrets.KeystorePassword}} ./${{env.Solution_Name}}.Android/${{env.Solution_Name}}.Android.csproj -o build
+      run: dotnet publish -f ${{env.Framework}} -c ${{env.Configuration}} -p:AndroidKeyStore=true -p:AndroidSigningKeyStore=${{github.workspace}}/${{env.Name}}.keystore -p:AndroidSigningKeyAlias=${{env.Name}} -p:AndroidSigningKeyPass=${{secrets.KeystorePassword}} -p:AndroidSigningStorePass=${{secrets.KeystorePassword}} ./${{env.Solution_Name}}.Android/${{env.Solution_Name}}.Android.csproj -o build
 
     # Remove the pfx
     - name: Remove the keystore
