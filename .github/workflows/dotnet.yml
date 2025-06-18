@@ -162,7 +162,7 @@ jobs:
 
     - name: Install Android
       run: |
-        dotnet workload install andoird
+        dotnet workload install android
 
     # Decode keystore
     - name: Decode the keystore
