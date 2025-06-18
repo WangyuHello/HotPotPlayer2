@@ -2,7 +2,107 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:vm="using:HotPotPlayer2.ViewModels"
+			 xmlns:jmodel="using:Jellyfin.Sdk.Generated.Models"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="850"
+			 x:DataType="vm:SettingPageViewModel"
              x:Class="HotPotPlayer2.Views.Pages.Setting">
-  Setting
+
+	<Grid Background="White" Margin="0,28,0,0">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+		<TextBlock Margin="36,0,0,12" FontSize="24" FontFamily="{DynamicResource MiSansMedium}">设置</TextBlock>
+
+		<ScrollViewer Grid.Row="2">
+			<Grid Margin="36,0,36,0">
+
+				<StackPanel MaxWidth="1000"
+                            HorizontalAlignment="Stretch"
+                            Spacing="4"
+                            >
+					<TextBlock Margin="0,12" FontSize="18" FontFamily="{DynamicResource MiSansMedium}">Jellyfin</TextBlock>
+
+					<Border BorderThickness="0.5" BorderBrush="LightGray" CornerRadius="2">
+						<Grid RowDefinitions="*,*" ColumnDefinitions="Auto,*,Auto,Auto,Auto,Auto" Margin="16,16">
+							<Label Grid.RowSpan="2" Classes="LabelIcon" Content="&#xE977;" FontSize="24" />
+							<TextBlock Margin="12,0,0,0" Grid.Column="1" FontSize="14" FontFamily="{DynamicResource MiSansMedium}" VerticalAlignment="Bottom">服务器</TextBlock>
+							<TextBlock Margin="12,0,0,0" Grid.Column="1" Grid.Row="1" FontSize="14" VerticalAlignment="Top">列表</TextBlock>
+							<TextBox Grid.Column="2" Grid.RowSpan="2" Text="{Binding JellyfinUrl, Mode=TwoWay}"></TextBox>
+							<TextBox Grid.Column="3" Grid.RowSpan="2" Margin="20,0,0,0" Text="{Binding JellyfinUserName, Mode=TwoWay}"></TextBox>
+							<TextBox Grid.Column="4" Grid.RowSpan="2" Margin="20,0,0,0" Text="{Binding JellyfinPassword, Mode=TwoWay}" PasswordChar="*"></TextBox>
+							<Button Grid.Column="5" Grid.RowSpan="2" Margin="20 0 0 0" Command="{Binding AddJellyfinServerClickCommand}">添加</Button>
+						</Grid>
+					</Border>
+
+					<Border BorderThickness="0.5" BorderBrush="LightGray" CornerRadius="2">
+						<Grid RowDefinitions="*,*" ColumnDefinitions="Auto,*,Auto" Margin="16,16">
+							<Label Grid.RowSpan="2" Classes="LabelIcon" Content="&#xEC4F;" FontSize="24" />
+							<TextBlock Margin="12,0,0,0" Grid.Column="1" FontSize="14" FontFamily="{DynamicResource MiSansMedium}" VerticalAlignment="Bottom">选择音乐库</TextBlock>
+							<TextBlock Margin="12,0,0,0" Grid.Column="1" Grid.Row="1" FontSize="14" VerticalAlignment="Top">只能选择一个音乐库</TextBlock>
+							<ComboBox Grid.Column="2" 
+									  Grid.RowSpan="2" 
+									  ItemsSource="{Binding MusicLibraryDto}" 
+									  SelectedItem="{Binding SelectedMusicLibraryDto}"
+									  >
+								<ComboBox.ItemTemplate>
+									<DataTemplate x:DataType="jmodel:BaseItemDto">
+										<TextBlock Text="{Binding Name}" />
+									</DataTemplate>
+								</ComboBox.ItemTemplate>
+							</ComboBox>
+						</Grid>
+					</Border>
+					<Border BorderThickness="0.5" BorderBrush="LightGray" CornerRadius="2">
+						<Grid RowDefinitions="*,*" ColumnDefinitions="Auto,*,Auto" Margin="16,16">
+							<Label Grid.RowSpan="2" Classes="LabelIcon" Content="&#xE77C;" FontSize="24" />
+							<TextBlock Margin="12,0,0,0" Grid.Column="1" Grid.RowSpan="2" FontSize="14" FontFamily="{DynamicResource MiSansMedium}" VerticalAlignment="Center">恢复上一次播放进度</TextBlock>
+							<ToggleSwitch Grid.Column="2" Grid.RowSpan="2" OnContent="开启" OffContent="关闭" IsChecked="{Binding EnableRestorePrevLocation, Mode=TwoWay}"/>
+						</Grid>
+					</Border>
+
+					<TextBlock Margin="0,24,0,12" FontSize="18" FontFamily="{DynamicResource MiSansMedium}">MPV</TextBlock>
+					<Border BorderThickness="0.5" BorderBrush="LightGray" CornerRadius="2">
+						<Grid RowDefinitions="*,*" ColumnDefinitions="Auto,*,Auto" Margin="16,16">
+							<Label Grid.RowSpan="2" Classes="LabelIcon" Content="&#xE8D6;" FontSize="24" />
+							<TextBlock Margin="12,0,0,0" Grid.Column="1" FontSize="14" FontFamily="{DynamicResource MiSansMedium}" VerticalAlignment="Bottom">回放增益</TextBlock>
+							<TextBlock Margin="12,0,0,0" Grid.Column="1" Grid.Row="1" FontSize="14" VerticalAlignment="Top">根据元数据中的值调整音量增益</TextBlock>
+							<ToggleSwitch Grid.Column="2" Grid.RowSpan="2" OnContent="开启" OffContent="关闭" IsChecked="{Binding EnableReplayGain, Mode=TwoWay}"/>
+						</Grid>
+					</Border>
+					<Border BorderThickness="0.5" BorderBrush="LightGray" CornerRadius="2">
+						<Grid RowDefinitions="*,*" ColumnDefinitions="Auto,*,Auto" Margin="16,16">
+							<Label Grid.RowSpan="2" Classes="LabelIcon" Content="&#xE8D6;" FontSize="24" />
+							<TextBlock Margin="12,0,0,0" Grid.Column="1" FontSize="14" FontFamily="{DynamicResource MiSansMedium}" VerticalAlignment="Bottom">版本</TextBlock>
+							<TextBlock Margin="12,0,0,0" Grid.Column="1" Grid.Row="1" FontSize="14" VerticalAlignment="Top"></TextBlock>
+						</Grid>
+					</Border>
+
+					<TextBlock Margin="0,24,0,12" FontSize="18" FontFamily="{DynamicResource MiSansMedium}">调试</TextBlock>
+					<Button BorderBrush="LightGray" 
+							CornerRadius="2" 
+							HorizontalAlignment="Stretch" 
+							Padding="16,16" 
+							Classes="TransparentButton"
+							BorderThickness="0.5"
+							Command="{Binding OpenDataLocationClick}"
+							>
+						打开数据位置
+					</Button>
+					<Button BorderBrush="LightGray"
+							CornerRadius="2"
+							HorizontalAlignment="Stretch"
+							Padding="16,16"
+							Classes="TransparentButton"
+							BorderThickness="0.5"
+							Command="{Binding OpenConfigFileClick}"
+							>
+						打开配置文件
+					</Button>
+				</StackPanel>
+			</Grid>
+		</ScrollViewer>
+	</Grid>
 </UserControl>

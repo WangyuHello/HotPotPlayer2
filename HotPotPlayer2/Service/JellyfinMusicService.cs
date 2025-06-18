@@ -446,7 +446,7 @@ namespace HotPotPlayer2.Service
             return (!string.IsNullOrEmpty(token), message);
         }
 
-        public static async Task<(JObject re, string msg)> TryGetSystemInfoPublicAsync(string url)
+        public async Task<(JObject re, string msg)> TryGetSystemInfoPublicAsync(string url)
         {
             using var http = new HttpClient();
             var msg = string.Empty;
