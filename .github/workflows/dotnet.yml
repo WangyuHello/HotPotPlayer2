@@ -160,12 +160,16 @@ jobs:
       with:
         dotnet-version: 9.0.x
 
+    - name: Install Android
+      run: |
+        dotnet workload install andoird
+
     # Decode keystore
     - name: Decode the keystore
       shell: pwsh
       run: |
-        $byte = [System.Convert]::FromBase64String("${{ secrets.Base64_Encoded_Keystore }}")
-        [IO.File]::WriteAllBytes("$($env:Name).keystore", $byte)
+        $bytes = [System.Convert]::FromBase64String("${{ secrets.Base64_Encoded_Keystore }}")
+        [IO.File]::WriteAllBytes("$($env:Name).keystore", $bytes)
 
     - name: Create the app package
       run: dotnet publish -f ${{env.Framework}} -c ${{env.Configuration}} -p:AndroidKeyStore=true -p:AndroidSigningKeyStore=${{env.Name}}.keystore -p:AndroidSigningKeyAlias=${{env.Name}} -p:AndroidSigningKeyPass=${{secrets.KeystorePassword}} -p:AndroidSigningStorePass=${{secrets.KeystorePassword}} ./${{env.Solution_Name}}.Android/${{env.Solution_Name}}.Android.csproj -o build
