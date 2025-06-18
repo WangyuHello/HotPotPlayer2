@@ -170,6 +170,7 @@ jobs:
       run: |
         $bytes = [System.Convert]::FromBase64String("${{ secrets.Base64_Encoded_Keystore }}")
         [IO.File]::WriteAllBytes("$($env:Name).keystore", $bytes)
+        Get-ChildItem .
 
     - name: Create the app package
       run: dotnet publish -f ${{env.Framework}} -c ${{env.Configuration}} -p:AndroidKeyStore=true -p:AndroidSigningKeyStore=${{env.Name}}.keystore -p:AndroidSigningKeyAlias=${{env.Name}} -p:AndroidSigningKeyPass=${{secrets.KeystorePassword}} -p:AndroidSigningStorePass=${{secrets.KeystorePassword}} ./${{env.Solution_Name}}.Android/${{env.Solution_Name}}.Android.csproj -o build
