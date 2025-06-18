@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-		<TargetFrameworks>net9.0;net9.0-windows10.0.26100.0</TargetFrameworks>
+		<TargetFrameworks>net8.0;net9.0;net9.0-windows10.0.26100.0</TargetFrameworks>
 		<TargetPlatformMinVersion>10.0.22621.0</TargetPlatformMinVersion>
         <Nullable>enable</Nullable>
 	    <LangVersion>Preview</LangVersion>
@@ -19,42 +19,41 @@
     </ItemGroup>
 
 	<ItemGroup>
-        <PackageReference Include="AsyncImageLoader.Avalonia"/>
+        <PackageReference Include="AsyncImageLoader.Avalonia" />
         <PackageReference Include="Avalonia" />
-        <PackageReference Include="Avalonia.Themes.Fluent"/>
-        <PackageReference Include="Avalonia.Fonts.Inter"/>
-		<PackageReference Include="Avalonia.Controls.ItemsRepeater"/>
+        <PackageReference Include="Avalonia.Themes.Fluent" />
+        <PackageReference Include="Avalonia.Fonts.Inter" />
+		<PackageReference Include="Avalonia.Controls.ItemsRepeater" />
 		<PackageReference Include="Avalonia.Diagnostics">
 			<IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
 			<PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
 		</PackageReference>
-        <PackageReference Include="CommunityToolkit.Mvvm"/>
-	    <PackageReference Include="Blurhash.System.Drawing.Common"/>
-	    <PackageReference Include="Jellyfin.Sdk"/>
-		<PackageReference Include="Newtonsoft.Json"/>
-		<PackageReference Include="Richasy.BiliKernel.Authorizers.TV"/>
-		<PackageReference Include="Richasy.BiliKernel.Core"/>
-		<PackageReference Include="Richasy.BiliKernel.Resolvers.NativeCookies"/>
-		<PackageReference Include="Richasy.BiliKernel.Resolvers.NativeQRCode"/>
-		<PackageReference Include="Richasy.BiliKernel.Resolvers.NativeToken"/>
-		<PackageReference Include="Richasy.BiliKernel.Services.Article"/>
-		<PackageReference Include="Richasy.BiliKernel.Services.Comment"/>
-		<PackageReference Include="Richasy.BiliKernel.Services.Media"/>
-		<PackageReference Include="Richasy.BiliKernel.Services.Moment"/>
-		<PackageReference Include="Richasy.BiliKernel.Services.Search"/>
-		<PackageReference Include="Richasy.BiliKernel.Services.User"/>
-		<PackageReference Include="SixLabors.ImageSharp"/>
-		<PackageReference Include="SixLabors.ImageSharp.Drawing"/>
-		<PackageReference Include="Svg.Controls.Avalonia"/>
-		<PackageReference Include="Svg.Controls.Skia.Avalonia"/>
-		<PackageReference Include="TagLibSharp"/>
-		<PackageReference Include="Xaml.Behaviors"/>
-		<PackageReference Include="Dove.Avalonia.Controls.Extensions"/>
+        <PackageReference Include="CommunityToolkit.Mvvm" />
+	    <!--<PackageReference Include="Blurhash.System.Drawing.Common" />-->
+	    <PackageReference Include="Jellyfin.Sdk" />
+		<PackageReference Include="Newtonsoft.Json" />
+		<!--<PackageReference Include="Richasy.BiliKernel.Authorizers.TV"/>-->
+		<PackageReference Include="Richasy.BiliKernel.Core" />
+		<PackageReference Include="Richasy.BiliKernel.Resolvers.NativeCookies" />
+		<PackageReference Include="Richasy.BiliKernel.Resolvers.NativeQRCode" />
+		<PackageReference Include="Richasy.BiliKernel.Resolvers.NativeToken" />
+		<PackageReference Include="Richasy.BiliKernel.Services.Article" />
+		<PackageReference Include="Richasy.BiliKernel.Services.Comment" />
+		<PackageReference Include="Richasy.BiliKernel.Services.Media" />
+		<PackageReference Include="Richasy.BiliKernel.Services.Moment" />
+		<PackageReference Include="Richasy.BiliKernel.Services.Search" />
+		<PackageReference Include="Richasy.BiliKernel.Services.User" />
+		<PackageReference Include="SixLabors.ImageSharp" />
+		<PackageReference Include="SixLabors.ImageSharp.Drawing" />
+		<PackageReference Include="Svg.Controls.Avalonia" />
+		<PackageReference Include="Svg.Controls.Skia.Avalonia" />
+		<PackageReference Include="TagLibSharp" />
+		<PackageReference Include="Xaml.Behaviors" />
     </ItemGroup>
 
 	<ItemGroup Condition="$(TargetFramework.StartsWith('net9.0-windows'))">
-		<PackageReference Include="DirectNAot"/>
-		<PackageReference Include="DirectNAot.Extensions"/>
+		<PackageReference Include="DirectNAot" />
+		<PackageReference Include="DirectNAot.Extensions" />
 		<PackageReference Include="Microsoft.Windows.CsWin32">
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>

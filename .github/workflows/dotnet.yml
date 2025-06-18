@@ -101,6 +101,7 @@ jobs:
     env:
       Solution_Name: HotPotPlayer2
       Configuration: Release
+      Platform: "24.08"
 
     steps:
     - name: Checkout
@@ -123,7 +124,7 @@ jobs:
       run: |
         sudo apt-get install flatpak flatpak-builder rpm elfutils --no-install-recommends -y
         sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-        sudo flatpak install -y flathub org.freedesktop.Platform//24.08 org.freedesktop.Sdk//24.08
+        sudo flatpak install -y flathub org.freedesktop.Platform//${{env.Platform}} org.freedesktop.Sdk//${{env.Platform}}
     
     - name: Install rpm
       if: ${{ matrix.pack == 'rpm' }}
@@ -145,8 +146,8 @@ jobs:
     env:
       Solution_Name: HotPotPlayer2
       Name: hotpotplayer2
-      Configuration: Debug
-      Framework: net9.0-android
+      Configuration: Release
+      Framework: net8.0-android
 
     steps:
     - name: Checkout

@@ -124,13 +124,10 @@
 				</ScrollViewer>
 			</TabItem>
 			<TabItem Header="艺术家">
-				<GridView />
 			</TabItem>
 			<TabItem Header="播放列表">
-				<GridView />
 			</TabItem>
 			<TabItem Header="歌曲">
-				<GridView />
 			</TabItem>
 		</TabControl>
 	</Grid>
