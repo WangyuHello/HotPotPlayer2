@@ -23,7 +23,12 @@ namespace HotPotPlayer2
 		{
             var file = Path.Combine(AppContext.BaseDirectory, "HotPotPlayer2.dll");
             var v = GetFileProductVersion(file) ?? "";
-            return v[..v.IndexOf('+')];
+            var plus = v.IndexOf('+');
+            if (plus > 0)
+            {
+                return v[..plus];
+            }
+            return v;
         }
 
         private string? mpvVersion;
