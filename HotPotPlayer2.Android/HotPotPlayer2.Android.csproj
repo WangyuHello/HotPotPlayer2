@@ -5,6 +5,7 @@
 		<RuntimeIdentifiers>android-arm;android-arm64;android-x86;android-x64</RuntimeIdentifiers>
         <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
         <Nullable>enable</Nullable>
+        <ApplicationTitle>HotPotPlayer2</ApplicationTitle>
         <ApplicationId>com.dayu.HotPotPlayer2</ApplicationId>
         <ApplicationVersion>1</ApplicationVersion>
         <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
