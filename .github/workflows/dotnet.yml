@@ -48,6 +48,8 @@ on:
         required: false
         default: true
         type: boolean
+env:
+  version: 0.${{ github.run_number }}.${{ github.run_attempt }}
 
 jobs:
   win32:
@@ -84,7 +86,7 @@ jobs:
       run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
 
     - name: Create the app package
-      run: pupnet HotPotPlayer2.pupnet.win.conf --kind setup --app-version 0.${{ github.run_number }}.${{ github.run_attempt }}[1] -y
+      run: pupnet HotPotPlayer2.pupnet.win.conf --kind setup --app-version ${{env.version}}[1] -y
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
@@ -132,7 +134,7 @@ jobs:
         sudo apt-get install rpm --no-install-recommends -y
 
     - name: Create the app package ${{ matrix.pack }}
-      run: pupnet HotPotPlayer2.pupnet.conf --kind ${{ matrix.pack }} --app-version 0.${{ github.run_number }}.${{ github.run_attempt }}[1] -y
+      run: pupnet HotPotPlayer2.pupnet.conf --kind ${{ matrix.pack }} --app-version ${{env.version}}[1] -y
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
@@ -174,7 +176,7 @@ jobs:
         Get-ChildItem .
 
     - name: Create the app package
-      run: dotnet publish -f ${{env.Framework}} -c ${{env.Configuration}} -p:ApplicationDisplayVersion=0.${{ github.run_number }}.${{ github.run_attempt }} -p:AndroidKeyStore=true -p:AndroidSigningKeyStore=${{github.workspace}}/${{env.Name}}.keystore -p:AndroidSigningKeyAlias=${{env.Name}} -p:AndroidSigningKeyPass=${{secrets.KeystorePassword}} -p:AndroidSigningStorePass=${{secrets.KeystorePassword}} ./${{env.Solution_Name}}.Android/${{env.Solution_Name}}.Android.csproj -o build
+      run: dotnet publish -f ${{env.Framework}} -c ${{env.Configuration}} -p:Version=${{env.version}} -p:ApplicationDisplayVersion=${{env.version}} -p:AndroidKeyStore=true -p:AndroidSigningKeyStore=${{github.workspace}}/${{env.Name}}.keystore -p:AndroidSigningKeyAlias=${{env.Name}} -p:AndroidSigningKeyPass=${{secrets.KeystorePassword}} -p:AndroidSigningStorePass=${{secrets.KeystorePassword}} ./${{env.Solution_Name}}.Android/${{env.Solution_Name}}.Android.csproj -o build
 
     # Remove the pfx
     - name: Remove the keystore
@@ -202,8 +204,8 @@ jobs:
     - name: Create GH release
       uses: softprops/action-gh-release@v2
       with:
-        name: '0.${{ github.run_number }}.${{ github.run_attempt }}'
-        tag_name: 'v0.${{ github.run_number }}.${{ github.run_attempt }}'
+        name: ${{env.version}}
+        tag_name: ${{env.version}}
         body:
         files: |
           artis/**/*
