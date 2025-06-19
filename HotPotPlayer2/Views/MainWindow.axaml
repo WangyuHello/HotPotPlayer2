@@ -10,5 +10,5 @@
         Icon="/Assets/logo.ico"
         Title="HotPotPlayer2">
     
-	<local:MainView />
+	<local:MainView x:Name="MainView"/>
 </Window>

@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using HotPotPlayer2.Models;
 using HotPotPlayer2.ViewModels;
 
 namespace HotPotPlayer2.Views
@@ -10,6 +11,9 @@ namespace HotPotPlayer2.Views
             InitializeComponent();
         }
 
-
+        public void ShowToast(ToastInfo toast)
+        {
+            MainView.ShowToast(toast);
+        }
     }
 }

@@ -4,7 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:HotPotPlayer2.ViewModels"
 		     xmlns:cont="using:HotPotPlayer2.Controls"
+			 xmlns:local="using:HotPotPlayer2.Views"
              x:DataType="vm:MainWindowViewModel"
+			 x:Name="Self"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="HotPotPlayer2.Views.MainView">
 	<Design.DataContext>
@@ -31,5 +33,16 @@
 					  IsVisible="{Binding MusicPlayer.IsPlayBarVisible}">
 
 		</cont:PlayBar>
+
+		<cont:Toast x:Name="Toast" VerticalAlignment="Top" HorizontalAlignment="Stretch" MaxWidth="480" Margin="240,40">
+			<cont:Toast.RenderTransform>
+				<TranslateTransform X="0" Y="{Binding #Self.ToastVisible, Converter={x:Static local:MainViewConverters.GetToastTranslation}}"/>
+			</cont:Toast.RenderTransform>
+			<cont:Toast.Transitions>
+				<Transitions>
+					<TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.4" Easing="QuarticEaseOut"/>
+				</Transitions>
+			</cont:Toast.Transitions>
+		</cont:Toast>
 	</Grid>
 </UserControl>

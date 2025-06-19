@@ -17,7 +17,7 @@
 		<TextBlock Margin="36,0,0,12" FontSize="24" FontFamily="{StaticResource MiSansMedium}">设置</TextBlock>
 
 		<ScrollViewer Grid.Row="2">
-			<Grid Margin="36,0,36,0">
+			<Grid Margin="36,0,36,36">
 
 				<StackPanel MaxWidth="1000"
                             HorizontalAlignment="Stretch"
@@ -42,9 +42,9 @@
 							<Label Grid.RowSpan="2" Classes="LabelIcon" Content="&#xEC4F;" FontSize="24" />
 							<TextBlock Margin="12,0,0,0" Grid.Column="1" FontSize="14" FontFamily="{StaticResource MiSansMedium}" VerticalAlignment="Bottom">选择音乐库</TextBlock>
 							<TextBlock Margin="12,0,0,0" Grid.Column="1" Grid.Row="1" FontSize="14" VerticalAlignment="Top">只能选择一个音乐库</TextBlock>
-							<ComboBox Grid.Column="2" 
-									  Grid.RowSpan="2" 
-									  ItemsSource="{Binding MusicLibraryDto}" 
+							<ComboBox Grid.Column="2"
+									  Grid.RowSpan="2"
+									  ItemsSource="{Binding MusicLibraryDto}"
 									  SelectedItem="{Binding SelectedMusicLibraryDto}"
 									  >
 								<ComboBox.ItemTemplate>
@@ -74,17 +74,17 @@
 					</Border>
 					<Border BorderThickness="0.5" BorderBrush="LightGray" CornerRadius="2">
 						<Grid RowDefinitions="*,*" ColumnDefinitions="Auto,*,Auto" Margin="16,16">
-							<Label Grid.RowSpan="2" Classes="LabelIcon" Content="&#xE8D6;" FontSize="24" />
+							<Image Grid.RowSpan="2" Width="30" Height="30" Source="/Assets/Icons/mpv.png"/>
 							<TextBlock Margin="12,0,0,0" Grid.Column="1" FontSize="14" FontFamily="{StaticResource MiSansMedium}" VerticalAlignment="Bottom">版本</TextBlock>
-							<TextBlock Margin="12,0,0,0" Grid.Column="1" Grid.Row="1" FontSize="14" VerticalAlignment="Top"></TextBlock>
+							<TextBlock Margin="12,0,0,0" Grid.Column="1" Grid.Row="1" FontSize="14" VerticalAlignment="Top" Text="{Binding App.MpvVersion}" />
 						</Grid>
 					</Border>
 
 					<TextBlock Margin="0,24,0,12" FontSize="18" FontFamily="{StaticResource MiSansMedium}">调试</TextBlock>
-					<Button BorderBrush="LightGray" 
-							CornerRadius="2" 
-							HorizontalAlignment="Stretch" 
-							Padding="16,16" 
+					<Button BorderBrush="LightGray"
+							CornerRadius="2"
+							HorizontalAlignment="Stretch"
+							Padding="16,16"
 							Classes="TransparentButton"
 							BorderThickness="0.5"
 							Command="{Binding OpenDataLocationClick}"
@@ -101,6 +101,26 @@
 							>
 						打开配置文件
 					</Button>
+					<Button BorderBrush="LightGray"
+							CornerRadius="2"
+							HorizontalAlignment="Stretch"
+							Padding="16,16"
+							Classes="TransparentButton"
+							BorderThickness="0.5"
+							Command="{Binding ClearCacheClick}"
+							>
+						删除缓存
+					</Button>
+
+					<TextBlock Margin="0,24,0,12" FontSize="18" FontFamily="{StaticResource MiSansMedium}">HotPotPlayer</TextBlock>
+
+					<Border BorderThickness="0.5" BorderBrush="LightGray" CornerRadius="2">
+						<Grid RowDefinitions="*,*" ColumnDefinitions="Auto,*,Auto" Margin="16,16">
+							<Image Grid.RowSpan="2" Width="30" Height="30" Source="/Assets/Logos/logo.32x32.png" />
+							<TextBlock Margin="12,0,0,0" Grid.Column="1" FontSize="14" FontFamily="{StaticResource MiSansMedium}" VerticalAlignment="Bottom">版本</TextBlock>
+							<TextBlock Margin="12,0,0,0" Grid.Column="1" Grid.Row="1" FontSize="14" VerticalAlignment="Top" Text="{Binding App.ApplicationVersion}" />
+						</Grid>
+					</Border>
 				</StackPanel>
 			</Grid>
 		</ScrollViewer>

@@ -1,8 +1,13 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using HotPotPlayer2.Base;
+using HotPotPlayer2.Models;
+using HotPotPlayer2.Views;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,9 +21,38 @@ namespace HotPotPlayer2
 
 		private static string GetApplicationVersion()
 		{
-			var version = "1.0.0.0";
-			return version;
-		}
+            var file = Path.Combine(AppContext.BaseDirectory, "HotPotPlayer2.dll");
+            var v = GetFileProductVersion(file) ?? "";
+            return v[..v.IndexOf('+')];
+        }
+
+        private string? mpvVersion;
+        public override string MpvVersion => mpvVersion ??= GetMpvVersion();
+
+        private static string GetMpvVersion()
+        {
+#if WINDOWS
+            var file = Path.Combine(AppContext.BaseDirectory, "mpv.dll");
+#else
+            var file = Path.Combine(AppContext.BaseDirectory, "libmpv.so");
+#endif
+            return GetFileProductVersion(file) ?? "";
+        }
+
+        private static string? GetFileProductVersion(string file)
+        {
+            string? v = null;
+            try
+            {
+                var myFileVersionInfo = FileVersionInfo.GetVersionInfo(file);
+                v = myFileVersionInfo.ProductVersion;
+            }
+            catch (Exception)
+            {
+
+            }
+            return v;
+        }
 
         private void MainWindow_Closing(object? sender, WindowClosingEventArgs e)
         {
@@ -42,5 +76,17 @@ namespace HotPotPlayer2
         }
 
         public override Rect Bounds => throw new System.NotImplementedException();
+
+        public override void ShowToast(ToastInfo toast)
+        {
+            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                (desktop.MainWindow as MainWindow)?.ShowToast(toast);
+            }
+            else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
+            {
+                (singleViewPlatform.MainView as MainView)?.ShowToast(toast);
+            }
+        }
     }
 }

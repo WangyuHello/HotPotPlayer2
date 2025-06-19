@@ -4,6 +4,7 @@ using Avalonia.Platform.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using HotPotPlayer2.Base;
+using HotPotPlayer2.Models;
 using Jellyfin.Sdk.Generated.Models;
 using System;
 using System.Collections.Generic;
@@ -96,6 +97,25 @@ namespace HotPotPlayer2.ViewModels
         }
 
         [RelayCommand]
+        public void ClearCacheClick()
+        {
+            var cache = Config.CacheFolder;
+            var di = new DirectoryInfo(cache);
+            if(!di.Exists)
+            {
+                di.Create();
+            }
+            foreach (var item in di.GetDirectories())
+            {
+                item.Delete(true);
+            }
+            App.ShowToast(new ToastInfo
+            {
+                Text = "已删除应用缓存"
+            });
+        }
+
+        [RelayCommand]
         public async Task AddJellyfinServerClick()
         {
             if (string.IsNullOrEmpty(JellyfinUrl)||
@@ -108,6 +128,7 @@ namespace HotPotPlayer2.ViewModels
             var (info, msg) = await JellyfinMusicService.TryGetSystemInfoPublicAsync(JellyfinUrl);
             if (info == null)
             {
+                App.ShowToast(new ToastInfo { Text = msg });
                 return;
             }
 
@@ -115,8 +136,11 @@ namespace HotPotPlayer2.ViewModels
 
             if (!loginResult)
             {
+                App.ShowToast(new ToastInfo { Text = message });
                 return;
             }
+
+            App.ShowToast(new ToastInfo { Text = "登录成功" });
 
             Config.SetConfig("JellyfinUrl", JellyfinUrl);
             Config.SetConfig("JellyfinUserName", JellyfinUserName);

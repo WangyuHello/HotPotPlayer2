@@ -38,6 +38,7 @@ namespace HotPotPlayer2.Base
         public abstract void SetSmtcPosition(TimeSpan current, TimeSpan? duration);
 #endif
         public abstract string ApplicationVersion { get; }
+        public abstract string MpvVersion { get; }
 
         public void NavigateBack(bool force = false)
         {
@@ -49,10 +50,7 @@ namespace HotPotPlayer2.Base
             throw new NotImplementedException();
         }
 
-        public void ShowToast(ToastInfo toast)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract void ShowToast(ToastInfo toast);
         public abstract IntPtr MainWindowHandle { get; }
         public abstract Rect Bounds { get; }
 
