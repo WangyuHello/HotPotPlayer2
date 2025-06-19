@@ -13,7 +13,7 @@ namespace HotPotPlayer2.Base
     {
         public AppBase App { get; }
         public ConfigBase Config { get; }
-        public Window MainWindow { get; }
+        public TopLevel Top { get; }
 
         public JellyfinMusicService JellyfinMusicService { get; }
         public MusicPlayerService MusicPlayer { get; }

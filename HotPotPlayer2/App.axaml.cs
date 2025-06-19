@@ -30,7 +30,7 @@ namespace HotPotPlayer2
                 var width = Config.GetConfig("width", 0);
                 var height = Config.GetConfig("height", 0);
 
-                desktop.MainWindow = mainWindow = new MainWindow
+                desktop.MainWindow = new MainWindow
                 {
                     DataContext = new MainWindowViewModel(),
                     ExtendClientAreaToDecorationsHint = true,

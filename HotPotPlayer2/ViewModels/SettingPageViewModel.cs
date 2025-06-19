@@ -84,7 +84,7 @@ namespace HotPotPlayer2.ViewModels
         public async Task OpenDataLocationClick()
         {
             var loc = Config.LocalFolder;
-            var launcher = TopLevel.GetTopLevel(App.MainWindow)!.Launcher;
+            var launcher = App.Top.Launcher;
             await launcher.LaunchDirectoryInfoAsync(new DirectoryInfo(loc));
         }
 
@@ -92,7 +92,7 @@ namespace HotPotPlayer2.ViewModels
         public async Task OpenConfigFileClick()
         {
             var loc = Path.Combine(Config.LocalFolder,"Config","Settings.json");
-            var launcher = TopLevel.GetTopLevel(App.MainWindow)!.Launcher;
+            var launcher = App.Top.Launcher;
             await launcher.LaunchFileInfoAsync(new FileInfo(loc));
         }
 

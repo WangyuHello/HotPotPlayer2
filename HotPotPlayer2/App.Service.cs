@@ -28,7 +28,7 @@ namespace HotPotPlayer2
             {
                 return v[..plus];
             }
-            return v;
+            return string.IsNullOrEmpty(v) ? "1.0.0" : v;
         }
 
         private string? mpvVersion;
@@ -64,8 +64,27 @@ namespace HotPotPlayer2
             Config.SaveSettings();
         }
 
-        Window? mainWindow;
-        public override Window MainWindow => mainWindow!;
+        TopLevel? top;
+        public override TopLevel Top
+        {
+            get
+            {
+                if (top == null)
+                {
+                    if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+                    {
+                        top = desktop.MainWindow!;
+                    }
+                    else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
+                    {
+                        top = TopLevel.GetTopLevel(singleViewPlatform.MainView);
+                    }
+                }
+                return top!;
+            }
+        }
+
+#if WINDOWS
 
         private nint _mainWindowHandle;
         public override nint MainWindowHandle
@@ -74,13 +93,14 @@ namespace HotPotPlayer2
             {
                 if(_mainWindowHandle == 0)
                 {
-                    _mainWindowHandle = MainWindow.TryGetPlatformHandle()!.Handle;
+                    _mainWindowHandle = (Top as Window)!.TryGetPlatformHandle()!.Handle;
                 }
                 return _mainWindowHandle;
             }
         }
 
         public override Rect Bounds => throw new System.NotImplementedException();
+#endif
 
         public override void ShowToast(ToastInfo toast)
         {

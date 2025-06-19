@@ -20,7 +20,7 @@ namespace HotPotPlayer2.Base
 
         private ConfigBase? config;
         public ConfigBase Config => config ??= new AppConfig();
-        public abstract Window MainWindow { get; }
+        public abstract TopLevel Top { get; }
 
         private JellyfinMusicService? jellyfinMusicService;
         public JellyfinMusicService JellyfinMusicService => jellyfinMusicService ??= new JellyfinMusicService(Config, this);
@@ -51,8 +51,10 @@ namespace HotPotPlayer2.Base
         }
 
         public abstract void ShowToast(ToastInfo toast);
+#if WINDOWS
         public abstract IntPtr MainWindowHandle { get; }
         public abstract Rect Bounds { get; }
+#endif
 
 #if WINDOWS
         TaskbarHelper? _taskbar;

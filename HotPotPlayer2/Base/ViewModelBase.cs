@@ -12,7 +12,7 @@ namespace HotPotPlayer2.Base
 
         public ConfigBase Config => App.Config;
 
-        public Window MainWindow => App.MainWindow;
+        public TopLevel Top => App.Top;
 
         public JellyfinMusicService JellyfinMusicService => App.JellyfinMusicService;
 
