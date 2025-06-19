@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+		<TargetFramework>net9.0</TargetFramework>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -10,7 +10,7 @@
 			<Link>libmpv.so</Link>
 			<Pack>false</Pack>
 		</Content>
-		<Content Include="$(MSBuildThisFileDirectory)\lib\mpv.dll" >
+		<Content Include="$(MSBuildThisFileDirectory)\lib\mpv.dll">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 			<Link>mpv.dll</Link>
 			<Pack>false</Pack>

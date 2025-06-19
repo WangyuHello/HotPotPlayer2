@@ -24,6 +24,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\HotPotPlayer2\HotPotPlayer2.csproj" />
-    </ItemGroup>
+		<ProjectReference Include="..\HotPotPlayer2\HotPotPlayer2.csproj" />
+	</ItemGroup>
 </Project>

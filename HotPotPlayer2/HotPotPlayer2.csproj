@@ -60,7 +60,6 @@
 	</ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\HotPotPlayer2.Native\HotPotPlayer2.Native.csproj" />
       <ProjectReference Include="..\ThirdParty\Mpv.NET-lib-\src\Mpv.NET\Mpv.NET.csproj" />
     </ItemGroup>
 </Project>
