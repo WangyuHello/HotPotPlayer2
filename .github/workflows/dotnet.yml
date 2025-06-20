@@ -178,6 +178,9 @@ jobs:
     - name: Create the app package
       run: dotnet publish -f ${{env.Framework}} -c ${{env.Configuration}} -p:Version=${{env.version}} -p:ApplicationDisplayVersion=${{env.version}} -p:AndroidKeyStore=true -p:AndroidSigningKeyStore=${{github.workspace}}/${{env.Name}}.keystore -p:AndroidSigningKeyAlias=${{env.Name}} -p:AndroidSigningKeyPass=${{secrets.KeystorePassword}} -p:AndroidSigningStorePass=${{secrets.KeystorePassword}} ./${{env.Solution_Name}}.Android/${{env.Solution_Name}}.Android.csproj -o build
 
+    - name: Rename apk
+      run: mv build/*Signed.apk build/HotPotPlayer2-${{env.version}}-1-Signed.apk
+
     # Remove the pfx
     - name: Remove the keystore
       shell: pwsh
