@@ -2,6 +2,7 @@
 using Avalonia.Interactivity;
 using CommunityToolkit.Mvvm.ComponentModel;
 using HotPotPlayer2.Base;
+using HotPotPlayer2.Models.Collection;
 using Jellyfin.Sdk.Generated.Models;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,10 @@ namespace HotPotPlayer2.ViewModels
         public partial bool NoJellyfinVisible { get; set; }
 
         [ObservableProperty]
-        public partial ObservableCollection<BaseItemDto>? JellyfinAlbumList { get; set; }
+        public partial JellyfinItemCollection? JellyfinAlbumList { get; set; }
+
+        [ObservableProperty]
+        public partial JellyfinItemCollection JellyfinPlayListList { get; set; }
 
         [ObservableProperty]
         public partial BaseItemDto? SelectedAlbum { get; set; }
@@ -41,11 +45,10 @@ namespace HotPotPlayer2.ViewModels
                 JellyfinMusicService.IsMusicPageFirstNavigate = false;
 
                 NoJellyfinVisible = !JellyfinMusicService.IsJellfinAvailable();
-                var albums = await JellyfinMusicService.GetJellyfinAlbumListAsync(() => JellyfinMusicService.SelectedMusicLibraryDto);
-                if (albums != null)
-                {
-                    JellyfinAlbumList = new(albums);
-                }
+                JellyfinAlbumList = new JellyfinItemCollection(() => JellyfinMusicService.SelectedMusicLibraryDto, JellyfinMusicService.GetJellyfinAlbumListAsync);
+                JellyfinPlayListList = new JellyfinItemCollection(() => JellyfinMusicService.SelectedMusicLibraryDto, JellyfinMusicService.GetJellyfinPlayListsAsync);
+
+                await JellyfinAlbumList.LoadMoreItemsAsync(default);
             }
         }
 
@@ -81,6 +84,23 @@ namespace HotPotPlayer2.ViewModels
         public void MusicItemClick(BaseItemDto music, BaseItemDto album)
         {
             MusicPlayer.PlayNext(music, album);
+        }
+
+        public async void JellyfinAlbumListLoadMore()
+        {
+            if (JellyfinAlbumList == null) return;
+            if (!JellyfinAlbumList.IsLoading && JellyfinAlbumList.HasMoreItems)
+            {
+                await JellyfinAlbumList.LoadMoreItemsAsync(default);
+            }
+        }
+        public async void JellyfinPlayListListLoadMore()
+        {
+            if (JellyfinPlayListList == null) return;
+            if (!JellyfinPlayListList.IsLoading && JellyfinPlayListList.HasMoreItems)
+            {
+                await JellyfinPlayListList.LoadMoreItemsAsync(default);
+            }
         }
     }
 }

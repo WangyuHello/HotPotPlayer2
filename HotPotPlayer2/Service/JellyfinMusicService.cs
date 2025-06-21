@@ -120,7 +120,7 @@ namespace HotPotPlayer2.Service
         }
 
         private List<BaseItemDto>? jellyfinPlaylistList;
-        public async Task<List<BaseItemDto>> GetJellyfinPlayListList()
+        public async Task<List<BaseItemDto>?> GetJellyfinPlayListList()
         {
             return jellyfinPlaylistList ??= await GetJellyfinPlayListsAsync(() => SelectedMusicLibraryDto, default);
         }
@@ -167,7 +167,7 @@ namespace HotPotPlayer2.Service
             return VideoLibraryDto;
         }
 
-        public async Task<List<BaseItemDto>?> GetJellyfinAlbumListAsync(Func<BaseItemDto> library, CancellationToken token = default, int startIndex = 0, int limit = 50)
+        public async Task<List<BaseItemDto>?> GetJellyfinAlbumListAsync(Func<BaseItemDto> library, int startIndex = 0, int limit = 50, CancellationToken token = default)
         {
             if (!IsLogin)
             {
@@ -199,7 +199,7 @@ namespace HotPotPlayer2.Service
             return result?.Items;
         }
 
-        public async Task<List<BaseItemDto>> GetJellyfinPlayListsAsync(Func<BaseItemDto> library, CancellationToken token, int startIndex = 0, int limit = 50)
+        public async Task<List<BaseItemDto>?> GetJellyfinPlayListsAsync(Func<BaseItemDto> library, int startIndex = 0, int limit = 50, CancellationToken token = default)
         {
             var result = await JellyfinApiClient.Items.GetAsync(param =>
             {
@@ -215,7 +215,7 @@ namespace HotPotPlayer2.Service
                     Limit = limit,
                 };
             }, token).ConfigureAwait(false);
-            return result!.Items!;
+            return result?.Items;
         }
 
         public async Task<List<BaseItemDto>?> GetJellyfinArtistListAsync(Func<BaseItemDto> library, CancellationToken token, int startIndex = 0, int limit = 50)

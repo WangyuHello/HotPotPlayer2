@@ -42,6 +42,42 @@ public partial class Music : UserControl
     {
         e.Handled = true;
     }
+
+    private void TabSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (e.RemovedItems.Count != 0)
+        {
+            switch ((e.AddedItems[0] as TabItem)?.Header)
+            {
+                case "²¥·ÅÁÐ±í":
+                    (DataContext as MusicPageViewModel)!.JellyfinPlayListListLoadMore();
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    private void OnAlbumListScrollChanged(object sender, ScrollChangedEventArgs e)
+    {
+        if (sender is ScrollViewer scrollViewer)
+        {
+            if (scrollViewer.Offset.Y >= (scrollViewer.ScrollBarMaximum.Y - 50) && scrollViewer.ScrollBarMaximum.Y > 0)
+            {
+                (DataContext as MusicPageViewModel)!.JellyfinAlbumListLoadMore();
+            }
+        }
+    }
+    private void OnPlayListListScrollChanged(object sender, ScrollChangedEventArgs e)
+    {
+        if (sender is ScrollViewer scrollViewer)
+        {
+            if (scrollViewer.Offset.Y >= (scrollViewer.ScrollBarMaximum.Y - 50) && scrollViewer.ScrollBarMaximum.Y > 0)
+            {
+                (DataContext as MusicPageViewModel)!.JellyfinPlayListListLoadMore();
+            }
+        }
+    }
 }
 
 public static class MusicConverters
