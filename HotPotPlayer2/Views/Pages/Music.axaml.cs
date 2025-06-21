@@ -72,9 +72,9 @@ public partial class Music : UserControl
     {
         if (e.RemovedItems.Count != 0)
         {
-            switch ((e.AddedItems[0] as TabItem)?.Header)
+            switch ((e.AddedItems[0] as TabItem)?.Tag as string)
             {
-                case "≤•∑≈¡–±Ì":
+                case "PlayList":
                     (DataContext as MusicPageViewModel)!.JellyfinPlayListListLoadMore();
                     break;
                 default:

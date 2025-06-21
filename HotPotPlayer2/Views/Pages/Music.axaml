@@ -193,7 +193,7 @@
 	<Grid Margin="36,28,0,0">
 
 		<TabControl SelectionChanged="TabSelectionChanged">
-			<TabItem Header="专辑">
+			<TabItem Header="专辑" Tag="Album">
 				<ScrollViewer Margin="-8,0,-10,0" ScrollChanged="OnAlbumListScrollChanged">
 					<ItemsRepeater x:Name="AlbumGridView"
 								   ItemsSource="{Binding JellyfinAlbumList}"
@@ -202,7 +202,7 @@
 					</ItemsRepeater>
 				</ScrollViewer>
 			</TabItem>
-			<TabItem Header="播放列表">
+			<TabItem Header="播放列表" Tag="PlayList">
 				<ScrollViewer Margin="-8,0,-10,0" ScrollChanged="OnPlayListListScrollChanged">
 					<ItemsRepeater x:Name="PlayListGridView"
 								   ItemsSource="{Binding JellyfinPlayListList}"
@@ -211,9 +211,9 @@
 					</ItemsRepeater>
 				</ScrollViewer>
 			</TabItem>
-			<TabItem Header="艺术家">
+			<TabItem Header="艺术家" Tag="Artist">
 			</TabItem>
-			<TabItem Header="歌曲">
+			<TabItem Header="歌曲" Tag="Song">
 			</TabItem>
 		</TabControl>
 
