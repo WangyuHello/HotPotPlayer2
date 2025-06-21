@@ -112,6 +112,12 @@ namespace HotPotPlayer2.Service
         public bool IsMusicPageFirstNavigate { get; set; } = true;
         public bool IsVideoPageFirstNavigate { get; set; } = true;
 
+        public bool IsJellfinAvailable()
+        {
+            var avail = Config.HasConfig("JellyfinPassword") &&
+                        Config.HasConfig("JellyfinUrl");
+            return avail;
+        }
 
         private List<BaseItemDto>? jellyfinPlaylistList;
         public async Task<List<BaseItemDto>> GetJellyfinPlayListList()
@@ -123,7 +129,6 @@ namespace HotPotPlayer2.Service
             var result = await JellyfinApiClient.System.Info.Public.GetAsync().ConfigureAwait(false);
             return result;
         }
-
 
         private async Task GetViews()
         {

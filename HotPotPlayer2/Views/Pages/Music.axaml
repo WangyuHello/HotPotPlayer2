@@ -133,6 +133,14 @@
 			</TabItem>
 		</TabControl>
 
+		<StackPanel VerticalAlignment="Center" 
+					HorizontalAlignment="Center" 
+					Spacing="16" 
+					IsVisible="{Binding NoJellyfinVisible}">
+			<Label Classes="LabelIcon" FontSize="60" Content="&#xE977;" />
+			<TextBlock FontSize="20" Text="尚未添加Jellyfin服务器，请在设置页面添加" FontFamily="{StaticResource MiSansRegular}"/>
+		</StackPanel>
+
 		<Grid x:Name="AlbumPopupOverlay" 
 			  Margin="-36,-28,0,0" 
 			  HorizontalAlignment="Stretch" 

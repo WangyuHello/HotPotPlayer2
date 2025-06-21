@@ -17,6 +17,9 @@ namespace HotPotPlayer2.ViewModels
         public override string? Name => "Music";
 
         [ObservableProperty]
+        public partial bool NoJellyfinVisible { get; set; }
+
+        [ObservableProperty]
         public partial ObservableCollection<BaseItemDto>? JellyfinAlbumList { get; set; }
 
         [ObservableProperty]
@@ -37,6 +40,7 @@ namespace HotPotPlayer2.ViewModels
             {
                 JellyfinMusicService.IsMusicPageFirstNavigate = false;
 
+                NoJellyfinVisible = !JellyfinMusicService.IsJellfinAvailable();
                 var albums = await JellyfinMusicService.GetJellyfinAlbumListAsync(() => JellyfinMusicService.SelectedMusicLibraryDto);
                 if (albums != null)
                 {
