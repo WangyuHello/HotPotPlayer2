@@ -15,5 +15,7 @@ namespace HotPotPlayer2.Views
         {
             MainView.ShowToast(toast);
         }
+
+        public string? GetSavePageName() => MainView.GetSavePageName();
     }
 }

@@ -7,6 +7,8 @@
 		mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="HotPotPlayer2.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
+		WindowStartupLocation="CenterScreen"
+		ExtendClientAreaToDecorationsHint="True"
         Icon="/Assets/logo.ico"
         Title="HotPotPlayer2">
     

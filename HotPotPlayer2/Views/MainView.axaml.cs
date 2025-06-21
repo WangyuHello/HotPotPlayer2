@@ -13,9 +13,11 @@ public partial class MainView : UserControl
         InitializeComponent();
     }
 
-    void OnBackClick() { ((MainWindowViewModel)DataContext!).OnBackClick(); }
+    public string? GetSavePageName() => (DataContext as MainWindowViewModel)?.GetSavePageName();
 
-    void SelectedPageNameChanged(string name) { ((MainWindowViewModel)DataContext!).SelectedPageNameChanged(name); }
+    void OnBackClick() { (DataContext as MainWindowViewModel)!.OnBackClick(); }
+
+    void SelectedPageNameChanged(string name) { (DataContext as MainWindowViewModel)!.SelectedPageNameChanged(name); }
 }
 
 public static class MainViewConverters

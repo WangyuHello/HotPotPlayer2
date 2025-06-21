@@ -61,7 +61,14 @@ namespace HotPotPlayer2
 
         private void MainWindow_Closing(object? sender, WindowClosingEventArgs e)
         {
+            var window = sender as MainWindow;
+            Config.SetConfig("Width", window?.Width); 
+            Config.SetConfig("Height", window?.Height);
+            Config.SetConfig("InitPage", window?.GetSavePageName());
+
             Config.SaveSettings();
+
+            JellyfinMusicService.Logout().Wait();
         }
 
         TopLevel? top;

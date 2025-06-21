@@ -21,20 +21,19 @@ namespace HotPotPlayer2
 
         public override void OnFrameworkInitializationCompleted()
         {
+            var initPage = Config.GetConfig("InitPage", "Music")!;
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 // Avoid duplicate validations from both Avalonia and the CommunityToolkit. 
                 // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
                 DisableAvaloniaDataAnnotationValidation();
 
-                var width = Config.GetConfig("width", 0);
-                var height = Config.GetConfig("height", 0);
+                var width = Config.GetConfig("Width", 1420);
+                var height = Config.GetConfig("Height", 1100);
 
                 desktop.MainWindow = new MainWindow
                 {
-                    DataContext = new MainWindowViewModel(),
-                    ExtendClientAreaToDecorationsHint = true,
-                    WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                    DataContext = new MainWindowViewModel(initPage),
                     Width = width,
                     Height = height,
                 };
@@ -44,7 +43,7 @@ namespace HotPotPlayer2
             {
                 singleViewPlatform.MainView = new MainView
                 {
-                    DataContext = new MainWindowViewModel()
+                    DataContext = new MainWindowViewModel(initPage)
                 };
             }
 

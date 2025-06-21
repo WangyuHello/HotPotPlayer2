@@ -9,14 +9,16 @@ namespace HotPotPlayer2.ViewModels
 {
     public partial class MainWindowViewModel : ViewModelBase
     {
-        public MainWindowViewModel()
+        public MainWindowViewModel(string initPage)
         {
-            SelectedPageNameChanged("Music");
-            SelectedPageName = "Music";
+            InitPage = initPage;
+            SelectedPageNameChanged(InitPage);
+            SelectedPageName = InitPage;
         }
 
         private readonly Dictionary<string, PageViewModelBase> PageCache = [];
         private readonly Stack<PageViewModelBase> NavigationStack = new();
+        private readonly string InitPage;
 
         [ObservableProperty]
         public partial PageViewModelBase? CurrentPage { get; set; }
@@ -103,6 +105,21 @@ namespace HotPotPlayer2.ViewModels
                 }
                 CurrentPage.OnNavigatedTo(null);
             }
+        }
+
+        public string? GetSavePageName()
+        {
+            if (SelectedPageName == null)
+            {
+                return null;
+            }
+            var segs = SelectedPageName.Split(".");
+            var mainName = segs[0].Replace("Sub", "");
+            if (mainName == "VideoPlay" || mainName == "BiliVideoPlay")
+            {
+                mainName = null; // Do not save
+            }
+            return mainName;
         }
     }
 }
