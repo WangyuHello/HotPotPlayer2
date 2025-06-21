@@ -58,7 +58,7 @@ public static class PlayBarConverters
     public static FuncValueConverter<BaseItemDto, string> GetSubtitle = new(i =>
     {
         if (i == null) return string.Empty;
-        return $"{i.GetJellyfinArtists()} ¡¤ {i.Album}";
+        return $"{i.GetJellyfinArtists()} Â· {i.Album}";
     });
 
     public static FuncValueConverter<BaseItemDto, Uri?> GetPlayBarImage = new(i =>
