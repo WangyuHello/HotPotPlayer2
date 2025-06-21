@@ -11,6 +11,7 @@
         <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
         <AndroidPackageFormat>apk</AndroidPackageFormat>
         <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
+		<AndroidCreatePackagePerAbi>True</AndroidCreatePackagePerAbi>
 	</PropertyGroup>
 
     <ItemGroup>

@@ -149,7 +149,7 @@ jobs:
       Solution_Name: HotPotPlayer2
       Name: hotpotplayer2
       Configuration: Release
-      Framework: net8.0-android
+      Framework: net9.0-android
 
     steps:
     - name: Checkout
@@ -179,7 +179,13 @@ jobs:
       run: dotnet publish -f ${{env.Framework}} -c ${{env.Configuration}} -p:Version=${{env.version}} -p:ApplicationDisplayVersion=${{env.version}} -p:AndroidKeyStore=true -p:AndroidSigningKeyStore=${{github.workspace}}/${{env.Name}}.keystore -p:AndroidSigningKeyAlias=${{env.Name}} -p:AndroidSigningKeyPass=${{secrets.KeystorePassword}} -p:AndroidSigningStorePass=${{secrets.KeystorePassword}} ./${{env.Solution_Name}}.Android/${{env.Solution_Name}}.Android.csproj -o build
 
     - name: Rename apk
-      run: mv build/*Signed.apk build/HotPotPlayer2-${{env.version}}-1-Signed.apk
+      run: |
+        mkdir build2
+        mv build/*arm64-v8a-Signed.apk build2/HotPotPlayer2-${{env.version}}-1.arm64-v8a.apk
+        mv build/*armeabi-v7a-Signed.apk build2/HotPotPlayer2-${{env.version}}-1.armeabi-v7a.apk
+        mv build/*x86-Signed.apk build2/HotPotPlayer2-${{env.version}}-1.x86.apk
+        mv build/*x86_64-Signed.apk build2/HotPotPlayer2-${{env.version}}-1.x86_64.apk
+        mv build/com.dayu.HotPotPlayer2-Signed.apk build2/HotPotPlayer2-${{env.version}}-1.apk
 
     # Remove the pfx
     - name: Remove the keystore
@@ -191,7 +197,7 @@ jobs:
       with:
         name: android
         path: |
-          build/*Signed.apk
+          build2/*.apk
 
   release:
     runs-on: ubuntu-latest
