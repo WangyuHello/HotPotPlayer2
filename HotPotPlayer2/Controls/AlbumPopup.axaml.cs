@@ -42,7 +42,8 @@ public partial class AlbumPopup : UserControl
     public static readonly AvaloniaProperty<BaseItemDto?> AlbumInfoProperty =
         AvaloniaProperty.Register<AlbumPopup, BaseItemDto?>("AlbumInfo");
 
-    public event EventHandler<RoutedEventArgs> OnAlbumPlayClick;
+    public event EventHandler<RoutedEventArgs>? OnAlbumPlayClick;
+    public event Action<BaseItemDto, BaseItemDto>? OnMusicPlayClick;
 
     private void AlbumPlayClick(object sender, RoutedEventArgs e)
     {
@@ -51,6 +52,10 @@ public partial class AlbumPopup : UserControl
 
     private void ItemClick(object sender, RoutedEventArgs e)
     {
-
+        var item = (sender as Button)!.Tag as BaseItemDto;
+        if (item != null && Album != null)
+        {
+            OnMusicPlayClick?.Invoke(item, Album);
+        }
     }
 }

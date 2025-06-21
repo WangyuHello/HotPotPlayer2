@@ -6,6 +6,7 @@
 			 xmlns:conv="using:HotPotPlayer2.Converters"
 			 xmlns:cont="using:HotPotPlayer2.Controls"
 			 xmlns:jmodel="using:Jellyfin.Sdk.Generated.Models"
+			 xmlns:local="using:HotPotPlayer2.Views.Pages"
 			 xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 x:DataType="vm:MusicPageViewModel"
@@ -139,7 +140,19 @@
 		      Background="#50000000"
 			  IsVisible="{Binding AlbumPopupOverlayVisible}"
 			  Tapped="AlbumPopupOverlay_Tapped"
+			  Opacity="{Binding $self.IsVisible, Converter={x:Static local:MusicConverters.GetPopupOpacity}}"
 			  >
+			<!--<Grid.RenderTransform>
+				<ScaleTransform ScaleX="{Binding #AlbumPopupOverlay.IsVisible, Converter={x:Static local:MusicConverters.GetPopupScale}}" 
+								ScaleY="{Binding #AlbumPopupOverlay.IsVisible, Converter={x:Static local:MusicConverters.GetPopupScale}}" />
+			</Grid.RenderTransform>-->
+
+			<Grid.Transitions>
+				<Transitions>
+					<DoubleTransition Property="Opacity" Duration="0:0:0.2" />
+					<!--<TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.45" Easing="BounceEaseOut"/>-->
+				</Transitions>
+			</Grid.Transitions>
 
 			<cont:AlbumPopup x:Name="AlbumPopupTarget"
 							 Margin="0,-32,0,0"
@@ -148,6 +161,7 @@
 							 AlbumInfo="{Binding SelectedAlbumInfo}"
 							 AlbumMusicItems="{Binding SelectedAlbumMusicItems}"
 							 OnAlbumPlayClick="PlayAlbumClick"
+							 OnMusicPlayClick="MusicItemClick"
 							 >
 				
 			</cont:AlbumPopup>

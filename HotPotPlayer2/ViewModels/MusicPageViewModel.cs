@@ -72,7 +72,11 @@ namespace HotPotPlayer2.ViewModels
             {
                 MusicPlayer.PlayNext(item2);
             }
-            
+        }
+
+        public void MusicItemClick(BaseItemDto music, BaseItemDto album)
+        {
+            MusicPlayer.PlayNext(music, album);
         }
     }
 }

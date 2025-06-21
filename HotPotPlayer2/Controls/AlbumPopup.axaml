@@ -15,7 +15,7 @@
 		</LinearGradientBrush>
 
 		<DataTemplate x:Key="MusicItemsTemplate" x:DataType="jmodel:BaseItemDto">
-			<Button Classes="ListButton">
+			<Button Classes="ListButton" Tag="{Binding }" Click="ItemClick">
 				<Grid>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="20" />
