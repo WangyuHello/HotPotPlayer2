@@ -4,7 +4,7 @@
     <Border Padding="20">
 		<!-- Add Controls for Previewer Here -->
 		<StackPanel>
-			<Button Classes="VolumeButton">
+			<Button Classes="ListButton">
 				<Label Classes="LabelIcon" Content="&#xE72C;" />
 			</Button>
 		</StackPanel>
@@ -181,5 +181,31 @@
 	<Style Selector="Button.VolumeButton:pointerover /template/ ContentPresenter">
 		<Setter Property="BorderBrush" Value="LightGray"/>
 		<Setter Property="BorderThickness" Value="1"/>
+	</Style>
+
+	<Style Selector="Button.AlbumPlayButton">
+		<Setter Property="Background" Value="#6BA2FC" />
+		<Setter Property="Foreground" Value="White" />
+		<Setter Property="CornerRadius" Value="4" />
+	</Style>
+
+	<Style Selector="Button.AlbumPlayButton:pointerover /template/ ContentPresenter">
+		<Setter Property="Background" Value="#6BA2FC" />
+		<Setter Property="Foreground" Value="White" />
+	</Style>
+
+	<Style Selector="Button.AlbumPlayButton:pressed /template/ ContentPresenter">
+		<Setter Property="Background" Value="#6BA2FC" />
+		<Setter Property="Foreground" Value="White" />
+	</Style>
+
+	<Style Selector="Button.ListButton">
+		<Setter Property="Padding" Value="12,0" />
+		<Setter Property="CornerRadius" Value="0" />
+		<Setter Property="HorizontalAlignment" Value="Stretch" />
+		<Setter Property="Background" Value="Transparent" />
+	</Style>
+	<Style Selector="Button.ListButton:pressed /template/ ContentPresenter">
+		<Setter Property="Background" Value="#20000000" />
 	</Style>
 </Styles>

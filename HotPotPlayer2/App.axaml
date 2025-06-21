@@ -17,6 +17,7 @@
 		<StyleInclude Source="Styles/Labels.axaml" />
 		<StyleInclude Source="Styles/Buttons.axaml" />
 		<StyleInclude Source="Styles/GridViews.axaml" />
+		<StyleInclude Source="Styles/ListViews.axaml" />
 		<StyleInclude Source="Styles/Sliders.axaml" />
     </Application.Styles>
 

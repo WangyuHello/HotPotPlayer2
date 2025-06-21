@@ -1,0 +1,139 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:conv="using:HotPotPlayer2.Converters"
+			 xmlns:ail="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+			 xmlns:jmodel="using:Jellyfin.Sdk.Generated.Models"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 x:Name="Self"
+             x:Class="HotPotPlayer2.Controls.AlbumPopup">
+	<UserControl.Resources>
+		<LinearGradientBrush x:Key="PopupBackground" StartPoint="0,0" EndPoint="1,1">
+			<GradientStop Color="#E8E9F2" Offset="0.0" />
+			<GradientStop Color="#CECDDB" Offset="1.0" />
+		</LinearGradientBrush>
+
+		<DataTemplate x:Key="MusicItemsTemplate" x:DataType="jmodel:BaseItemDto">
+			<Button Classes="ListButton">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="20" />
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="180" />
+						<ColumnDefinition Width="38" />
+						<ColumnDefinition Width="Auto" />
+					</Grid.ColumnDefinitions>
+					<TextBlock Text="{Binding IndexNumber}" VerticalAlignment="Center" FontFamily="{StaticResource MiSansMedium}"/>
+					<TextBlock Grid.Column="1" Text="{Binding Name}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+					<HyperlinkButton Grid.Column="2" Content="{Binding, Converter={x:Static conv:JellyfinConverters.GetJellyfinArtists}}" VerticalAlignment="Center" Click="" Tag="{Binding }" FontFamily="{StaticResource MiSansRegular}"/>
+					<TextBlock Grid.Column="3" Text="{Binding, Converter={x:Static conv:JellyfinConverters.GetJellyfinDuration}}" VerticalAlignment="Center" />
+					<Button Grid.Column="4" Classes="TransparentButton" 
+							Margin="16,0,0,0" 
+							CornerRadius="4" 
+							Padding="4" 
+							Tag="{Binding }" Click="">
+						<Label Classes="LabelIcon" Content="&#xE712;" />
+					</Button>
+				</Grid>
+			</Button>
+		</DataTemplate>
+	</UserControl.Resources>
+	
+	<Border Width="860"
+            MinHeight="460"
+            MaxHeight="560"
+			CornerRadius="8"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center" 
+			Background="{StaticResource PopupBackground}"
+			>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="320" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="320" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="*" />
+				</Grid.RowDefinitions>
+
+				<Image x:Name="Cover" 
+					   ail:ImageLoader.Source="{Binding #Self.Album, Converter={x:Static conv:JellyfinImageConverters.PrimaryImage}}"
+					   Width="320" 
+					   Height="320" 
+					   Stretch="UniformToFill"
+					   HorizontalAlignment="Center"
+					   VerticalAlignment="Top">
+					
+				</Image>
+
+				<Button Margin="0,0,32,-20"
+						Width="48"
+						Height="48"
+						CornerRadius="24"
+						VerticalAlignment="Bottom"
+						HorizontalAlignment="Right"
+						Classes="AlbumPlayButton"
+						Click="AlbumPlayClick"
+						Tag="{Binding #Self.Album}">
+					<Label Classes="LabelIcon" Content="&#xE768;" />
+				</Button>
+
+				<SelectableTextBlock Grid.Row="1"
+						   Margin="12,24,8,8"
+						   Text="{Binding #Self.Album.Name}"
+						   MaxLines="2"
+						   FontSize="18"
+						   TextWrapping="Wrap"
+						   TextTrimming="CharacterEllipsis"
+						   FontFamily="{StaticResource MiSansMedium}" />
+
+				<Grid Grid.Row="2" Margin="12,0,8,8">
+					<StackPanel Orientation="Horizontal" Spacing="8">
+						<Border CornerRadius="16" ClipToBounds="True">
+							<Image x:Name="CreatorAvatar" 
+					               ail:ImageLoader.Source="{Binding #Self.AlbumInfo, Converter={x:Static conv:JellyfinImageConverters.PrimaryImage}}"
+								   Width="32" Height="32"
+								   VerticalAlignment="Center" >
+							</Image>
+						</Border>
+						<SelectableTextBlock FontSize="15"
+						           FontWeight="Bold"
+							       VerticalAlignment="Center"
+						           Text="{Binding #Self.Album.AlbumArtist}"
+						           Tag="{Binding #Self.Album}"
+						           FontFamily="{StaticResource MiSansRegular}" />
+					</StackPanel>
+					<TextBlock FontSize="15"
+						       VerticalAlignment="Center"
+						       HorizontalAlignment="Right"
+						       Text="{Binding #Self.Album.ProductionYear}"
+						       FontFamily="{StaticResource MiSansRegular}"
+                    />
+				</Grid>
+
+				<ScrollViewer Grid.Row="4" Margin="12,8,0,12" >
+					<SelectableTextBlock Text="{Binding #Self.AlbumInfo.Overview}" 
+							   TextWrapping="Wrap" 
+							   TextTrimming="CharacterEllipsis" 
+							   FontFamily="{StaticResource MiSansRegular}" 
+							   />
+				</ScrollViewer>
+			</Grid>
+
+			<ScrollViewer Grid.Column="1" Background="White">
+				<ItemsRepeater Classes="ListView"
+							   ItemTemplate="{StaticResource MusicItemsTemplate}"
+							   ItemsSource="{Binding #Self.AlbumMusicItems}" >
+
+				</ItemsRepeater>
+			</ScrollViewer>
+		</Grid>
+	</Border>
+</UserControl>

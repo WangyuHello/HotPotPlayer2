@@ -19,6 +19,18 @@ namespace HotPotPlayer2.ViewModels
         [ObservableProperty]
         public partial ObservableCollection<BaseItemDto>? JellyfinAlbumList { get; set; }
 
+        [ObservableProperty]
+        public partial BaseItemDto? SelectedAlbum { get; set; }
+
+        [ObservableProperty]
+        public partial BaseItemDto? SelectedAlbumInfo { get; set; }
+
+        [ObservableProperty]
+        public partial List<BaseItemDto>? SelectedAlbumMusicItems { get; set; }
+
+        [ObservableProperty]
+        public partial bool AlbumPopupOverlayVisible { get; set; }
+
         public override async void OnNavigatedTo(object? args)
         {
             if (JellyfinMusicService.IsMusicPageFirstNavigate)
@@ -33,17 +45,34 @@ namespace HotPotPlayer2.ViewModels
             }
         }
 
-        public void AlbumClick(object sender, RoutedEventArgs e)
+        public async void AlbumClick(object sender, RoutedEventArgs e)
+        {
+            var album = (sender as Button)!.Tag as BaseItemDto;
+            if (album != null && album != SelectedAlbum)
+            {
+                SelectedAlbumMusicItems = await JellyfinMusicService.GetAlbumMusicItemsAsync(album);
+                SelectedAlbumInfo = await JellyfinMusicService.GetItemInfoAsync(album);
+            }
+            SelectedAlbum = album;
+
+            AlbumPopupOverlayVisible = true;
+        }
+
+        public void PlayAlbumClick(object sender, RoutedEventArgs e)
         {
             if (sender is not Button b)
             {
                 return;
             }
-            if(b.DataContext is not BaseItemDto item)
+            if (b.DataContext is BaseItemDto item)
             {
-                return;
+                MusicPlayer.PlayNext(item);
             }
-            MusicPlayer.PlayNext(item);
+            else if(b.Tag is BaseItemDto item2)
+            {
+                MusicPlayer.PlayNext(item2);
+            }
+            
         }
     }
 }

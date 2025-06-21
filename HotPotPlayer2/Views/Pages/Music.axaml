@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:vm="using:HotPotPlayer2.ViewModels"
 			 xmlns:conv="using:HotPotPlayer2.Converters"
+			 xmlns:cont="using:HotPotPlayer2.Controls"
 			 xmlns:jmodel="using:Jellyfin.Sdk.Generated.Models"
 			 xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
@@ -63,7 +64,7 @@
 									Margin="0,-70,0,0"
 									CornerRadius="32"
 									Width="48" Height="48"
-									Click="AlbumClick"
+									Click="PlayAlbumClick"
 									Tag="{Binding }">
 								<Label Classes="LabelIcon" Content="&#xE768;" FontSize="20"/>
 							</Button>
@@ -130,6 +131,27 @@
 			<TabItem Header="歌曲">
 			</TabItem>
 		</TabControl>
+
+		<Grid x:Name="AlbumPopupOverlay" 
+			  Margin="-36,-28,0,0" 
+			  HorizontalAlignment="Stretch" 
+			  VerticalAlignment="Stretch"
+		      Background="#50000000"
+			  IsVisible="{Binding AlbumPopupOverlayVisible}"
+			  Tapped="AlbumPopupOverlay_Tapped"
+			  >
+
+			<cont:AlbumPopup x:Name="AlbumPopupTarget"
+							 Margin="0,-32,0,0"
+						     Tapped="SuppressTap"
+							 Album="{Binding SelectedAlbum}"
+							 AlbumInfo="{Binding SelectedAlbumInfo}"
+							 AlbumMusicItems="{Binding SelectedAlbumMusicItems}"
+							 OnAlbumPlayClick="PlayAlbumClick"
+							 >
+				
+			</cont:AlbumPopup>
+		</Grid>
 	</Grid>
 	
 </UserControl>
