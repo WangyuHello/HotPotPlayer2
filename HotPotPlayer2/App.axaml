@@ -28,5 +28,10 @@
 		<FontFamily x:Key="MiSansBold">/Assets/Fonts/MiSans-Bold.ttf#MiSans</FontFamily>
 		<FontFamily x:Key="SegoeIcons">/Assets/Fonts/SegoeIcons.ttf#Segoe Fluent Icons</FontFamily>
 		<FontFamily x:Key="BiliIcons">/Assets/Fonts/bili.ttf#bili</FontFamily>
+
+		<LinearGradientBrush x:Key="PopupBackground" StartPoint="0,0" EndPoint="1,1">
+			<GradientStop Color="#E8E9F2" Offset="0.0" />
+			<GradientStop Color="#CECDDB" Offset="1.0" />
+		</LinearGradientBrush>
 	</Application.Resources>
 </base:Application>

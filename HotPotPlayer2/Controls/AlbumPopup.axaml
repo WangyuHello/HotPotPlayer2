@@ -9,11 +9,6 @@
 			 x:Name="Self"
              x:Class="HotPotPlayer2.Controls.AlbumPopup">
 	<UserControl.Resources>
-		<LinearGradientBrush x:Key="PopupBackground" StartPoint="0,0" EndPoint="1,1">
-			<GradientStop Color="#E8E9F2" Offset="0.0" />
-			<GradientStop Color="#CECDDB" Offset="1.0" />
-		</LinearGradientBrush>
-
 		<DataTemplate x:Key="MusicItemsTemplate" x:DataType="jmodel:BaseItemDto">
 			<Button Classes="ListButton" Tag="{Binding }" Click="ItemClick">
 				<Grid>
@@ -47,6 +42,7 @@
             VerticalAlignment="Center"
             HorizontalAlignment="Center" 
 			Background="{StaticResource PopupBackground}"
+			ClipToBounds="True"
 			>
 		<Grid>
 			<Grid.ColumnDefinitions>

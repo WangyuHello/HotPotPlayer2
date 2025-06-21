@@ -6,6 +6,7 @@ using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using HotPotPlayer2.ViewModels;
 using Jellyfin.Sdk.Generated.Models;
+using System.Collections.Generic;
 
 namespace HotPotPlayer2.Views.Pages;
 
@@ -32,10 +33,34 @@ public partial class Music : UserControl
         (DataContext as MusicPageViewModel)!.MusicItemClick(music, album);
     }
 
+    private void PlayListClick(object sender, RoutedEventArgs e)
+    {
+        (DataContext as MusicPageViewModel)!.PlayListClick(sender, e);
+    }
+
+    private void PlayPlayListClick(List<BaseItemDto>? list)
+    {
+        (DataContext as MusicPageViewModel)!.PlayPlayListClick(list);
+    }
+
+    private void PlayPlayListClick(object sender, RoutedEventArgs e)
+    {
+        (DataContext as MusicPageViewModel)!.PlayPlayListClick(sender, e);
+        e.Handled = true;
+    }
+
+    private void PlayListMusicItemClick(BaseItemDto music, List<BaseItemDto>? list)
+    {
+        (DataContext as MusicPageViewModel)!.PlayListMusicItemClick(music, list);
+    }
 
     private void AlbumPopupOverlay_Tapped(object sender, TappedEventArgs e)
     {
         (DataContext as MusicPageViewModel)!.AlbumPopupOverlayVisible = false;
+    }
+    private void PlayListPopupOverlay_Tapped(object sender, TappedEventArgs e)
+    {
+        (DataContext as MusicPageViewModel)!.PlayListPopupOverlayVisible = false;
     }
 
     private void SuppressTap(object sender, TappedEventArgs e)

@@ -36,7 +36,19 @@ namespace HotPotPlayer2.ViewModels
         public partial List<BaseItemDto>? SelectedAlbumMusicItems { get; set; }
 
         [ObservableProperty]
+        public partial BaseItemDto? SelectedPlayList { get; set; }
+
+        [ObservableProperty]
+        public partial BaseItemDto? SelectedPlayListInfo { get; set; }
+
+        [ObservableProperty]
+        public partial List<BaseItemDto>? SelectedPlayListMusicItems { get; set; }
+
+        [ObservableProperty]
         public partial bool AlbumPopupOverlayVisible { get; set; }
+
+        [ObservableProperty]
+        public partial bool PlayListPopupOverlayVisible { get; set; }
 
         public override async void OnNavigatedTo(object? args)
         {
@@ -84,6 +96,36 @@ namespace HotPotPlayer2.ViewModels
         public void MusicItemClick(BaseItemDto music, BaseItemDto album)
         {
             MusicPlayer.PlayNext(music, album);
+        }
+
+        public void PlayListMusicItemClick(BaseItemDto music, List<BaseItemDto>? list)
+        {
+            MusicPlayer.PlayNext(music, list);
+        }
+
+        public async void PlayListClick(object sender, RoutedEventArgs e)
+        {
+            var playList = (sender as Button)!.Tag as BaseItemDto;
+            if (playList != null && playList != SelectedPlayList)
+            {
+                SelectedPlayListMusicItems = await JellyfinMusicService.GetPlayListMusicItemsAsync(playList);
+                SelectedPlayListInfo = await JellyfinMusicService.GetPlayListInfoAsync(playList);
+            }
+            SelectedPlayList = playList;
+
+            PlayListPopupOverlayVisible = true;
+        }
+
+        public void PlayPlayListClick(List<BaseItemDto>? list)
+        {
+            MusicPlayer.PlayNext(list);
+        }
+
+        public async void PlayPlayListClick(object sender, RoutedEventArgs e)
+        {
+            var playList = (sender as Button)!.Tag as BaseItemDto;
+            var list = await JellyfinMusicService.GetPlayListMusicItemsAsync(playList!);
+            PlayPlayListClick(list);
         }
 
         public async void JellyfinAlbumListLoadMore()

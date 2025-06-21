@@ -72,8 +72,12 @@ namespace HotPotPlayer2.Service
             }
         }
 
-        public void PlayNext(BaseItemDto music, IEnumerable<BaseItemDto> list)
+        public void PlayNext(BaseItemDto music, IEnumerable<BaseItemDto>? list)
         {
+            if (list == null)
+            {
+                return;
+            }
             CurrentPlayList = [.. list];
             var index = CurrentPlayList.IndexOf(music);
             PlayNext(index);
@@ -84,8 +88,10 @@ namespace HotPotPlayer2.Service
             CurrentPlayList = new ObservableCollection<BaseItemDto>(list);
             PlayNext(index);
         }
-        public void PlayNext(IEnumerable<BaseItemDto> list)
+
+        public void PlayNext(IEnumerable<BaseItemDto>? list)
         {
+            if (list == null) return;
             PlayNext(0, list);
         }
 

@@ -1,0 +1,128 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:conv="using:HotPotPlayer2.Converters"
+			 xmlns:ail="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+			 xmlns:jmodel="using:Jellyfin.Sdk.Generated.Models"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 x:Name="Self"
+             x:Class="HotPotPlayer2.Controls.PlayListPopup">
+	<UserControl.Resources>
+
+		<DataTemplate x:Key="MusicItemsTemplate" x:DataType="jmodel:BaseItemDto">
+			<Button Classes="ListButton" Tag="{Binding }" Click="ItemClick">
+				<Grid Margin="0,4">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*" />
+						<RowDefinition Height="*" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="24" />
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="48" />
+						<ColumnDefinition Width="Auto" />
+					</Grid.ColumnDefinitions>
+					<TextBlock Grid.RowSpan="2" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="{StaticResource MiSansBold}">
+						<TextBlock.Text>
+							<MultiBinding Converter="{x:Static conv:CommonConverters.ListIndex}">
+								<Binding  />
+								<Binding Path="#Self.PlayListMusicItems" />
+							</MultiBinding>
+						</TextBlock.Text>
+					</TextBlock>
+					<Border VerticalAlignment="Center" Margin="4,0,8,0" Grid.RowSpan="2" Grid.Column="1" ClipToBounds="True" CornerRadius="4">
+						<Image ail:ImageLoader.Source="{Binding, Converter={x:Static conv:JellyfinImageConverters.PrimaryImage}}" Height="36" Width="36" Stretch="UniformToFill"/>
+					</Border>
+					<TextBlock Grid.Column="2" VerticalAlignment="Bottom" FontSize="14" TextTrimming="CharacterEllipsis" Text="{Binding Name}" FontFamily="{StaticResource MiSansMedium}" />
+					<HyperlinkButton Grid.Row="1" Grid.Column="2" Padding="0" Content="{Binding, Converter={x:Static conv:JellyfinConverters.GetJellyfinArtists}}" VerticalAlignment="Top" Click="" Tag="{Binding }" Foreground="Gray" FontFamily="{StaticResource MiSansRegular}"/>
+					<HyperlinkButton Grid.RowSpan="2" Grid.Column="3" Margin="0,0,8,0" Content="{Binding Album}" VerticalAlignment="Center" Click="" Tag="{Binding }" FontFamily="{StaticResource MiSansRegular}"/>
+					<TextBlock Grid.RowSpan="2" Grid.Column="4" Text="{Binding, Converter={x:Static conv:JellyfinConverters.GetJellyfinDuration}}" VerticalAlignment="Center" FontFamily="{StaticResource MiSansRegular}"/>
+					<Button Grid.RowSpan="2" Grid.Column="5" Classes="TransparentButton"
+							Margin="4,0,4,0"
+							CornerRadius="4"
+							Padding="4"
+							Tag="{Binding }" Click="">
+						<Label Classes="LabelIcon" Content="&#xE712;" />
+					</Button>
+				</Grid>
+			</Button>
+		</DataTemplate>
+	</UserControl.Resources>
+
+	<Border Width="960"
+            MinHeight="460"
+            MaxHeight="560"
+			CornerRadius="8"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+			Background="{StaticResource PopupBackground}"
+			ClipToBounds="True"
+			>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="320" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="320" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="*" />
+				</Grid.RowDefinitions>
+
+				<Image x:Name="Cover"
+					   ail:ImageLoader.Source="{Binding #Self.PlayList, Converter={x:Static conv:JellyfinImageConverters.PrimaryImage}}"
+					   Width="320"
+					   Height="320"
+					   Stretch="UniformToFill"
+					   HorizontalAlignment="Center"
+					   VerticalAlignment="Top">
+
+				</Image>
+
+				<Button Margin="0,0,32,-20"
+						Width="48"
+						Height="48"
+						CornerRadius="24"
+						VerticalAlignment="Bottom"
+						HorizontalAlignment="Right"
+						Classes="AlbumPlayButton"
+						Click="PlayListPlayClick"
+						Tag="{Binding #Self.PlayList}">
+					<Label Classes="LabelIcon" Content="&#xE768;" />
+				</Button>
+
+				<SelectableTextBlock Grid.Row="1"
+						   Margin="12,24,8,8"
+						   Text="{Binding #Self.PlayList.Name}"
+						   MaxLines="2"
+						   FontSize="18"
+						   TextWrapping="Wrap"
+						   TextTrimming="CharacterEllipsis"
+						   FontFamily="{StaticResource MiSansMedium}" />
+
+				<ScrollViewer Grid.Row="4" Margin="12,8,0,12" >
+					<SelectableTextBlock Text="{Binding #Self.PlayListInfo.Overview}"
+							   TextWrapping="Wrap"
+							   TextTrimming="CharacterEllipsis"
+							   FontFamily="{StaticResource MiSansRegular}"
+							   />
+				</ScrollViewer>
+			</Grid>
+
+			<ScrollViewer Grid.Column="1" Background="White">
+				<ItemsRepeater Classes="ListView"
+							   ItemTemplate="{StaticResource MusicItemsTemplate}"
+							   ItemsSource="{Binding #Self.PlayListMusicItems}" >
+
+				</ItemsRepeater>
+			</ScrollViewer>
+		</Grid>
+	</Border>
+</UserControl>
