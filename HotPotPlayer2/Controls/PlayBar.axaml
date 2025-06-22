@@ -121,7 +121,7 @@
 				<Button Classes="PlayOtherButton" Click="HidePlayBarClick">
 					<Label Classes="LabelIcon" Content="&#xE019;" />
 				</Button>
-				<Button Classes="PlayOtherButton">
+				<Button Classes="PlayOtherButton" Click="TogglePlayListBarVisibilityClick">
 					<Label Classes="LabelIcon" Content="&#xE762;" />
 				</Button>
 			</StackPanel>

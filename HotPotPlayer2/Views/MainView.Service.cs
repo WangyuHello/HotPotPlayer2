@@ -42,7 +42,7 @@ namespace HotPotPlayer2.Views
             }
             _toastOpened = true;
             Toast.ToastInfo = toast;
-            Toast.RenderTransform = new TranslateTransform(0, 0);
+            Toast.RenderTransform = null;
             _timer ??= InitToastTimer();
             _timer.Start();
         }
@@ -70,11 +70,18 @@ namespace HotPotPlayer2.Views
                     PlayBar.RenderTransform = new TranslateTransform(0, 80);
                 }
             }
-        }
-
-        private void OnHidePlayBar()
-        {
-            (DataContext as MainWindowViewModel)!.MusicPlayer.HidePlayBar();
+            else if(e.PropertyName == "IsPlayListBarVisible")
+            {
+                var visible = (DataContext as MainWindowViewModel)!.MusicPlayer.IsPlayListBarVisible;
+                if (visible)
+                {
+                    CurrentPlayListBar.RenderTransform = new TranslateTransform(0, 0);
+                }
+                else
+                {
+                    CurrentPlayListBar.RenderTransform = new TranslateTransform(400, 0);
+                }
+            }
         }
     }
 }

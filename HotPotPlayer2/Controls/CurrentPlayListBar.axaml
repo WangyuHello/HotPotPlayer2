@@ -4,8 +4,84 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:jmodel="using:Jellyfin.Sdk.Generated.Models"
 			 xmlns:cont="using:HotPotPlayer2.Controls"
+			 xmlns:conv="using:HotPotPlayer2.Converters"
 			 xmlns:vm="using:HotPotPlayer2.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 x:Name="Self"
 			 x:DataType="vm:CurrentPlayListBarViewModel"
              x:Class="HotPotPlayer2.Controls.CurrentPlayListBar">
+
+	<UserControl.Resources>
+		<LinearGradientBrush x:Key="PlayListBarBackground" StartPoint="0,0" EndPoint="100%,100%">
+			<GradientStop Color="#F17799" Offset="0.0" />
+			<GradientStop Color="#CE71E2" Offset="0.25" />
+			<GradientStop Color="#B179F2" Offset="0.75" />
+			<GradientStop Color="#7FABF9" Offset="1.0" />
+		</LinearGradientBrush>
+
+		<DataTemplate x:Key="PlayListBarListTemplate" x:DataType="jmodel:BaseItemDto">
+			<Button x:Name="RootButton" Classes="ListButton" Padding="8,4,16,4" Margin="0" Tag="{Binding}" Click="MusicItemClick">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="32" />
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="38" />
+						<ColumnDefinition Width="Auto" />
+					</Grid.ColumnDefinitions>
+
+					<Label Classes="LabelIcon" Content="&#xE013;" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" IsVisible="False">
+
+					</Label>
+
+					<StackPanel Grid.Column="1" Margin="0,0,8,0">
+						<TextBlock Foreground="White" Text="{Binding Name}" FontSize="14" TextTrimming="CharacterEllipsis" FontFamily="{StaticResource MiSansRegular}"/>
+						<TextBlock Foreground="WhiteSmoke" Text="{Binding, Converter={x:Static conv:JellyfinConverters.GetJellyfinArtists}}" FontSize="12" TextTrimming="CharacterEllipsis" FontFamily="{StaticResource MiSansRegular}"/>
+					</StackPanel>
+
+					<TextBlock Grid.Column="2" Foreground="White" Text="{Binding, Converter={x:Static conv:JellyfinConverters.GetJellyfinDuration}}" VerticalAlignment="Center" FontFamily="{StaticResource MiSansRegular}"/>
+
+					<Button Grid.Column="3" Foreground="White" Classes="WhiteTransparentButton" Margin="8,0,0,0" Padding="4" CornerRadius="8" Tag="{Binding }" Click="">
+						<Label Classes="LabelIcon" Content="&#xE712;" />
+					</Button>
+				</Grid>
+			</Button>
+		</DataTemplate>
+	</UserControl.Resources>
+
+	<Grid x:Name="Root" Tapped="RootTapped" Background="#00000000">
+		<Grid Background="{StaticResource PlayListBarBackground}" Width="400" HorizontalAlignment="Right" Tapped="InnerTapped">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+
+			<Grid Margin="0,36,0,0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+
+				<Button Width="40" Height="40" Classes="WhiteTransparentButton" Foreground="White" Click="BackClick">
+					<Label Classes="LabelIcon" Content="&#xE72B;" />
+				</Button>
+
+				<TextBlock Grid.Column="1" Text="正在播放" Margin="0,-2,0,0" VerticalAlignment="Center" FontSize="22" Foreground="White" FontFamily="{StaticResource MiSansMedium}"/>
+
+				<Button Grid.Column="2" Width="40" Height="40" Classes="WhiteTransparentButton" Foreground="White">
+					<Label Classes="LabelIcon" Content="&#xE10A;" />
+				</Button>
+			</Grid>
+
+			<ScrollViewer Grid.Row="1">
+				<ItemsRepeater x:Name="PlayList"
+							   
+							   ItemsSource="{Binding MusicPlayer.CurrentPlayList}"
+							   ItemTemplate="{StaticResource PlayListBarListTemplate}"
+							   >
+
+				</ItemsRepeater>
+			</ScrollViewer>
+		</Grid>
+	</Grid>
 </UserControl>

@@ -26,6 +26,16 @@
 			<TransitioningContentControl Grid.Column="1" Content="{Binding CurrentPage}" />
 		</Grid>
 
+		<cont:CurrentPlayListBar x:Name="CurrentPlayListBar" 
+								 RenderTransform="translateX(400px)"
+								 IsVisible="{Binding MusicPlayer.IsPlayListBarVisible}">
+			<cont:CurrentPlayListBar.Transitions>
+				<Transitions>
+					<TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.4" Easing="QuinticEaseOut"/>
+				</Transitions>
+			</cont:CurrentPlayListBar.Transitions>
+		</cont:CurrentPlayListBar>
+
 		<cont:PlayBar x:Name="PlayBar"
 					  VerticalAlignment="Bottom"
                       HorizontalAlignment="Stretch"
@@ -33,7 +43,6 @@
 					  Opacity="0"
 					  RenderTransform="translateY(80px)"
 					  IsVisible="{Binding MusicPlayer.IsPlayBarVisible}"
-					  OnHidePlayBar="OnHidePlayBar"
 					  >
 			<cont:PlayBar.Transitions>
 				<Transitions>

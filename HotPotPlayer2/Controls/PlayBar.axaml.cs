@@ -50,10 +50,14 @@ public partial class PlayBar : UserControl
         (DataContext as PlayBarViewModel)?.PlaySlider_DragCompleted(PlaySlider.Value);
     }
 
-    public event Action? OnHidePlayBar;
     private void HidePlayBarClick(object sender, RoutedEventArgs e)
     {
-        OnHidePlayBar?.Invoke();
+        (DataContext as PlayBarViewModel)!.MusicPlayer.HidePlayBar();
+    }
+
+    private void TogglePlayListBarVisibilityClick(object sender, RoutedEventArgs e)
+    {
+        (DataContext as PlayBarViewModel)!.MusicPlayer.TogglePlayListBarVisibility();
     }
 }
 public static class PlayBarConverters

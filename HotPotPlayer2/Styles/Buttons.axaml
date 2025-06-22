@@ -3,8 +3,8 @@
   <Design.PreviewWith>
     <Border Padding="20">
 		<!-- Add Controls for Previewer Here -->
-		<StackPanel>
-			<Button Classes="ListButton">
+		<StackPanel Background="Gray">
+			<Button Classes="WhiteTransparentButton">
 				<Label Classes="LabelIcon" Content="&#xE72C;" />
 			</Button>
 		</StackPanel>
@@ -32,6 +32,21 @@
 		<Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
 		<Setter Property="Padding" Value="0" />
+	</Style>
+
+	<Style Selector="Button.WhiteTransparentButton">
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="Foreground" Value="White"/>
+		<Setter Property="Padding" Value="0" />
+		<Setter Property="BorderThickness" Value="0" />
+	</Style>
+	<Style Selector="Button.WhiteTransparentButton:pointerover /template/ ContentPresenter">
+		<Setter Property="Foreground" Value="White"/>
+		<Setter Property="Background" Value="#40ffffff" />
+	</Style>
+	<Style Selector="Button.WhiteTransparentButton:pressed /template/ ContentPresenter">
+		<Setter Property="Foreground" Value="White"/>
+		<Setter Property="Background" Value="#80ffffff" />
 	</Style>
 
 	<Style Selector="Button.SemiTransparentButton">
