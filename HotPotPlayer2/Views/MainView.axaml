@@ -32,7 +32,9 @@
 					  Margin="180,0,124,16"
 					  Opacity="0"
 					  RenderTransform="translateY(80px)"
-					  IsVisible="{Binding MusicPlayer.IsPlayBarVisible}">
+					  IsVisible="{Binding MusicPlayer.IsPlayBarVisible}"
+					  OnHidePlayBar="OnHidePlayBar"
+					  >
 			<cont:PlayBar.Transitions>
 				<Transitions>
 					<DoubleTransition Property="Opacity" Duration="0:0:0.8" Easing="QuarticEaseOut" />	

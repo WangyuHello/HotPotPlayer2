@@ -118,7 +118,7 @@
 						</Flyout>
 					</Button.Flyout>
 				</Button>
-				<Button Classes="PlayOtherButton">
+				<Button Classes="PlayOtherButton" Click="HidePlayBarClick">
 					<Label Classes="LabelIcon" Content="&#xE019;" />
 				</Button>
 				<Button Classes="PlayOtherButton">

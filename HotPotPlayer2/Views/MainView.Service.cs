@@ -71,5 +71,10 @@ namespace HotPotPlayer2.Views
                 }
             }
         }
+
+        private void OnHidePlayBar()
+        {
+            (DataContext as MainWindowViewModel)!.MusicPlayer.HidePlayBar();
+        }
     }
 }
