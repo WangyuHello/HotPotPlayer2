@@ -12,7 +12,7 @@
 	<Design.DataContext>
 		<!-- This only sets the DataContext for the previewer in an IDE,
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-		<vm:MainWindowViewModel/>
+		<!--<vm:MainWindowViewModel/>-->
 	</Design.DataContext>
 
 	<Grid x:Name="Root">
@@ -30,17 +30,26 @@
 					  VerticalAlignment="Bottom"
                       HorizontalAlignment="Stretch"
 					  Margin="180,0,124,16"
+					  Opacity="0"
+					  RenderTransform="translateY(80px)"
 					  IsVisible="{Binding MusicPlayer.IsPlayBarVisible}">
+			<cont:PlayBar.Transitions>
+				<Transitions>
+					<DoubleTransition Property="Opacity" Duration="0:0:0.8" Easing="QuarticEaseOut" />	
+					<TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.8" Easing="QuarticEaseOut"/>
+				</Transitions>
+			</cont:PlayBar.Transitions>
 
 		</cont:PlayBar>
 
-		<cont:Toast x:Name="Toast" VerticalAlignment="Top" HorizontalAlignment="Stretch" MaxWidth="480" Margin="240,40">
-			<cont:Toast.RenderTransform>
-				<TranslateTransform X="0" Y="{Binding #Self.ToastVisible, Converter={x:Static local:MainViewConverters.GetToastTranslation}}"/>
-			</cont:Toast.RenderTransform>
+		<cont:Toast x:Name="Toast" 
+					VerticalAlignment="Top" 
+					HorizontalAlignment="Stretch" 
+					MaxWidth="480" Margin="240,40"
+					RenderTransform="translateY(-200px)">
 			<cont:Toast.Transitions>
 				<Transitions>
-					<TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.4" Easing="QuarticEaseOut"/>
+					<TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.4" Easing="BackEaseInOut"/>
 				</Transitions>
 			</cont:Toast.Transitions>
 		</cont:Toast>

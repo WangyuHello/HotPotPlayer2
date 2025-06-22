@@ -2,7 +2,10 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data.Converters;
 using Avalonia.Markup.Xaml;
+using Avalonia.Media;
+using HotPotPlayer2.Service;
 using HotPotPlayer2.ViewModels;
+using System.ComponentModel;
 
 namespace HotPotPlayer2.Views;
 
@@ -11,6 +14,15 @@ public partial class MainView : UserControl
     public MainView()
     {
         InitializeComponent();
+        PropertyChanged += MainView_PropertyChanged;
+    }
+
+    private void MainView_PropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
+    {
+        if (e.Property == DataContextProperty)
+        {
+            (DataContext as MainWindowViewModel)!.MusicPlayer.PropertyChanged += MusicPlayer_PropertyChanged;
+        }
     }
 
     public string? GetSavePageName() => (DataContext as MainWindowViewModel)?.GetSavePageName();
@@ -22,8 +34,8 @@ public partial class MainView : UserControl
 
 public static class MainViewConverters
 {
-    public static FuncValueConverter<bool, double> GetToastTranslation = new(v =>
+    public static FuncValueConverter<bool, TranslateTransform> GetToastTranslation = new(v =>
     {
-        return v ? 0 : -120;
+        return new TranslateTransform(0, v ? 0 : -120);
     });
 }
