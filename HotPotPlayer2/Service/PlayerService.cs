@@ -32,6 +32,8 @@ namespace HotPotPlayer2.Service
 
         public PlayerService(ConfigBase config, AppBase app) : base(config, app)
         {
+            PlayMode = PlayMode.Loop;
+
             _playerStarter = new BackgroundWorker
             {
                 WorkerReportsProgress = true

@@ -20,7 +20,7 @@
 		</LinearGradientBrush>
 
 		<DataTemplate x:Key="PlayListBarListTemplate" x:DataType="jmodel:BaseItemDto">
-			<Button x:Name="RootButton" Classes="ListButton" Padding="8,4,16,4" Margin="0" Tag="{Binding}" Click="MusicItemClick">
+			<Button x:Name="RootButton" Classes="TransparentListButton" Padding="8,4,16,4" Margin="0" Tag="{Binding}" Click="MusicItemClick">
 				<Grid>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="32" />
@@ -29,8 +29,8 @@
 						<ColumnDefinition Width="Auto" />
 					</Grid.ColumnDefinitions>
 
-					<Label Classes="LabelIcon" Content="&#xE013;" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" IsVisible="False">
-
+					<Label Classes="LabelIcon" Content="&#xE013;" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" 
+						   IsVisible="{Binding $parent[ListBoxItem].IsSelected}">
 					</Label>
 
 					<StackPanel Grid.Column="1" Margin="0,0,8,0">
@@ -73,15 +73,30 @@
 				</Button>
 			</Grid>
 
-			<ScrollViewer Grid.Row="1">
-				<ItemsRepeater x:Name="PlayList"
-							   
-							   ItemsSource="{Binding MusicPlayer.CurrentPlayList}"
-							   ItemTemplate="{StaticResource PlayListBarListTemplate}"
-							   >
-
-				</ItemsRepeater>
-			</ScrollViewer>
+			<ListBox x:Name="PlayList"
+							Grid.Row="1"
+							ItemsSource="{Binding MusicPlayer.CurrentPlayList}"
+							ItemTemplate="{StaticResource PlayListBarListTemplate}"
+						    SelectedIndex="{Binding MusicPlayer.CurrentPlayingIndex}"
+						    SelectionMode="Single"
+					        Background="Transparent"
+							>
+				<ListBox.Styles>
+					<Style Selector="ListBoxItem">
+						<Setter Property="Background" Value="Transparent"/>
+						<Setter Property="Padding" Value="0"/>
+					</Style>
+					<Style Selector="ListBoxItem:pointerover /template/ ContentPresenter">
+						<Setter Property="Background" Value="#40ffffff"/>
+					</Style>
+					<Style Selector="ListBoxItem:presses /template/ ContentPresenter">
+						<Setter Property="Background" Value="#50ffffff"/>
+					</Style>
+					<Style Selector="ListBoxItem:selected /template/ ContentPresenter">
+						<Setter Property="Background" Value="#60ffffff"/>
+					</Style>
+				</ListBox.Styles>
+			</ListBox>
 		</Grid>
 	</Grid>
 </UserControl>

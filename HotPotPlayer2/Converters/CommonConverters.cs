@@ -28,5 +28,6 @@ namespace HotPotPlayer2.Converters
             var list = os2[1] as List<BaseItemDto>;
             return (list!.IndexOf(i!) + 1).ToString();
         });
+
     }
 }
