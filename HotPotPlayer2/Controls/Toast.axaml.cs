@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using HotPotPlayer2.Models;
+using System;
 
 namespace HotPotPlayer2.Controls;
 
@@ -11,6 +12,12 @@ public partial class Toast : UserControl
     {
         InitializeComponent();
     }
+
+    public event EventHandler? OnShow;
+    public event EventHandler? OnHide;
+    public void Show() { OnShow?.Invoke(this, new EventArgs()); }
+
+    public void Hide() { OnHide?.Invoke(this, new EventArgs()); }
 
     public ToastInfo? ToastInfo
     {

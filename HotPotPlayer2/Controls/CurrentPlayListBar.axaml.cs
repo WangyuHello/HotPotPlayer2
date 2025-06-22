@@ -6,6 +6,7 @@ using Avalonia.Markup.Xaml;
 using HotPotPlayer2.Base;
 using HotPotPlayer2.ViewModels;
 using Jellyfin.Sdk.Generated.Models;
+using System;
 
 namespace HotPotPlayer2.Controls;
 
@@ -16,6 +17,12 @@ public partial class CurrentPlayListBar : UserControl
         InitializeComponent();
         DataContext = new CurrentPlayListBarViewModel();
     }
+
+    public event EventHandler? OnShow;
+    public event EventHandler? OnHide;
+    public void Show() { OnShow?.Invoke(this, new EventArgs()); }
+
+    public void Hide() { OnHide?.Invoke(this, new EventArgs()); }
 
     private void RootTapped(object sender, TappedEventArgs e)
     {

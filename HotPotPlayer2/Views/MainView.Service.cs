@@ -42,7 +42,7 @@ namespace HotPotPlayer2.Views
             }
             _toastOpened = true;
             Toast.ToastInfo = toast;
-            Toast.RenderTransform = null;
+            Toast.Show();
             _timer ??= InitToastTimer();
             _timer.Start();
         }
@@ -50,8 +50,8 @@ namespace HotPotPlayer2.Views
         public void DismissToast()
         {
             _timer?.Stop();
+            Toast.Hide();
             _toastOpened = false;
-            Toast.RenderTransform = new TranslateTransform(0, -200);
         }
 
         private void MusicPlayer_PropertyChanged(object? sender, PropertyChangedEventArgs e)
@@ -61,13 +61,11 @@ namespace HotPotPlayer2.Views
                 var visible = (DataContext as MainWindowViewModel)!.MusicPlayer.IsPlayBarVisible;
                 if (visible)
                 {
-                    PlayBar.Opacity = 1;
-                    PlayBar.RenderTransform = new TranslateTransform(0, 0);
+                    PlayBar.Show();
                 }
                 else
                 {
-                    PlayBar.Opacity = 0;
-                    PlayBar.RenderTransform = new TranslateTransform(0, 80);
+                    PlayBar.Hide();
                 }
             }
             else if(e.PropertyName == "IsPlayListBarVisible")
@@ -75,11 +73,11 @@ namespace HotPotPlayer2.Views
                 var visible = (DataContext as MainWindowViewModel)!.MusicPlayer.IsPlayListBarVisible;
                 if (visible)
                 {
-                    CurrentPlayListBar.RenderTransform = new TranslateTransform(0, 0);
+                    CurrentPlayListBar.Show();
                 }
                 else
                 {
-                    CurrentPlayListBar.RenderTransform = new TranslateTransform(400, 0);
+                    CurrentPlayListBar.Hide();
                 }
             }
         }

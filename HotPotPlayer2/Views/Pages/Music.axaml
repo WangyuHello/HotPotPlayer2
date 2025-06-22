@@ -255,10 +255,21 @@
 							 OnAlbumPlayClick="PlayAlbumClick"
 							 OnMusicPlayClick="MusicItemClick"
 							 >
-				
+				<cont:AlbumPopup.Transitions>
+					<Transitions>
+						<TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.4" Easing="BackEaseInOut"/>
+					</Transitions>
+				</cont:AlbumPopup.Transitions>
+
+				<Interaction.Behaviors>
+					<EventTriggerBehavior EventName="OnShow">
+						<ChangePropertyAction TargetObject="{Binding #AlbumPopupTarget}" PropertyName="RenderTransform" Value="scale(1)" />
+					</EventTriggerBehavior>
+					<EventTriggerBehavior EventName="OnHide">
+						<ChangePropertyAction TargetObject="{Binding #AlbumPopupTarget}" PropertyName="RenderTransform" Value="scale(0.9)" />
+					</EventTriggerBehavior>
+				</Interaction.Behaviors>
 			</cont:AlbumPopup>
-
-
 		</Grid>
 
 		<Grid x:Name="PlayListPopupOverlay"
@@ -284,6 +295,21 @@
 						     OnPlayListPlayClick="PlayPlayListClick"
 							 OnMusicPlayClick="PlayListMusicItemClick"
 							 >
+
+				<cont:PlayListPopup.Transitions>
+					<Transitions>
+						<TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.4" Easing="BackEaseInOut"/>
+					</Transitions>
+				</cont:PlayListPopup.Transitions>
+
+				<Interaction.Behaviors>
+					<EventTriggerBehavior EventName="OnShow">
+						<ChangePropertyAction TargetObject="{Binding #PlayListPopupTarget}" PropertyName="RenderTransform" Value="scale(1)" />
+					</EventTriggerBehavior>
+					<EventTriggerBehavior EventName="OnHide">
+						<ChangePropertyAction TargetObject="{Binding #PlayListPopupTarget}" PropertyName="RenderTransform" Value="scale(0.9)" />
+					</EventTriggerBehavior>
+				</Interaction.Behaviors>
 			</cont:PlayListPopup>
 		</Grid>
 	</Grid>

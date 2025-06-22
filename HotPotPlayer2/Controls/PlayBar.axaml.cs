@@ -23,6 +23,12 @@ public partial class PlayBar : UserControl
         DataContext = new PlayBarViewModel();
     }
 
+    public event EventHandler? OnShow;
+    public event EventHandler? OnHide;
+    public void Show() { OnShow?.Invoke(this, new EventArgs()); }
+
+    public void Hide() { OnHide?.Invoke(this, new EventArgs()); }
+
     private void PlayButtonClick(object sender, RoutedEventArgs e)
     {
         (DataContext as PlayBarViewModel)?.PlayButtonClick(sender, e);

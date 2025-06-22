@@ -34,6 +34,15 @@
 					<TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.4" Easing="QuinticEaseOut"/>
 				</Transitions>
 			</cont:CurrentPlayListBar.Transitions>
+
+			<Interaction.Behaviors>
+				<EventTriggerBehavior EventName="OnShow">
+					<ChangePropertyAction TargetObject="{Binding #CurrentPlayListBar}" PropertyName="RenderTransform" Value="translateX(0px)" />
+				</EventTriggerBehavior>
+				<EventTriggerBehavior EventName="OnHide">
+					<ChangePropertyAction TargetObject="{Binding #CurrentPlayListBar}" PropertyName="RenderTransform" Value="translateX(400px)" />
+				</EventTriggerBehavior>
+			</Interaction.Behaviors>
 		</cont:CurrentPlayListBar>
 
 		<cont:PlayBar x:Name="PlayBar"
@@ -51,18 +60,38 @@
 				</Transitions>
 			</cont:PlayBar.Transitions>
 
+			<Interaction.Behaviors>
+				<EventTriggerBehavior EventName="OnShow">
+					<ChangePropertyAction TargetObject="{Binding #PlayBar}" PropertyName="RenderTransform" Value="translateY(0px)" />
+					<ChangePropertyAction TargetObject="{Binding #PlayBar}" PropertyName="Opacity" Value="1" />
+				</EventTriggerBehavior>
+				<EventTriggerBehavior EventName="OnHide">
+					<ChangePropertyAction TargetObject="{Binding #PlayBar}" PropertyName="RenderTransform" Value="translateY(80px)" />
+					<ChangePropertyAction TargetObject="{Binding #PlayBar}" PropertyName="Opacity" Value="0" />
+				</EventTriggerBehavior>
+			</Interaction.Behaviors>
 		</cont:PlayBar>
 
 		<cont:Toast x:Name="Toast" 
 					VerticalAlignment="Top" 
 					HorizontalAlignment="Stretch" 
 					MaxWidth="480" Margin="240,40"
-					RenderTransform="translateY(-200px)">
+					RenderTransform="translateY(-250px)"
+					>
 			<cont:Toast.Transitions>
 				<Transitions>
 					<TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.4" Easing="BackEaseInOut"/>
 				</Transitions>
 			</cont:Toast.Transitions>
+
+			<Interaction.Behaviors>
+				<EventTriggerBehavior EventName="OnShow">
+					<ChangePropertyAction TargetObject="{Binding #Toast}" PropertyName="RenderTransform" Value="translateY(0px)" />
+				</EventTriggerBehavior>
+				<EventTriggerBehavior EventName="OnHide">
+					<ChangePropertyAction TargetObject="{Binding #Toast}" PropertyName="RenderTransform" Value="translateY(-250px)" />
+				</EventTriggerBehavior>
+			</Interaction.Behaviors>
 		</cont:Toast>
 	</Grid>
 </UserControl>

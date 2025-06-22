@@ -15,6 +15,44 @@ public partial class Music : UserControl
     public Music()
     {
         InitializeComponent();
+        AlbumPopupOverlay.PropertyChanged += AlbumPopupOverlay_PropertyChanged;
+        PlayListPopupOverlay.PropertyChanged += PlayListPopupOverlay_PropertyChanged;
+    }
+
+    private void PlayListPopupOverlay_PropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
+    {
+        if (e.Property == IsVisibleProperty)
+        {
+            if (e.NewValue != null)
+            {
+                if ((bool)e.NewValue == true)
+                {
+                    PlayListPopupTarget.Show();
+                }
+                else
+                {
+                    PlayListPopupTarget.Hide();
+                }
+            }
+        }
+    }
+
+    private void AlbumPopupOverlay_PropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
+    {
+        if (e.Property == IsVisibleProperty)
+        {
+            if (e.NewValue != null)
+            {
+                if ((bool)e.NewValue == true)
+                {
+                    AlbumPopupTarget.Show();
+                }
+                else
+                {
+                    AlbumPopupTarget.Hide();
+                }
+            }
+        }
     }
 
     private void AlbumClick(object sender, RoutedEventArgs e)
