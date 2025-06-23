@@ -18,6 +18,7 @@
     <PackageVersion Include="Avalonia.Android" Version="11.3.1" />
     <PackageVersion Include="Avalonia.Diagnostics" Version="11.3.1" />
     <PackageVersion Include="Avalonia.Controls.ItemsRepeater" Version="11.1.5" />
+    <PackageVersion Include="DebounceThrottle" Version="3.0.1" />
     <PackageVersion Include="System.Formats.Nrbf" Version="9.0.0" />
     <PackageVersion Include="Xamarin.AndroidX.Core.SplashScreen" Version="1.0.1.15" />
     <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.0" />

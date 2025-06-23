@@ -29,6 +29,7 @@
 			<PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
 		</PackageReference>
         <PackageReference Include="CommunityToolkit.Mvvm" />
+        <PackageReference Include="DebounceThrottle" />
 	    <!--<PackageReference Include="Blurhash.System.Drawing.Common" />-->
 	    <PackageReference Include="Jellyfin.Sdk" />
 		<PackageReference Include="Newtonsoft.Json" />

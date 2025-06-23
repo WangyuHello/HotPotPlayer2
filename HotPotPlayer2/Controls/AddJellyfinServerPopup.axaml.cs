@@ -2,9 +2,13 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using Avalonia.Threading;
+using DebounceThrottle;
 using HotPotPlayer2.Base;
 using HotPotPlayer2.Models;
 using System;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Windows.Input;
 
 namespace HotPotPlayer2.Controls;
@@ -13,8 +17,19 @@ public partial class AddJellyfinServerPopup : UserControl
 {
     public AddJellyfinServerPopup()
     {
-        InitializeComponent();
+        InitializeComponent(); 
+        debounceDispatcher = new DebounceDispatcher(
+            interval: TimeSpan.FromMilliseconds(2000),
+            maxDelay: TimeSpan.FromSeconds(5));
+
+        http = new HttpClient();
+        http.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("HotPotPlayer", (Application.Current as AppBase)!.ApplicationVersion));
+        http.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json", 1.0));
+        http.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*", 0.8));
     }
+
+    private readonly DebounceDispatcher debounceDispatcher;
+    private readonly HttpClient http;
 
     public event EventHandler? OnShow;
     public event EventHandler? OnHide;
@@ -87,17 +102,24 @@ public partial class AddJellyfinServerPopup : UserControl
 
     private async void UrlChanged(object sender, TextChangedEventArgs e)
     {
+        if (string.IsNullOrEmpty(JellyfinUrl.Text))
+        {
+            return;
+        }
         var prefix = UrlPrefix.SelectedIndex == 0 ? "https://" : "http://";
         var url = prefix + JellyfinUrl.Text;
-
-        if (Application.Current is not AppBase app) return;
-        try
+        await debounceDispatcher.DebounceAsync(async () =>
         {
-            QuickCode = await app.JellyfinMusicService.QuickConnectInitiate(url);
-        }
-        catch (Exception)
-        {
+            if (Application.Current is not AppBase app) return;
+            try
+            {
+                var code = await app.JellyfinMusicService.QuickConnectInitiate(http, url);
+                Dispatcher.UIThread.Post(() => { QuickCode = code; });
+            }
+            catch (Exception)
+            {
 
-        }
+            }
+        });
     }
 }

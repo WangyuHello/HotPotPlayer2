@@ -403,13 +403,8 @@ namespace HotPotPlayer2.Service
             IsLogin = true;
         }
 
-        public async Task<string?> QuickConnectInitiate(string url)
+        public async Task<string?> QuickConnectInitiate(HttpClient http, string url)
         {
-            using var http = new HttpClient();
-            http.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("HotPotPlayer", App.ApplicationVersion));
-            http.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json", 1.0));
-            http.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*", 0.8));
-
             var setting = new JellyfinSdkSettings();
             setting.Initialize(
                 "HotPotPlayer",
