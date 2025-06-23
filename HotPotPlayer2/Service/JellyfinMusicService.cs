@@ -381,6 +381,13 @@ namespace HotPotPlayer2.Service
                 return;
             }
             SystemInfo = (await GetSystemInfoPublicAsync())!;
+            //await JellyfinApiClient.QuickConnect.Authorize.PostAsync(req =>
+            //{
+            //    req.QueryParameters = new Jellyfin.Sdk.Generated.QuickConnect.Authorize.AuthorizeRequestBuilder.AuthorizeRequestBuilderPostQueryParameters
+            //    {
+            //        Code = ""
+            //    };
+            //});
             // Authenticate user.
             var authenticationResult = await JellyfinApiClient.Users.AuthenticateByName.PostAsync(new AuthenticateUserByName
             {
@@ -394,6 +401,12 @@ namespace HotPotPlayer2.Service
             await GetViews().ConfigureAwait(false);
             Session = authenticationResult.SessionInfo!;
             IsLogin = true;
+        }
+
+        public async Task<string?> QuickConnectInitiate()
+        {
+            var init = await JellyfinApiClient.QuickConnect.Initiate.PostAsync();
+            return init?.Code;
         }
 
         public async Task<PublicSystemInfo?> GetPublicSystemInfo()

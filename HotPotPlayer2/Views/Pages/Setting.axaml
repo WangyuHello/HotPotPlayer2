@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:vm="using:HotPotPlayer2.ViewModels"
 			 xmlns:jmodel="using:Jellyfin.Sdk.Generated.Models"
+			 xmlns:cont="using:HotPotPlayer2.Controls"
+			 xmlns:local="using:HotPotPlayer2.Views.Pages"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="850"
 			 x:DataType="vm:SettingPageViewModel"
              x:Class="HotPotPlayer2.Views.Pages.Setting">
@@ -26,14 +28,11 @@
 					<TextBlock Margin="0,12" FontSize="18" FontFamily="{StaticResource MiSansMedium}">Jellyfin</TextBlock>
 
 					<Border BorderThickness="0.5" BorderBrush="LightGray" CornerRadius="2">
-						<Grid RowDefinitions="*,*" ColumnDefinitions="Auto,*,Auto,Auto,Auto,Auto" Margin="16,16">
+						<Grid RowDefinitions="*,*" ColumnDefinitions="Auto,*,Auto" Margin="16,16">
 							<Label Grid.RowSpan="2" Classes="LabelIcon" Content="&#xE977;" FontSize="24" />
 							<TextBlock Margin="12,0,0,0" Grid.Column="1" FontSize="14" FontFamily="{StaticResource MiSansMedium}" VerticalAlignment="Bottom">服务器</TextBlock>
-							<TextBlock Margin="12,0,0,0" Grid.Column="1" Grid.Row="1" FontSize="14" VerticalAlignment="Top">列表</TextBlock>
-							<TextBox Grid.Column="2" Grid.RowSpan="2" Text="{Binding JellyfinUrl, Mode=TwoWay}"></TextBox>
-							<TextBox Grid.Column="3" Grid.RowSpan="2" Margin="20,0,0,0" Text="{Binding JellyfinUserName, Mode=TwoWay}"></TextBox>
-							<TextBox Grid.Column="4" Grid.RowSpan="2" Margin="20,0,0,0" Text="{Binding JellyfinPassword, Mode=TwoWay}" PasswordChar="*"></TextBox>
-							<Button Grid.Column="5" Grid.RowSpan="2" Margin="20 0 0 0" Command="{Binding AddJellyfinServerClickCommand}">添加</Button>
+							<TextBlock Margin="12,0,0,0" Grid.Column="1" Grid.Row="1" FontSize="14" VerticalAlignment="Top" Text="{Binding JellyfinUrl, Mode=TwoWay}"></TextBlock>
+							<Button Grid.Column="2" Grid.RowSpan="2" Margin="20 0 0 0" Command="{Binding AddJellyfinServerClickCommand}">添加</Button>
 						</Grid>
 					</Border>
 
@@ -124,5 +123,42 @@
 				</StackPanel>
 			</Grid>
 		</ScrollViewer>
+
+		<Grid x:Name="AddJellyfinServerPopupOverlay"
+			  Grid.RowSpan="3"
+			  HorizontalAlignment="Stretch"
+			  VerticalAlignment="Stretch"
+		      Background="#50000000"
+			  IsVisible="{Binding AddJellyfinServerPopupOverlayVisible}"
+			  Tapped="AddJellyfinServerPopupOverlay_Tapped"
+			  Opacity="{Binding $self.IsVisible, Converter={x:Static local:MusicConverters.GetPopupOpacity}}">
+			<Grid.Transitions>
+				<Transitions>
+					<DoubleTransition Property="Opacity" Duration="0:0:0.2" />
+				</Transitions>
+			</Grid.Transitions>
+
+			<cont:AddJellyfinServerPopup x:Name="AddJellyfinServerPopupTarget"
+						                 Tapped="SuppressTap"
+										 QuickCode="{Binding QuickCode}"
+									     OnLoginSucceededCommand="{Binding LoginSucceededCommand}"
+							             >
+
+				<cont:AddJellyfinServerPopup.Transitions>
+					<Transitions>
+						<TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.4" Easing="BackEaseInOut"/>
+					</Transitions>
+				</cont:AddJellyfinServerPopup.Transitions>
+
+				<Interaction.Behaviors>
+					<EventTriggerBehavior EventName="OnShow">
+						<ChangePropertyAction TargetObject="{Binding #AddJellyfinServerPopupTarget}" PropertyName="RenderTransform" Value="scale(1)" />
+					</EventTriggerBehavior>
+					<EventTriggerBehavior EventName="OnHide">
+						<ChangePropertyAction TargetObject="{Binding #AddJellyfinServerPopupTarget}" PropertyName="RenderTransform" Value="scale(0.9)" />
+					</EventTriggerBehavior>
+				</Interaction.Behaviors>
+			</cont:AddJellyfinServerPopup>
+		</Grid>
 	</Grid>
 </UserControl>

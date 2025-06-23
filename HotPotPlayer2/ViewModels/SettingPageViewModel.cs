@@ -21,6 +21,9 @@ namespace HotPotPlayer2.ViewModels
         public override string? Name => "Setting";
 
         [ObservableProperty]
+        public partial bool AddJellyfinServerPopupOverlayVisible { get; set; }
+
+        [ObservableProperty]
         public partial string? JellyfinUrl { get; set; }
 
         [ObservableProperty]
@@ -28,6 +31,9 @@ namespace HotPotPlayer2.ViewModels
 
         [ObservableProperty]
         public partial string? JellyfinPassword { get; set; }
+
+        [ObservableProperty]
+        public partial string? QuickCode { get; set; }
 
         [ObservableProperty]
         public partial BaseItemDto SelectedMusicLibraryDto { get; set; }
@@ -118,37 +124,14 @@ namespace HotPotPlayer2.ViewModels
         [RelayCommand]
         public async Task AddJellyfinServerClick()
         {
-            if (string.IsNullOrEmpty(JellyfinUrl)||
-                string.IsNullOrEmpty(JellyfinPassword)||
-                string.IsNullOrEmpty(JellyfinUserName))
-            {
-                return;
-            }
+            AddJellyfinServerPopupOverlayVisible = true;
+            QuickCode = await JellyfinMusicService.QuickConnectInitiate();
+        }
 
-            var (info, msg) = await JellyfinMusicService.TryGetSystemInfoPublicAsync(JellyfinUrl);
-            if (info == null)
-            {
-                App.ShowToast(new ToastInfo { Text = msg });
-                return;
-            }
-
-            var (loginResult, message) = await JellyfinMusicService.TryLoginAsync(JellyfinUrl, JellyfinUserName, JellyfinPassword);
-
-            if (!loginResult)
-            {
-                App.ShowToast(new ToastInfo { Text = message });
-                return;
-            }
-
-            App.ShowToast(new ToastInfo { Text = "登录成功" });
-
-            Config.SetConfig("JellyfinUrl", JellyfinUrl);
-            Config.SetConfig("JellyfinUserName", JellyfinUserName);
-            Config.SetConfig("JellyfinPassword", JellyfinPassword);
-            Config.SaveSettings();
-
-            JellyfinMusicService.Reset();
-
+        [RelayCommand]
+        public void OnLoginSucceeded()
+        {
+            AddJellyfinServerPopupOverlayVisible = false;
             MusicLibraryDto = JellyfinMusicService.MusicLibraryDto;
             SelectedMusicLibraryDto = JellyfinMusicService.SelectedMusicLibraryDto;
         }
