@@ -33,9 +33,6 @@ namespace HotPotPlayer2.ViewModels
         public partial string? JellyfinPassword { get; set; }
 
         [ObservableProperty]
-        public partial string? QuickCode { get; set; }
-
-        [ObservableProperty]
         public partial BaseItemDto SelectedMusicLibraryDto { get; set; }
 
         [ObservableProperty]
@@ -122,10 +119,9 @@ namespace HotPotPlayer2.ViewModels
         }
 
         [RelayCommand]
-        public async Task AddJellyfinServerClick()
+        public void AddJellyfinServerClick()
         {
             AddJellyfinServerPopupOverlayVisible = true;
-            QuickCode = await JellyfinMusicService.QuickConnectInitiate();
         }
 
         [RelayCommand]

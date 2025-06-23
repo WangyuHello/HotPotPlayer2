@@ -20,7 +20,7 @@
 						<x:String>https://</x:String>
 						<x:String>http://</x:String>
 					</ComboBox>
-					<TextBox Grid.Column="1" x:Name="JellyfinUrl" />
+					<TextBox Grid.Column="1" x:Name="JellyfinUrl" TextChanged="UrlChanged"/>
 				</Grid>
 				<TextBlock Text="用户名" Margin="0,0,0,4"/>
 				<TextBox x:Name="JellyfinUserName" />

@@ -403,9 +403,26 @@ namespace HotPotPlayer2.Service
             IsLogin = true;
         }
 
-        public async Task<string?> QuickConnectInitiate()
+        public async Task<string?> QuickConnectInitiate(string url)
         {
-            var init = await JellyfinApiClient.QuickConnect.Initiate.PostAsync();
+            using var http = new HttpClient();
+            http.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("HotPotPlayer", App.ApplicationVersion));
+            http.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json", 1.0));
+            http.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*", 0.8));
+
+            var setting = new JellyfinSdkSettings();
+            setting.Initialize(
+                "HotPotPlayer",
+                App.ApplicationVersion,
+                Environment.MachineName,
+                DevideId);
+            setting.SetServerUrl(url);
+
+            var auth = new JellyfinAuthenticationProvider(setting);
+            var adapter = new JellyfinRequestAdapter(auth, setting, http);
+            var client = new JellyfinApiClient(adapter);
+            var init = await client.QuickConnect.Initiate.PostAsync();
+
             return init?.Code;
         }
 
@@ -426,7 +443,7 @@ namespace HotPotPlayer2.Service
 
         public async Task<(bool success, string message)> TryLoginAsync(string url, string username, string password)
         {
-            var http = new HttpClient();
+            using var http = new HttpClient();
             http.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("HotPotPlayer", App.ApplicationVersion));
             http.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json", 1.0));
             http.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*", 0.8));

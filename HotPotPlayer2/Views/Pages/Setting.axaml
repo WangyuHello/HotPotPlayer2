@@ -140,7 +140,6 @@
 
 			<cont:AddJellyfinServerPopup x:Name="AddJellyfinServerPopupTarget"
 						                 Tapped="SuppressTap"
-										 QuickCode="{Binding QuickCode}"
 									     OnLoginSucceededCommand="{Binding LoginSucceededCommand}"
 							             >
 

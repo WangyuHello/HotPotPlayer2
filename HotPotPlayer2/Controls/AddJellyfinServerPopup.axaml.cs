@@ -84,4 +84,20 @@ public partial class AddJellyfinServerPopup : UserControl
             OnLoginSucceededCommand.Execute(null);
         }
     }
+
+    private async void UrlChanged(object sender, TextChangedEventArgs e)
+    {
+        var prefix = UrlPrefix.SelectedIndex == 0 ? "https://" : "http://";
+        var url = prefix + JellyfinUrl.Text;
+
+        if (Application.Current is not AppBase app) return;
+        try
+        {
+            QuickCode = await app.JellyfinMusicService.QuickConnectInitiate(url);
+        }
+        catch (Exception)
+        {
+
+        }
+    }
 }
