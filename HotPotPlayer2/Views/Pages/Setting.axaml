@@ -6,6 +6,7 @@
 			 xmlns:jmodel="using:Jellyfin.Sdk.Generated.Models"
 			 xmlns:cont="using:HotPotPlayer2.Controls"
 			 xmlns:local="using:HotPotPlayer2.Views.Pages"
+			 xmlns:ext="using:HotPotPlayer2.Extensions"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="850"
 			 x:DataType="vm:SettingPageViewModel"
              x:Class="HotPotPlayer2.Views.Pages.Setting">
@@ -125,13 +126,15 @@
 		</ScrollViewer>
 
 		<Grid x:Name="AddJellyfinServerPopupOverlay"
+			  Margin="0,-28,0,0"
 			  Grid.RowSpan="3"
 			  HorizontalAlignment="Stretch"
 			  VerticalAlignment="Stretch"
 		      Background="#50000000"
-			  IsVisible="{Binding AddJellyfinServerPopupOverlayVisible}"
+			  IsVisible="False"
+		      ext:InteractiveExtensions.IsVisible="{Binding AddJellyfinServerPopupOverlayVisible}"
 			  Tapped="AddJellyfinServerPopupOverlay_Tapped"
-			  Opacity="{Binding $self.IsVisible, Converter={x:Static local:MusicConverters.GetPopupOpacity}}">
+			  Opacity="{Binding AddJellyfinServerPopupOverlayVisible, Converter={x:Static local:MusicConverters.GetPopupOpacity}}">
 			<Grid.Transitions>
 				<Transitions>
 					<DoubleTransition Property="Opacity" Duration="0:0:0.2" />
@@ -140,7 +143,11 @@
 
 			<cont:AddJellyfinServerPopup x:Name="AddJellyfinServerPopupTarget"
 						                 Tapped="SuppressTap"
+										 RenderTransform="scale(0.9)"
 									     OnLoginSucceededCommand="{Binding LoginSucceededCommand}"
+										 ext:InteractiveExtensions.IsVisible="{Binding AddJellyfinServerPopupOverlayVisible}"
+										 ext:InteractiveExtensions.ShowTransform="scale(1)"
+										 ext:InteractiveExtensions.HideTransform="scale(0.9)"
 							             >
 
 				<cont:AddJellyfinServerPopup.Transitions>
@@ -149,14 +156,6 @@
 					</Transitions>
 				</cont:AddJellyfinServerPopup.Transitions>
 
-				<Interaction.Behaviors>
-					<EventTriggerBehavior EventName="OnShow">
-						<ChangePropertyAction TargetObject="{Binding #AddJellyfinServerPopupTarget}" PropertyName="RenderTransform" Value="scale(1)" />
-					</EventTriggerBehavior>
-					<EventTriggerBehavior EventName="OnHide">
-						<ChangePropertyAction TargetObject="{Binding #AddJellyfinServerPopupTarget}" PropertyName="RenderTransform" Value="scale(0.9)" />
-					</EventTriggerBehavior>
-				</Interaction.Behaviors>
 			</cont:AddJellyfinServerPopup>
 		</Grid>
 	</Grid>

@@ -19,6 +19,15 @@ namespace HotPotPlayer2.Views
         DispatcherTimer? _timer;
         bool _toastOpened = false;
 
+        public bool IsToastVisible
+        {
+            get { return (bool)GetValue(IsToastVisibleProperty)!; }
+            set { SetValue(IsToastVisibleProperty, value); }
+        }
+
+        public static readonly AvaloniaProperty<bool> IsToastVisibleProperty =
+            AvaloniaProperty.Register<MainView, bool>("IsToastVisible");
+
         DispatcherTimer InitToastTimer()
         {
             var t = new DispatcherTimer
@@ -42,7 +51,7 @@ namespace HotPotPlayer2.Views
             }
             _toastOpened = true;
             Toast.ToastInfo = toast;
-            Toast.Show();
+            IsToastVisible = true;
             _timer ??= InitToastTimer();
             _timer.Start();
         }
@@ -50,36 +59,8 @@ namespace HotPotPlayer2.Views
         public void DismissToast()
         {
             _timer?.Stop();
-            Toast.Hide();
+            IsToastVisible = false;
             _toastOpened = false;
-        }
-
-        private void MusicPlayer_PropertyChanged(object? sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "IsPlayBarVisible")
-            {
-                var visible = (DataContext as MainWindowViewModel)!.MusicPlayer.IsPlayBarVisible;
-                if (visible)
-                {
-                    PlayBar.Show();
-                }
-                else
-                {
-                    PlayBar.Hide();
-                }
-            }
-            else if(e.PropertyName == "IsPlayListBarVisible")
-            {
-                var visible = (DataContext as MainWindowViewModel)!.MusicPlayer.IsPlayListBarVisible;
-                if (visible)
-                {
-                    CurrentPlayListBar.Show();
-                }
-                else
-                {
-                    CurrentPlayListBar.Hide();
-                }
-            }
         }
     }
 }

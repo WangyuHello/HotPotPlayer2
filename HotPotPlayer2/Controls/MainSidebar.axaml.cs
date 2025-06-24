@@ -11,6 +11,7 @@ public partial class MainSidebar : UserControl
     public MainSidebar()
     {
         InitializeComponent();
+        SelectedPageNameProperty.Changed.AddClassHandler<MainSidebar>(OnSelectedPageNameChanged);
     }
 
     public bool IsBackEnable
@@ -30,12 +31,12 @@ public partial class MainSidebar : UserControl
     }
 
     public static readonly AvaloniaProperty<string?> SelectedPageNameProperty =
-        AvaloniaProperty.Register<MainSidebar, string?>("SelectedPageName", coerce: OnSelectedPageNameChanged);
+        AvaloniaProperty.Register<MainSidebar, string?>("SelectedPageName");
 
-    private static string? OnSelectedPageNameChanged(AvaloniaObject a, string? newValue)
+    private void OnSelectedPageNameChanged(MainSidebar a, AvaloniaPropertyChangedEventArgs args)
     {
-        var sidbar = (MainSidebar)a;
-        var newPageName = newValue;
+        var sidbar = a;
+        var newPageName = args.NewValue;
         sidbar._selectedButton = newPageName switch
         {
             string n when n.StartsWith("Music") => sidbar.Music,
@@ -45,7 +46,6 @@ public partial class MainSidebar : UserControl
             string n when n.StartsWith("Setting") => sidbar.Setting,
             _ => null,
         };
-        return newValue;
     }
 
     Button? _selectedButton;

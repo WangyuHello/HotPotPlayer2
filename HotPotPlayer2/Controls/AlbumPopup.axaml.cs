@@ -15,11 +15,6 @@ public partial class AlbumPopup : UserControl
         InitializeComponent();
     }
 
-    public event EventHandler? OnShow;
-    public event EventHandler? OnHide;
-    public void Show() { OnShow?.Invoke(this, new EventArgs()); }
-    public void Hide() { OnHide?.Invoke(this, new EventArgs()); }
-
     public BaseItemDto? Album
     {
         get { return (BaseItemDto?)GetValue(AlbumProperty); }

@@ -14,15 +14,6 @@ public partial class MainView : UserControl
     public MainView()
     {
         InitializeComponent();
-        PropertyChanged += MainView_PropertyChanged;
-    }
-
-    private void MainView_PropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
-    {
-        if (e.Property == DataContextProperty)
-        {
-            (DataContext as MainWindowViewModel)!.MusicPlayer.PropertyChanged += MusicPlayer_PropertyChanged;
-        }
     }
 
     public string? GetSavePageName() => (DataContext as MainWindowViewModel)?.GetSavePageName();
@@ -34,8 +25,8 @@ public partial class MainView : UserControl
 
 public static class MainViewConverters
 {
-    public static FuncValueConverter<bool, TranslateTransform> GetToastTranslation = new(v =>
+    public static FuncValueConverter<bool, double> GetOpacity = new(i =>
     {
-        return new TranslateTransform(0, v ? 0 : -120);
+        return i ? 1 : 0;
     });
 }

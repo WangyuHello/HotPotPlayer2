@@ -7,6 +7,7 @@
 			 xmlns:cont="using:HotPotPlayer2.Controls"
 			 xmlns:jmodel="using:Jellyfin.Sdk.Generated.Models"
 			 xmlns:local="using:HotPotPlayer2.Views.Pages"
+			 xmlns:ext="using:HotPotPlayer2.Extensions"
 			 xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 x:DataType="vm:MusicPageViewModel"
@@ -230,25 +231,25 @@
 			  HorizontalAlignment="Stretch" 
 			  VerticalAlignment="Stretch"
 		      Background="#50000000"
-			  IsVisible="{Binding AlbumPopupOverlayVisible}"
+			  IsVisible="False"
+			  ext:InteractiveExtensions.IsVisible="{Binding AlbumPopupOverlayVisible}"
 			  Tapped="AlbumPopupOverlay_Tapped"
-			  Opacity="{Binding $self.IsVisible, Converter={x:Static local:MusicConverters.GetPopupOpacity}}"
+			  Opacity="{Binding AlbumPopupOverlayVisible, Converter={x:Static local:MusicConverters.GetPopupOpacity}}"
 			  >
-			<!--<Grid.RenderTransform>
-				<ScaleTransform ScaleX="{Binding #AlbumPopupOverlay.IsVisible, Converter={x:Static local:MusicConverters.GetPopupScale}}" 
-								ScaleY="{Binding #AlbumPopupOverlay.IsVisible, Converter={x:Static local:MusicConverters.GetPopupScale}}" />
-			</Grid.RenderTransform>-->
 
 			<Grid.Transitions>
 				<Transitions>
 					<DoubleTransition Property="Opacity" Duration="0:0:0.2" />
-					<!--<TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.45" Easing="BounceEaseOut"/>-->
 				</Transitions>
 			</Grid.Transitions>
 
 			<cont:AlbumPopup x:Name="AlbumPopupTarget"
 							 Margin="0,-32,0,0"
 						     Tapped="SuppressTap"
+							 RenderTransform="scale(0.9)"
+							 ext:InteractiveExtensions.ShowTransform="scale(1)"
+							 ext:InteractiveExtensions.HideTransform="scale(0.9)"
+							 ext:InteractiveExtensions.IsVisible="{Binding AlbumPopupOverlayVisible}"
 							 Album="{Binding SelectedAlbum}"
 							 AlbumInfo="{Binding SelectedAlbumInfo}"
 							 AlbumMusicItems="{Binding SelectedAlbumMusicItems}"
@@ -260,15 +261,6 @@
 						<TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.4" Easing="BackEaseInOut"/>
 					</Transitions>
 				</cont:AlbumPopup.Transitions>
-
-				<Interaction.Behaviors>
-					<EventTriggerBehavior EventName="OnShow">
-						<ChangePropertyAction TargetObject="{Binding #AlbumPopupTarget}" PropertyName="RenderTransform" Value="scale(1)" />
-					</EventTriggerBehavior>
-					<EventTriggerBehavior EventName="OnHide">
-						<ChangePropertyAction TargetObject="{Binding #AlbumPopupTarget}" PropertyName="RenderTransform" Value="scale(0.9)" />
-					</EventTriggerBehavior>
-				</Interaction.Behaviors>
 			</cont:AlbumPopup>
 		</Grid>
 
@@ -277,9 +269,10 @@
 			  HorizontalAlignment="Stretch"
 			  VerticalAlignment="Stretch"
 		      Background="#50000000"
-			  IsVisible="{Binding PlayListPopupOverlayVisible}"
+			  IsVisible="false"
+			  ext:InteractiveExtensions.IsVisible="{Binding PlayListPopupOverlayVisible}"
 			  Tapped="PlayListPopupOverlay_Tapped"
-			  Opacity="{Binding $self.IsVisible, Converter={x:Static local:MusicConverters.GetPopupOpacity}}">
+			  Opacity="{Binding PlayListPopupOverlayVisible, Converter={x:Static local:MusicConverters.GetPopupOpacity}}">
 			<Grid.Transitions>
 				<Transitions>
 					<DoubleTransition Property="Opacity" Duration="0:0:0.2" />
@@ -287,29 +280,24 @@
 			</Grid.Transitions>
 
 			<cont:PlayListPopup x:Name="PlayListPopupTarget"
-							 Margin="0,-32,0,0"
-						     Tapped="SuppressTap"
-						     PlayList="{Binding SelectedPlayList}"
-						     PlayListInfo="{Binding SelectedPlayListInfo}"
-						     PlayListMusicItems="{Binding SelectedPlayListMusicItems}"
-						     OnPlayListPlayClick="PlayPlayListClick"
-							 OnMusicPlayClick="PlayListMusicItemClick"
-							 >
+							    Margin="0,-32,0,0"
+						        Tapped="SuppressTap"
+								RenderTransform="scale(0.9)"
+								ext:InteractiveExtensions.ShowTransform="scale(1)"
+								ext:InteractiveExtensions.HideTransform="scale(0.9)"
+								ext:InteractiveExtensions.IsVisible="{Binding PlayListPopupOverlayVisible}"
+						        PlayList="{Binding SelectedPlayList}"
+						        PlayListInfo="{Binding SelectedPlayListInfo}"
+						        PlayListMusicItems="{Binding SelectedPlayListMusicItems}"
+						        OnPlayListPlayClick="PlayPlayListClick"
+							    OnMusicPlayClick="PlayListMusicItemClick"
+							    >
 
 				<cont:PlayListPopup.Transitions>
 					<Transitions>
 						<TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.4" Easing="BackEaseInOut"/>
 					</Transitions>
 				</cont:PlayListPopup.Transitions>
-
-				<Interaction.Behaviors>
-					<EventTriggerBehavior EventName="OnShow">
-						<ChangePropertyAction TargetObject="{Binding #PlayListPopupTarget}" PropertyName="RenderTransform" Value="scale(1)" />
-					</EventTriggerBehavior>
-					<EventTriggerBehavior EventName="OnHide">
-						<ChangePropertyAction TargetObject="{Binding #PlayListPopupTarget}" PropertyName="RenderTransform" Value="scale(0.9)" />
-					</EventTriggerBehavior>
-				</Interaction.Behaviors>
 			</cont:PlayListPopup>
 		</Grid>
 	</Grid>

@@ -13,12 +13,6 @@ public partial class Toast : UserControl
         InitializeComponent();
     }
 
-    public event EventHandler? OnShow;
-    public event EventHandler? OnHide;
-    public void Show() { OnShow?.Invoke(this, new EventArgs()); }
-
-    public void Hide() { OnHide?.Invoke(this, new EventArgs()); }
-
     public ToastInfo? ToastInfo
     {
         get { return (ToastInfo?)GetValue(ToastInfoProperty); }

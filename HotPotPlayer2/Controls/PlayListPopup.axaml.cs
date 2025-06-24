@@ -15,11 +15,6 @@ public partial class PlayListPopup : UserControl
         InitializeComponent();
     }
 
-    public event EventHandler? OnShow;
-    public event EventHandler? OnHide;
-    public void Show() { OnShow?.Invoke(this, new EventArgs()); }
-    public void Hide() { OnHide?.Invoke(this, new EventArgs()); }
-
     public BaseItemDto? PlayList
     {
         get { return (BaseItemDto?)GetValue(PlayListProperty); }
