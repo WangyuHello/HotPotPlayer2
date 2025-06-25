@@ -1,8 +1,15 @@
 using Avalonia;
+using Avalonia.Animation;
 using Avalonia.Controls;
+using Avalonia.Data.Converters;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using Jellyfin.Sdk.Generated.Models;
 using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace HotPotPlayer2.Controls;
 
@@ -12,6 +19,8 @@ public partial class MainSidebar : UserControl
     {
         InitializeComponent();
         SelectedPageNameProperty.Changed.AddClassHandler<MainSidebar>(OnSelectedPageNameChanged);
+        //ShowPlayBar.PropertyChanged += ShowPlayBar_PropertyChanged;
+        //cancellationTokenSource = new CancellationTokenSource();
     }
 
     public bool IsBackEnable
@@ -48,6 +57,33 @@ public partial class MainSidebar : UserControl
         };
     }
 
+    public ICommand? ShowPlayBarCommand
+    {
+        get { return (ICommand?)GetValue(ShowPlayBarCommandProperty); }
+        set { SetValue(ShowPlayBarCommandProperty, value); }
+    }
+
+    public static readonly AvaloniaProperty<ICommand?> ShowPlayBarCommandProperty =
+        AvaloniaProperty.Register<MainSidebar, ICommand?>("ShowPlayBarCommand");
+
+    public BaseItemDto? CurrentPlaying
+    {
+        get { return (BaseItemDto?)GetValue(CurrentPlayingProperty)!; }
+        set { SetValue(CurrentPlayingProperty, value); }
+    }
+
+    public static readonly AvaloniaProperty<BaseItemDto?> CurrentPlayingProperty =
+        AvaloniaProperty.Register<MainSidebar, BaseItemDto?>("CurrentPlaying");
+
+    public bool IsPlayBarVisible
+    {
+        get { return (bool)GetValue(IsPlayBarVisibleProperty)!; }
+        set { SetValue(IsPlayBarVisibleProperty, value); }
+    }
+
+    public static readonly AvaloniaProperty<bool> IsPlayBarVisibleProperty =
+        AvaloniaProperty.Register<MainSidebar, bool>("IsPlayBarVisible");
+
     Button? _selectedButton;
     public event Action<string>? SelectedPageNameChanged;
     public event Action? OnBackClick;
@@ -64,4 +100,44 @@ public partial class MainSidebar : UserControl
         SelectedPageNameChanged?.Invoke(name);
         SelectedPageName = name;
     }
+
+    private void ShowPlayBarClick(object sender, RoutedEventArgs e)
+    {
+        if (ShowPlayBarCommand?.CanExecute(null) ?? false)
+        {
+            ShowPlayBarCommand.Execute(null);
+        }
+    }
+
+    //Animation? rotateAni;
+    //readonly CancellationTokenSource cancellationTokenSource;
+    //private void ShowPlayBar_PropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
+    //{
+    //    if (e.Property == IsVisibleProperty)
+    //    {
+    //        var visible = (bool?)e.NewValue ?? false;
+    //        if (visible)
+    //        {
+    //            rotateAni ??= (Animation)Resources["RotateAnimation"]!;
+    //            // https://github.com/AvaloniaUI/Avalonia/discussions/16757
+    //            _ = rotateAni.RunAsync(RotateBorder, cancellationTokenSource.Token);
+    //        }
+    //        else
+    //        {
+    //            cancellationTokenSource.Cancel();
+    //        }
+    //    }
+    //}
+}
+
+public static class MainSidebarConverters
+{
+    public static FuncMultiValueConverter<object?, bool> GetShowPlayBarVisible = new(os =>
+    {
+        var osa = os.ToArray();
+        var playbarVisible = osa[0] as bool?;
+
+        if (osa[1] is not BaseItemDto currentPlaying) return false;
+        return !(playbarVisible ?? false);
+    });
 }

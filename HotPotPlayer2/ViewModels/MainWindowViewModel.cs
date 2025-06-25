@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using HotPotPlayer2.Base;
 using HotPotPlayer2.Views.Pages;
 using System.Collections;

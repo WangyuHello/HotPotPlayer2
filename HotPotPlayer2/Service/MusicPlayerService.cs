@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using HotPotPlayer2.Base;
 using HotPotPlayer2.Extensions;
 using Jellyfin.Sdk.Generated.Models;
@@ -164,6 +165,7 @@ namespace HotPotPlayer2.Service
             IsPlayBarVisible = true;
         }
 
+        [RelayCommand]
         public void ShowPlayBar()
         {
             if (CurrentPlaying != null)

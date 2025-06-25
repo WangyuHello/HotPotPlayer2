@@ -22,6 +22,9 @@
 							  IsBackEnable="{Binding IsBackEnable}"
 							  OnBackClick="OnBackClick"
 							  SelectedPageNameChanged="SelectedPageNameChanged"
+							  IsPlayBarVisible="{Binding MusicPlayer.IsPlayBarVisible}"
+							  CurrentPlaying="{Binding MusicPlayer.CurrentPlaying}"
+							  ShowPlayBarCommand="{Binding MusicPlayer.ShowPlayBarCommand}"
 							  />
 
 			<TransitioningContentControl Grid.Column="1" Content="{Binding CurrentPage}" />

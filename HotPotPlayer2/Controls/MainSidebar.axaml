@@ -3,9 +3,27 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:conv="using:HotPotPlayer2.Converters"
+			 xmlns:local="using:HotPotPlayer2.Controls"
+			 xmlns:ail="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
              mc:Ignorable="d" d:DesignWidth="64" d:DesignHeight="450"
 			 x:Name="Self"
              x:Class="HotPotPlayer2.Controls.MainSidebar">
+
+	<UserControl.Resources>
+		<Animation x:Key="RotateAnimation"
+		           x:SetterTargetType="Border"
+		           Duration="0:0:5"
+				   Easing="LinearEasing"
+			       IterationCount="INFINITE">
+			<KeyFrame Cue="0%">
+				<Setter Property="RotateTransform.Angle" Value="0.0"/>
+			</KeyFrame>
+			<KeyFrame Cue="100%">
+				<Setter Property="RotateTransform.Angle" Value="360.0"/>
+			</KeyFrame>
+		</Animation>
+	</UserControl.Resources>
+	
 	<Grid Background="#F1F3F6">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="48" />
@@ -57,7 +75,21 @@
 				</MultiBinding>
 			</Button.IsEnabled>
 		</Button>
-		<Button Grid.Row="7" Margin="0,0,0,8" Classes="MainNavButton" Click="NavigateClick" Tag="Setting" x:Name="Setting">
+
+		<Button x:Name="ShowPlayBar" Grid.Row="6" Classes="MainNavButton" VerticalAlignment="Bottom" Click="ShowPlayBarClick">
+			<Button.IsVisible>
+				<MultiBinding Converter="{x:Static local:MainSidebarConverters.GetShowPlayBarVisible}">
+					<Binding Path="#Self.IsPlayBarVisible"/>
+					<Binding Path="#Self.CurrentPlaying" />
+				</MultiBinding>
+			</Button.IsVisible>
+			
+			<Border x:Name="RotateBorder" Width="32" Height="32" CornerRadius="16" ClipToBounds="True">
+				<Image Width="32" Height="32" ail:ImageLoader.Source="{Binding #Self.CurrentPlaying, Converter={x:Static conv:JellyfinImageConverters.PrimaryImage32}}"/>
+			</Border>
+		</Button>
+
+		<Button Grid.Row="7" Margin="0,8,0,8" Classes="MainNavButton" Click="NavigateClick" Tag="Setting" x:Name="Setting">
 			<Label Classes="LabelIcon" Content="&#xE713;"/>
 			<Button.IsEnabled>
 				<MultiBinding Converter="{x:Static conv:CommonConverters.NavButtonEnable}">
@@ -66,5 +98,5 @@
 				</MultiBinding>
 			</Button.IsEnabled>
 		</Button>
-</Grid>
+	</Grid>
 </UserControl>
