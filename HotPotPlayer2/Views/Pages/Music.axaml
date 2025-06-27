@@ -185,12 +185,6 @@
 		</DataTemplate>
 	</UserControl.Resources>
 
-	<UserControl.Styles>
-		<Style Selector="TabItem">
-			<Setter Property="FontFamily" Value="{DynamicResource MiSansMedium}" />
-		</Style>
-	</UserControl.Styles>
-
 	<Grid Margin="36,28,0,0">
 
 		<TabControl SelectionChanged="TabSelectionChanged">

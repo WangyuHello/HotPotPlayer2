@@ -12,4 +12,10 @@
 			<UniformGridLayout />
 		</Setter>
 	</Style>
+
+	<Style Selector="ItemsRepeater.SeriesCardGridView">
+		<Setter Property="Layout">
+			<UniformGridLayout />
+		</Setter>
+	</Style>
 </Styles>

@@ -23,6 +23,7 @@ namespace HotPotPlayer2.Models.Collection
 
         public async Task<LoadMoreItemsResult> LoadMoreItemsAsync(CancellationToken token)
         {
+            if (_isLoading || !_hasMore) return new LoadMoreItemsResult() { Count = 0 };
             _isLoading = true;
             var list = await _func(_library, _pageNum * _perPageItem, _perPageItem, token);
             _isLoading = false;

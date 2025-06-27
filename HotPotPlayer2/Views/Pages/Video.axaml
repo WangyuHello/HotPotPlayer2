@@ -2,7 +2,120 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vm="using:HotPotPlayer2.ViewModels"
+			 xmlns:jmodel="using:Jellyfin.Sdk.Generated.Models"
+			 xmlns:ail="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+			 xmlns:conv="using:HotPotPlayer2.Converters"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 x:DataType="vm:VideoPageViewModel"
              x:Class="HotPotPlayer2.Views.Pages.Video">
-  Video
+	<UserControl.Resources>
+		<DataTemplate x:Key="SeriesCardViewTemplate" x:DataType="jmodel:BaseItemDto">
+			<Grid x:Name="TemplateRoot"
+				    Width="170"
+					Background="White"
+					Margin="8">
+
+				<Button Classes="CardTransparentButton"
+						CornerRadius="4"
+						Click="SeriesClick"
+						Tag="{Binding }">
+					<Grid Margin="0,0,0,12" ClipToBounds="True">
+						<StackPanel Spacing="8">
+							<Image
+								ail:ImageLoader.Source="{Binding, Converter={x:Static conv:JellyfinImageConverters.PrimaryImage}}"
+								Width="170"
+								Height="250"
+								Stretch="UniformToFill"
+								VerticalAlignment="Center"
+								HorizontalAlignment="Center"/>
+							<TextBlock
+								Margin="8,0"
+								Text="{Binding Name}"
+								FontSize="14"
+								MaxLines="2"
+								TextTrimming="CharacterEllipsis"
+								TextWrapping="Wrap"
+								Height="40"
+								ToolTip.Tip="{Binding Name}"
+								FontFamily="{DynamicResource MiSansMedium}"/>
+							<TextBlock
+								Margin="8,0"
+								Text="{Binding ProductionYear}"
+								FontSize="14"
+								MaxLines="2"
+								TextTrimming="CharacterEllipsis"
+								TextWrapping="Wrap"
+								ToolTip.Tip="{Binding ProductionYear}"/>
+						</StackPanel>
+						<Grid x:Name="HiddenContent" IsVisible="False">
+							<Button Classes="SemiTransparentButton"
+									HorizontalAlignment="Center"
+									Padding="12"
+									Margin="0,-70,0,0"
+									CornerRadius="32"
+									Width="48" Height="48"
+									Click="PlaySeriesClick"
+									Tag="{Binding }">
+								<Label Classes="LabelIcon" Content="&#xE768;" FontSize="20"/>
+							</Button>
+							<StackPanel
+								Margin="0,0,8,0"
+								HorizontalAlignment="Right"
+								VerticalAlignment="Bottom"
+								Orientation="Horizontal"
+								Spacing="8"
+								Background="White">
+								<Button Classes="TransparentButton" Foreground="Gray" >
+									<Label Classes="LabelIcon" Content="&#xE734;" FontSize="18"/>
+								</Button>
+								<Button Classes="TransparentButton" Foreground="Gray" >
+									<Label Classes="LabelIcon" Content="&#xE712;" FontSize="18"/>
+								</Button>
+							</StackPanel>
+						</Grid>
+					</Grid>
+				</Button>
+
+				<Grid.Transitions>
+					<Transitions>
+						<TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.3" Easing="QuarticEaseOut"/>
+					</Transitions>
+				</Grid.Transitions>
+
+				<Interaction.Behaviors>
+					<EventTriggerBehavior EventName="PointerEntered">
+						<ChangePropertyAction TargetObject="{Binding #HiddenContent}" PropertyName="IsVisible" Value="True" />
+						<ChangePropertyAction TargetObject="{Binding #TemplateRoot}" PropertyName="RenderTransform" Value="scale(1.05)" />
+					</EventTriggerBehavior>
+					<EventTriggerBehavior EventName="PointerExited">
+						<ChangePropertyAction TargetObject="{Binding #HiddenContent}" PropertyName="IsVisible" Value="False" />
+						<ChangePropertyAction TargetObject="{Binding #TemplateRoot}" PropertyName="RenderTransform" Value="scale(1)" />
+					</EventTriggerBehavior>
+				</Interaction.Behaviors>
+			</Grid>
+		</DataTemplate>
+	</UserControl.Resources>
+
+	<UserControl.Styles>
+		<Style Selector="ItemsRepeater">
+			<Setter Property="ItemTemplate" Value="{StaticResource SeriesCardViewTemplate}"/>
+		</Style>
+	</UserControl.Styles>
+	
+	<Grid Margin="36,28,0,0">
+		<TabControl x:Name="VideoPivot"
+					ItemsSource="{Binding VideoGridViews}"
+					SelectedIndex="{Binding SelectedPivotIndex, Mode=TwoWay}">
+			
+		</TabControl>
+
+		<StackPanel VerticalAlignment="Center"
+					HorizontalAlignment="Center"
+					Spacing="16"
+					IsVisible="{Binding NoJellyfinVisible}">
+			<Label Classes="LabelIcon" FontSize="60" Content="&#xE977;" />
+			<TextBlock FontSize="20" Text="尚未添加Jellyfin服务器，请在设置页面添加" FontFamily="{StaticResource MiSansRegular}"/>
+		</StackPanel>
+	</Grid>
 </UserControl>

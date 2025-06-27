@@ -248,7 +248,7 @@ namespace HotPotPlayer2.Service
             return result?.Items;
         }
 
-        public async Task<List<BaseItemDto>?> GetJellyfinVideoListAsync(Func<BaseItemDto> library, CancellationToken token, int startIndex = 0, int limit = 50)
+        public async Task<List<BaseItemDto>?> GetJellyfinVideoListAsync(Func<BaseItemDto> library, int startIndex = 0, int limit = 50, CancellationToken token = default)
         {
             if (!IsLogin)
             {

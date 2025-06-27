@@ -10,4 +10,8 @@
 	<Style Selector="Window">
 		<Setter Property="FontFamily" Value="{DynamicResource MiSansNormal}" />
 	</Style>
+	
+	<Style Selector="TabItem">
+		<Setter Property="FontFamily" Value="{DynamicResource MiSansMedium}" />
+	</Style>
 </Styles>

@@ -131,18 +131,12 @@ namespace HotPotPlayer2.ViewModels
         public async void JellyfinAlbumListLoadMore()
         {
             if (JellyfinAlbumList == null) return;
-            if (!JellyfinAlbumList.IsLoading && JellyfinAlbumList.HasMoreItems)
-            {
-                await JellyfinAlbumList.LoadMoreItemsAsync(default);
-            }
+            await JellyfinAlbumList.LoadMoreItemsAsync(default);
         }
         public async void JellyfinPlayListListLoadMore()
         {
             if (JellyfinPlayListList == null) return;
-            if (!JellyfinPlayListList.IsLoading && JellyfinPlayListList.HasMoreItems)
-            {
-                await JellyfinPlayListList.LoadMoreItemsAsync(default);
-            }
+            await JellyfinPlayListList.LoadMoreItemsAsync(default);
         }
     }
 }
