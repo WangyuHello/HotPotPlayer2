@@ -135,12 +135,19 @@
 				   Stretch="UniformToFill"
 				   Margin="0,-142,0,0"
                    VerticalAlignment="Top"
+				   Tapped="Backdrop_Tapped"
+				   RenderTransform="{Binding #Self.IsBackdropExpanded, Converter={x:Static local:SeriesPopupConverters.GetBackdropOffset}}"
 				   >
-				
+				<Image.Transitions>
+					<Transitions>
+						<TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.7" Easing="QuarticEaseOut"/>
+					</Transitions>
+				</Image.Transitions>
 			</Image>
 
 			<Grid Margin="0,200,0,0"
                   x:Name="MainInfo"
+				  RenderTransform="{Binding #Self.IsBackdropExpanded, Converter={x:Static local:SeriesPopupConverters.GetMainInfoOffset}}"
                   Background="{StaticResource PopupInfoBackground}">
 
 				<Grid.ColumnDefinitions>
@@ -149,6 +156,7 @@
 				</Grid.ColumnDefinitions>
 
 				<Grid x:Name="LeftPanel"
+				      RenderTransform="{Binding #Self.IsBackdropExpanded, Converter={x:Static local:SeriesPopupConverters.GetLeftPanelOffset}}"
                       Margin="0,-40,0,0">
 
 					<Grid.RowDefinitions>
@@ -189,6 +197,12 @@
 
 						</Grid>
 					</ScrollViewer>
+
+					<Grid.Transitions>
+						<Transitions>
+							<TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.7" Easing="QuarticEaseOut"/>
+						</Transitions>
+					</Grid.Transitions>
 				</Grid>
 
 				<Grid Grid.Column="1" >
@@ -321,6 +335,12 @@
                     >
 					<Label Classes="LabelIcon" Content="{Binding #Self.IsBackdropExpanded, Converter={x:Static local:SeriesPopupConverters.GetBackdropExpandIcon}}" />
 				</Button>
+
+				<Grid.Transitions>
+					<Transitions>
+						<TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.7" Easing="QuarticEaseOut"/>
+					</Transitions>
+				</Grid.Transitions>
 			</Grid>
 		</Grid>
 		

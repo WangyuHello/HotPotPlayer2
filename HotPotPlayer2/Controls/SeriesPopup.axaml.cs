@@ -1,9 +1,11 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data.Converters;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
+using Avalonia.Media.Transformation;
 using ExCSS;
 using HotPotPlayer2.Base;
 using HotPotPlayer2.Models.Jellyfin;
@@ -132,7 +134,11 @@ public partial class SeriesPopup : UserControl
 
     private void BackdropExpand_Click(object sender, RoutedEventArgs e)
     {
-
+        IsBackdropExpanded = !IsBackdropExpanded;
+    }
+    private void Backdrop_Tapped(object sender, TappedEventArgs e)
+    {
+        IsBackdropExpanded = !IsBackdropExpanded;
     }
 
     private void ItemClick(object sender, RoutedEventArgs e)
@@ -207,5 +213,28 @@ public static class SeriesPopupConverters
         return (i.Chapters == null || i.Chapters.Count == 0) ? false : true;
     });
 
+    static TransformOperations? _transY142;
+    static TransformOperations? _transY284;
+    static TransformOperations? _transY60;
+    static TransformOperations? _transY0;
 
+    static TransformOperations TransY142 => _transY142 ??= TransformOperations.Parse("translateY(142px)");
+    static TransformOperations TransY284 => _transY284 ??= TransformOperations.Parse("translateY(284px)");
+    static TransformOperations TransY60 => _transY60 ??= TransformOperations.Parse("translateY(60px)");
+    static TransformOperations TransY0 => _transY0 ??= TransformOperations.Parse("translateY(0px)");
+
+    public static FuncValueConverter<bool, TransformOperations> GetBackdropOffset = new(i =>
+    {
+        return i ? TransY142 : TransY0;
+    });
+
+    public static FuncValueConverter<bool, TransformOperations> GetMainInfoOffset = new(i =>
+    {
+        return i ? TransY284 : TransY0;
+    });
+
+    public static FuncValueConverter<bool, TransformOperations> GetLeftPanelOffset = new(i =>
+    {
+        return i ? TransY60 : TransY0;
+    });
 }
