@@ -6,7 +6,7 @@ using Avalonia.Android;
 namespace HotPotPlayer2.Android;
 
 [Activity(
-    Label = "HotPotPlayer2.Android",
+    Label = "HotPotPlayer2",
     Theme = "@style/MyTheme.NoActionBar",
     Icon = "@drawable/icon",
     MainLauncher = true,
