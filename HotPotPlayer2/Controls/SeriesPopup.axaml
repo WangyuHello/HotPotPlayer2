@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:conv="using:HotPotPlayer2.Converters"
 			 xmlns:ail="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+			 xmlns:local="using:HotPotPlayer2.Controls"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 x:Name="Self"
              x:Class="HotPotPlayer2.Controls.SeriesPopup">
@@ -73,6 +74,10 @@
 							</Grid.ColumnDefinitions>
 
 							<TextBlock Margin="0,5,0,0" VerticalAlignment="Top" FontSize="14" Text="类型" FontFamily="{StaticResource MiSansMedium}"/>
+							
+							<TextBlock Margin="0,13,0,0" Grid.Row="1" FontSize="14" VerticalAlignment="Top" IsVisible="{Binding #Self.SeriesInfo.People, Converter={x:Static local:SeriesPopupConverters.GetDirectorVisible}}" Text="导演" FontFamily="{StaticResource MiSansMedium}"/>
+							
+							<TextBlock Margin="0,13,0,0" Grid.Row="2" FontSize="14" VerticalAlignment="Top" Text="{Binding #Self.SeriesInfo, Converter={x:Static local:SeriesPopupConverters.GetWriterTitle}}" FontFamily="{StaticResource MiSansMedium}"/>
 
 							<TextBlock Margin="0,13,0,0" Grid.Row="3" FontSize="14" VerticalAlignment="Top" Text="工作室" FontFamily="{StaticResource MiSansMedium}"/>
 
@@ -103,7 +108,7 @@
 						<TextBlock VerticalAlignment="Center" Text="{Binding #Self.SeriesInfo.ProductionYear}" FontFamily="{StaticResource MiSansRegular}"/>
 						<TextBlock VerticalAlignment="Center"
 								   Text="{Binding #Self.SeriesInfo, Converter={x:Static conv:JellyfinConverters.GetJellyfinDurationChinese}}"
-								   IsVisible="True"
+								   IsVisible="{Binding #Self.Series, Converter={x:Static local:SeriesPopupConverters.GetMoviePlayVisible}}"
 								   FontFamily="{StaticResource MiSansRegular}"/>
 						<Border Background="#30000000" CornerRadius="4" Padding="6,4">
 							<TextBlock Foreground="White" Text="{Binding #Self.SeriesInfo.OfficialRating}" FontFamily="{StaticResource MiSansRegular}"/>
@@ -125,8 +130,57 @@
 								Margin="-4,0,0,0"
 								x:Name="SeasonSelector" 
 								/>
-					
-					
+
+					<Grid Grid.Row="3"
+						  Margin="0,12"
+						  IsVisible="{Binding #Self.Series, Converter={x:Static local:SeriesPopupConverters.GetMoviePlayVisible}}"
+                      >
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto"/>
+							<ColumnDefinition Width="12"/>
+							<ColumnDefinition Width="*" />
+						</Grid.ColumnDefinitions>
+
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="4"/>
+							<RowDefinition Height="Auto"/>
+						</Grid.RowDefinitions>
+
+						<TextBlock Grid.Row="0" FontSize="15" VerticalAlignment="Center" Text="视频" FontFamily="{StaticResource MiSansRegular}"/>
+						<ComboBox Grid.Row="0" Grid.Column="2"
+								  ItemsSource="{Binding #Self.SeriesInfo, Converter={x:Static local:SeriesPopupConverters.GetVideoStreams}}"
+								  Width="400"
+								  FontFamily="{StaticResource MiSansRegular}"
+								  SelectedIndex="{Binding #Self.SeriesInfo, Converter={x:Static local:SeriesPopupConverters.GetVideoStreamsSelectIndex}}"/>
+
+						<TextBlock Grid.Row="2" FontSize="15" VerticalAlignment="Center" Text="音频" FontFamily="{StaticResource MiSansRegular}"/>
+						<ComboBox Grid.Row="2" Grid.Column="2"
+								  Width="400"
+								  FontFamily="{StaticResource MiSansRegular}"
+								  ItemsSource="{Binding #Self.SeriesInfo, Converter={x:Static local:SeriesPopupConverters.GetAudioStreams}}"
+								  SelectedIndex="{Binding #Self.SeriesInfo, Converter={x:Static local:SeriesPopupConverters.GetAudioStreamsSelectIndex}}"/>
+					</Grid>
+
+					<Button Grid.Row="4"
+							Width="60"
+							Height="36"
+							CornerRadius="4"
+							VerticalAlignment="Top"
+							Classes="AlbumPlayButton"
+							Tag="{Binding #Self.Series}"
+							IsVisible="{Binding #Self.Series, Converter={x:Static local:SeriesPopupConverters.GetMoviePlayVisible}}"
+							Click="" >
+						<Label Classes="LabelIcon" Content="&#xE768;" />
+					</Button>
+
+					<TextBlock Grid.Row="5"
+							   FontSize="21"
+							   Margin="0,16,0,0"
+							   IsVisible="{Binding #Self.SeriesInfo, Converter={x:Static local:SeriesPopupConverters.GetChapterVisible}}"
+							   VerticalAlignment="Center"
+							   Text="场景"
+							   FontFamily="{StaticResource MiSansMedium}"/>
 				</Grid>
 			</Grid>
 		</Grid>

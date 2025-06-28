@@ -1,7 +1,9 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Data.Converters;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
+using ExCSS;
 using HotPotPlayer2.Base;
 using HotPotPlayer2.Models.Jellyfin;
 using Jellyfin.Sdk.Generated.Models;
@@ -115,4 +117,73 @@ public partial class SeriesPopup : UserControl
             })];
         }
     }
+}
+
+public static class SeriesPopupConverters
+{
+    public static FuncValueConverter<bool, string> GetBackdropExpandIcon = new(i =>
+    {
+        return i ? "\uE70E" : "\uE70D";
+    });
+
+    public static FuncValueConverter<BaseItemDto?, bool> GetMoviePlayVisible = new(i =>
+    {
+        if (i == null || i.IsFolder == null) return false;
+        return !i.IsFolder.Value;
+    });
+
+    public static FuncValueConverter<BaseItemDto?, IEnumerable<string?>?> GetVideoStreams = new(i =>
+    {
+        return i?.MediaSources?.SelectMany(s => s.MediaStreams?.Where(m => m.Type == MediaStream_Type.Video)!)?.Select(s => s.DisplayTitle);
+    });
+
+    public static FuncValueConverter<BaseItemDto?, int> GetVideoStreamsSelectIndex = new(i =>
+    {
+        return 0;
+    });
+
+    public static FuncValueConverter<BaseItemDto?, IEnumerable<string?>?> GetAudioStreams = new(i =>
+    {
+        return i?.MediaStreams?.Where(m => m.Type == MediaStream_Type.Audio)?.Select(s => s.DisplayTitle);
+    });
+
+    public static FuncValueConverter<BaseItemDto?, int> GetAudioStreamsSelectIndex = new(i =>
+    {
+        return 0;
+    });
+
+    public static FuncValueConverter<List<BaseItemPerson>, IEnumerable<BaseItemPerson>?> GetDirector = new(i =>
+    {
+        return i?.Where(p => p.Type == BaseItemPerson_Type.Director);
+    });
+
+    public static FuncValueConverter<List<BaseItemPerson>, bool> GetDirectorVisible = new(i =>
+    {
+        return (i?.FirstOrDefault(p => p.Type == BaseItemPerson_Type.Director)) != null;
+    });
+
+    public static FuncValueConverter<List<BaseItemPerson>, IEnumerable<BaseItemPerson>?> GetWriter = new(i =>
+    {
+        return i?.Where(p => p.Type == BaseItemPerson_Type.Writer);
+    });
+
+    public static FuncValueConverter<BaseItemDto?, string?> GetWriterTitle = new(i =>
+    {
+        if (i == null)
+        {
+            return null;
+        }
+        return i.IsFolder!.Value ? "×÷Õß" : "±à¾ç";
+    });
+
+    public static FuncValueConverter<BaseItemDto?, bool> GetChapterVisible = new(i =>
+    {
+        if (i == null)
+        {
+            return false;
+        }
+        return (i.Chapters == null || i.Chapters.Count == 0) ? false : true;
+    });
+
+
 }
