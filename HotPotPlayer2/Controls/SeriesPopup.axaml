@@ -1,0 +1,135 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:conv="using:HotPotPlayer2.Converters"
+			 xmlns:ail="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 x:Name="Self"
+             x:Class="HotPotPlayer2.Controls.SeriesPopup">
+
+	<UserControl.Resources>
+		<SolidColorBrush x:Key="PopupInfoBackground" Color="#CECDDB" />
+	</UserControl.Resources>
+	
+	<Border Width="860"
+			Height="760"
+			CornerRadius="8"
+			VerticalAlignment="Center"
+			HorizontalAlignment="Center"
+			Background="{StaticResource PopupBackground}"
+			ClipToBounds="True">
+
+		<Grid>
+			<Image x:Name="Backdrop"
+				   ail:ImageLoader.Source="{Binding #Self.SeriesInfo, Converter={x:Static conv:JellyfinImageConverters.Backdrop}}"
+				   Width="860"
+				   Height="484"
+				   Stretch="UniformToFill"
+				   Margin="0,-142,0,0"
+                   VerticalAlignment="Top"
+				   >
+				
+			</Image>
+
+			<Grid Margin="0,200,0,0"
+                  x:Name="MainInfo"
+                  Background="{StaticResource PopupInfoBackground}">
+
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="292" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+
+				<Grid x:Name="LeftPanel"
+                      Margin="0,-40,0,0">
+
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="*" />
+					</Grid.RowDefinitions>
+
+					<Border CornerRadius="8" >
+						<Image x:Name="Cover"
+							   ail:ImageLoader.Source="{Binding #Self.Series, Converter={x:Static conv:JellyfinImageConverters.PrimaryImage}}"
+							   Margin="16,0,16,16"
+							   Width="260"
+							   Height="380"
+							   Stretch="UniformToFill"
+						/>
+					</Border>
+
+					<ScrollViewer Margin="16,0" Grid.Row="1">
+						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="Auto" />
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="64" />
+								<ColumnDefinition Width="*" />
+							</Grid.ColumnDefinitions>
+
+							<TextBlock Margin="0,5,0,0" VerticalAlignment="Top" FontSize="14" Text="类型" FontFamily="{StaticResource MiSansMedium}"/>
+
+							<TextBlock Margin="0,13,0,0" Grid.Row="3" FontSize="14" VerticalAlignment="Top" Text="工作室" FontFamily="{StaticResource MiSansMedium}"/>
+
+						</Grid>
+					</ScrollViewer>
+				</Grid>
+
+				<Grid Grid.Column="1" >
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="*" />
+					</Grid.RowDefinitions>
+
+					<SelectableTextBlock Text="{Binding #Self.Series.Name}"
+							   Margin="0,16,16,0"
+							   FontSize="32"
+							   TextWrapping="Wrap"
+							   MaxLines="2"
+							   FontFamily="{StaticResource MiSansMedium}"/>
+
+					<StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="10">
+						<TextBlock VerticalAlignment="Center" Text="{Binding #Self.SeriesInfo.ProductionYear}" FontFamily="{StaticResource MiSansRegular}"/>
+						<TextBlock VerticalAlignment="Center"
+								   Text="{Binding #Self.SeriesInfo, Converter={x:Static conv:JellyfinConverters.GetJellyfinDurationChinese}}"
+								   IsVisible="True"
+								   FontFamily="{StaticResource MiSansRegular}"/>
+						<Border Background="#30000000" CornerRadius="4" Padding="6,4">
+							<TextBlock Foreground="White" Text="{Binding #Self.SeriesInfo.OfficialRating}" FontFamily="{StaticResource MiSansRegular}"/>
+						</Border>
+						<StackPanel Orientation="Horizontal" Spacing="2" VerticalAlignment="Center">
+							<Label Foreground="Orange" Classes="LabelIcon" Content="&#xE735;" VerticalAlignment="Center"/>
+							<TextBlock VerticalAlignment="Center" Text="{Binding #Self.SeriesInfo.CommunityRating}" FontFamily="{StaticResource MiSansRegular}"/>
+						</StackPanel>
+					</StackPanel>
+
+					<ScrollViewer Grid.Row="2" Margin="0,8,16,0" MaxHeight="76">
+						<SelectableTextBlock Text="{Binding #Self.SeriesInfo.Overview}"
+							   TextWrapping="Wrap"
+							   FontFamily="{StaticResource MiSansRegular}"
+                           />
+					</ScrollViewer>
+					
+					<TabControl Grid.Row="3"
+								Margin="-4,0,0,0"
+								x:Name="SeasonSelector" 
+								/>
+					
+					
+				</Grid>
+			</Grid>
+		</Grid>
+		
+	</Border>
+</UserControl>

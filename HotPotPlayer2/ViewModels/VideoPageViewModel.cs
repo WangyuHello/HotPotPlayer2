@@ -1,5 +1,6 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using CommunityToolkit.Mvvm.ComponentModel;
 using HotPotPlayer2.Base;
 using HotPotPlayer2.Models.Collection;
@@ -28,6 +29,9 @@ namespace HotPotPlayer2.ViewModels
 
         [ObservableProperty]
         public partial ObservableCollection<TabItem>? VideoGridViews { get; set; }
+
+        [ObservableProperty]
+        public partial bool SeriesPopupOverlayVisible { get; set; }
 
         private List<BaseItemDto>? videoViews;
         private List<JellyfinItemCollection>? videoLists;
@@ -98,6 +102,18 @@ namespace HotPotPlayer2.ViewModels
                     await videoLists![i].LoadMoreItemsAsync(default);
                 }
             }
+        }
+
+        public void SeriesClick(object sender, RoutedEventArgs e)
+        {
+            var series = (sender as Button)!.Tag as BaseItemDto;
+            SelectedSeries = series;
+            SeriesPopupOverlayVisible = true;
+        }
+
+        public void PlaySeriesClick(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

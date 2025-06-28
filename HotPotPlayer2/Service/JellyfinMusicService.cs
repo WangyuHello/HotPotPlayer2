@@ -344,7 +344,7 @@ namespace HotPotPlayer2.Service
             return uri;
         }
 
-        public Uri? GetBackdropJellyfinImage(List<string> tag, Guid? parentId, int widthheight)
+        public Uri? GetBackdropJellyfinImage(List<string>? tag, Guid? parentId, int widthheight)
         {
             if (tag == null || tag.Count == 0) return null;
             var requestInformation = JellyfinApiClient.Items[parentId!.Value].Images[ImageType.Backdrop.ToString()].ToGetRequestInformation(param =>
@@ -763,7 +763,7 @@ namespace HotPotPlayer2.Service
             });
         }
 
-        public async Task<List<BaseItemDto>?> GetSeasons(BaseItemDto bangumi)
+        public async Task<List<BaseItemDto>?> GetSeasonsAsync(BaseItemDto bangumi)
         {
             var result = await JellyfinApiClient.Shows[bangumi.Id!.Value].Seasons.GetAsync(param =>
             {

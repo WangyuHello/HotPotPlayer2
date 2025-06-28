@@ -5,7 +5,10 @@
 			 xmlns:vm="using:HotPotPlayer2.ViewModels"
 			 xmlns:jmodel="using:Jellyfin.Sdk.Generated.Models"
 			 xmlns:ail="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+			 xmlns:ext="using:HotPotPlayer2.Extensions"
 			 xmlns:conv="using:HotPotPlayer2.Converters"
+			 xmlns:cont="using:HotPotPlayer2.Controls"
+			 xmlns:local="using:HotPotPlayer2.Views.Pages"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 x:DataType="vm:VideoPageViewModel"
              x:Class="HotPotPlayer2.Views.Pages.Video">
@@ -117,5 +120,38 @@
 			<Label Classes="LabelIcon" FontSize="60" Content="&#xE977;" />
 			<TextBlock FontSize="20" Text="尚未添加Jellyfin服务器，请在设置页面添加" FontFamily="{StaticResource MiSansRegular}"/>
 		</StackPanel>
+
+		<Grid x:Name="SeriesPopupOverlay"
+			  Margin="-36,-28,0,0"
+			  HorizontalAlignment="Stretch"
+			  VerticalAlignment="Stretch"
+		      Background="#50000000"
+			  IsVisible="false"
+			  ext:InteractiveExtensions.IsVisible="{Binding SeriesPopupOverlayVisible}"
+			  Tapped="SeriesPopupOverlay_Tapped"
+			  Opacity="{Binding SeriesPopupOverlayVisible, Converter={x:Static local:MusicConverters.GetPopupOpacity}}">
+			<Grid.Transitions>
+				<Transitions>
+					<DoubleTransition Property="Opacity" Duration="0:0:0.45" />
+				</Transitions>
+			</Grid.Transitions>
+
+			<cont:SeriesPopup x:Name="SeriesPopupTarget"
+							    Margin="0,-32,0,0"
+						        Tapped="SuppressTap"
+								RenderTransform="scale(0.9)"
+								ext:InteractiveExtensions.ShowTransform="scale(1)"
+								ext:InteractiveExtensions.HideTransform="scale(0.9)"
+								ext:InteractiveExtensions.IsVisible="{Binding SeriesPopupOverlayVisible}"
+								Series="{Binding SelectedSeries}"
+							    >
+
+				<cont:SeriesPopup.Transitions>
+					<Transitions>
+						<TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.45" Easing="BackEaseInOut"/>
+					</Transitions>
+				</cont:SeriesPopup.Transitions>
+			</cont:SeriesPopup>
+		</Grid>
 	</Grid>
 </UserControl>

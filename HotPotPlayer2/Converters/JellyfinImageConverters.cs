@@ -29,5 +29,12 @@ namespace HotPotPlayer2.Converters
                 var uri = jellyfin.GetPrimaryJellyfinImageWidth(i?.ImageTags, i?.Id, 32);
                 return uri;
             });
+
+        public static FuncValueConverter<BaseItemDto?, Uri?> Backdrop = new(i =>
+        {
+            var jellyfin = ((IServiceLocator)Application.Current!).JellyfinMusicService;
+            var uri = jellyfin.GetBackdropJellyfinImage(i?.BackdropImageTags, i?.Id, 860);
+            return uri;
+        });
     }
 }
