@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data.Converters;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using ExCSS;
@@ -116,6 +117,27 @@ public partial class SeriesPopup : UserControl
                 StartPositionTicks = c.StartPositionTicks,
             })];
         }
+    }
+
+    private async void SeasonSelector_SelectionChanged(object sender, SelectionChangedEventArgs args)
+    {
+        var tab = sender as TabControl;
+        if (tab!.SelectedItem is not TabItem selectedItem) { return; }
+        int currentSelectedIndex = tab.Items.IndexOf(selectedItem);
+
+        var season = Seasons![currentSelectedIndex];
+        var app = Application.Current as AppBase;
+        SelectedSeasonVideoItems = await app!.JellyfinMusicService.GetEpisodes(season);
+    }
+
+    private void BackdropExpand_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void ItemClick(object sender, RoutedEventArgs e)
+    {
+
     }
 }
 

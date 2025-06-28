@@ -3,6 +3,7 @@ using Avalonia.Data.Converters;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using HotPotPlayer2.Base;
+using HotPotPlayer2.Models.Jellyfin;
 using Jellyfin.Sdk.Generated.Models;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,13 @@ namespace HotPotPlayer2.Converters
         {
             var jellyfin = ((IServiceLocator)Application.Current!).JellyfinMusicService;
             var uri = jellyfin.GetBackdropJellyfinImage(i?.BackdropImageTags, i?.Id, 860);
+            return uri;
+        });
+
+        public static FuncValueConverter<CustomChapterInfo?, Uri?> GetChapterImage = new(i =>
+        {
+            var jellyfin = ((IServiceLocator)Application.Current!).JellyfinMusicService;
+            var uri = jellyfin.GetChapterImage(i?.ImageTag, i?.Index, i?.ParentId);
             return uri;
         });
     }

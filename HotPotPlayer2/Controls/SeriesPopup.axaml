@@ -5,12 +5,118 @@
 			 xmlns:conv="using:HotPotPlayer2.Converters"
 			 xmlns:ail="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
 			 xmlns:local="using:HotPotPlayer2.Controls"
+			 xmlns:jmodel="using:Jellyfin.Sdk.Generated.Models"
+			 xmlns:mjmodel="using:HotPotPlayer2.Models.Jellyfin"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 x:Name="Self"
              x:Class="HotPotPlayer2.Controls.SeriesPopup">
 
 	<UserControl.Resources>
 		<SolidColorBrush x:Key="PopupInfoBackground" Color="#CECDDB" />
+
+		<DataTemplate x:Key="VideoListTemplate" x:DataType="jmodel:BaseItemDto">
+			<Button Classes="ListButton" Tag="{Binding }" Padding="0" Click="ItemClick">
+				<Button.Background>
+					<MultiBinding Converter="{x:Static conv:CommonConverters.EvenColor}">
+						<Binding  />
+						<Binding Path="#Self.SelectedSeasonVideoItems" />
+					</MultiBinding>
+				</Button.Background>
+				<Grid Margin="8">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*" />
+						<RowDefinition Height="2*" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="24" />
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="48" />
+						<ColumnDefinition Width="Auto" />
+					</Grid.ColumnDefinitions>
+
+					<TextBlock Grid.RowSpan="2"
+							   FontSize="12"
+							   HorizontalAlignment="Center"
+							   VerticalAlignment="Center"
+							   FontFamily="{StaticResource MiSansBold}">
+						<TextBlock.Text>
+							<MultiBinding Converter="{x:Static conv:CommonConverters.ListIndex}">
+								<Binding  />
+								<Binding Path="#Self.SelectedSeasonVideoItems" />
+							</MultiBinding>
+						</TextBlock.Text>
+					</TextBlock>
+					<Border CornerRadius="4"
+							Grid.RowSpan="2"
+							Margin="4,0,8,0" 
+							Height="81" Width="144"
+							Grid.Column="1" 
+							VerticalAlignment="Center" 
+							ClipToBounds="True"
+							>
+						<Image ail:ImageLoader.Source="{Binding Converter={x:Static conv:JellyfinImageConverters.PrimaryImage}}"
+							   Height="81" Width="144"
+						    />
+					</Border>
+					<TextBlock Grid.Column="2" 
+							   Grid.ColumnSpan="2" 
+							   Margin="0,0,32,2" 
+							   VerticalAlignment="Bottom" 
+							   FontSize="18" 
+							   TextTrimming="CharacterEllipsis" 
+							   Text="{Binding Name}" 
+							   FontFamily="{StaticResource MiSansMedium}"
+							   ToolTip.Tip="{Binding Name}"/>
+					<TextBlock Grid.Row="1" 
+							   Grid.Column="2" 
+							   Grid.ColumnSpan="2" 
+							   Margin="0,0,8,0" 
+							   VerticalAlignment="Top" 
+							   FontSize="14" 
+							   MaxLines="2" 
+							   TextWrapping="Wrap" 
+							   TextTrimming="CharacterEllipsis" 
+							   Text="{Binding Overview}" 
+							   Foreground="Gray" 
+							   FontFamily="{StaticResource MiSansRegular}"
+							   ToolTip.Tip="{Binding Overview}"/>
+					<TextBlock Grid.RowSpan="2" 
+							   Grid.Column="4" 
+							   Text="{Binding Converter={x:Static conv:JellyfinConverters.GetJellyfinDuration}}" 
+							   VerticalAlignment="Center" 
+							   FontFamily="{StaticResource MiSansRegular}"/>
+					<Button Grid.RowSpan="2" 
+							Grid.Column="5" 
+							Classes="TransparentButton" 
+							Margin="4,0,4,0" 
+							CornerRadius="4" 
+							Padding="4" 
+							Tag="{Binding }" >
+						<Label Classes="LabelIcon" Content="&#xE712;" />
+					</Button>
+				</Grid>
+			</Button>
+		</DataTemplate>
+
+		<DataTemplate x:Key="ChapterListTemplate" x:DataType="mjmodel:CustomChapterInfo">
+			<Grid Width="284" Height="160">
+				<Image
+					Width="284" Height="160"
+					ail:ImageLoader.Source="{Binding Converter={x:Static conv:JellyfinImageConverters.GetChapterImage}}"
+                />
+				<StackPanel Orientation="Vertical"
+							Background="#90000000"
+							VerticalAlignment="Bottom"
+							HorizontalAlignment="Left"
+							Spacing="4"
+                        >
+					<TextBlock Margin="8,4,0,4" Text="{Binding Name}" Foreground="White" FontFamily="{StaticResource MiSansRegular}"/>
+					<TextBlock Margin="0,4,8,4" Text="{Binding Converter={x:Static conv:JellyfinConverters.GetJellyfinDuration2}}" Foreground="White" FontFamily="{StaticResource MiSansRegular}"/>
+				</StackPanel>
+			</Grid>
+		</DataTemplate>
 	</UserControl.Resources>
 	
 	<Border Width="860"
@@ -129,6 +235,7 @@
 					<TabControl Grid.Row="3"
 								Margin="-4,0,0,0"
 								x:Name="SeasonSelector" 
+								SelectionChanged="SeasonSelector_SelectionChanged"
 								/>
 
 					<Grid Grid.Row="3"
@@ -166,6 +273,7 @@
 							Width="60"
 							Height="36"
 							CornerRadius="4"
+							Padding="0"
 							VerticalAlignment="Top"
 							Classes="AlbumPlayButton"
 							Tag="{Binding #Self.Series}"
@@ -181,7 +289,38 @@
 							   VerticalAlignment="Center"
 							   Text="场景"
 							   FontFamily="{StaticResource MiSansMedium}"/>
+
+					<ScrollViewer Grid.Row="7">
+						<ItemsRepeater ItemsSource="{Binding #Self.SelectedSeasonVideoItems}"
+									   Classes="ListView"
+									   ItemTemplate="{StaticResource VideoListTemplate}">
+							
+						</ItemsRepeater>
+					</ScrollViewer>
+
+					<ScrollViewer Grid.Row="6"
+								  IsVisible="{Binding #Self.Series, Converter={x:Static local:SeriesPopupConverters.GetMoviePlayVisible}}">
+						<ItemsRepeater ItemsSource="{Binding #Self.CustomChapters}"
+									   Classes="HorizontalListView"
+									   ItemTemplate="{StaticResource ChapterListTemplate}">
+
+						</ItemsRepeater>
+					</ScrollViewer>
 				</Grid>
+
+				<Button Grid.Column="1"
+						HorizontalAlignment="Right"
+						VerticalAlignment="Top"
+						Margin="0,-40,8,0"
+						Classes="WhiteTransparentButton"
+						Background="#30000000"
+						Width="32"
+						Height="32"
+						CornerRadius="16"
+						Click="BackdropExpand_Click"
+                    >
+					<Label Classes="LabelIcon" Content="{Binding #Self.IsBackdropExpanded, Converter={x:Static local:SeriesPopupConverters.GetBackdropExpandIcon}}" />
+				</Button>
 			</Grid>
 		</Grid>
 		

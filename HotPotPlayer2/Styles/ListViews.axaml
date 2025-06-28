@@ -12,4 +12,9 @@
 			<StackLayout />
 		</Setter>
 	</Style>
+	<Style Selector="ItemsRepeater.HorizontalListView">
+		<Setter Property="Layout">
+			<StackLayout Orientation="Horizontal"/>
+		</Setter>
+	</Style>
 </Styles>

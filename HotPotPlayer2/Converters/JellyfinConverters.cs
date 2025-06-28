@@ -1,5 +1,6 @@
 ﻿using Avalonia.Data.Converters;
 using HotPotPlayer2.Extensions;
+using HotPotPlayer2.Models.Jellyfin;
 using Jellyfin.Sdk.Generated.Models;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,13 @@ namespace HotPotPlayer2.Converters
         public static FuncValueConverter<BaseItemDto, string> GetJellyfinDuration = new(b =>
         {
             return b.GetJellyfinDuration();
+        });
+
+        public static FuncValueConverter<CustomChapterInfo?, string> GetJellyfinDuration2 = new(b =>
+        {
+            var t = new TimeOnly(b?.StartPositionTicks ?? 0);
+            var str = t.ToString("mm\\:ss");
+            return str;
         });
 
         public static FuncValueConverter<BaseItemDto, string> GetJellyfinDurationChinese = new(b =>

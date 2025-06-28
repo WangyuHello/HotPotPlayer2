@@ -329,9 +329,10 @@ namespace HotPotPlayer2.Service
             return GetPrimaryJellyfinImageBase(tag, parentId, 300, "Banner");
         }
 
-        public Uri GetChapterImage(string tag, int index, Guid parentId)
+        public Uri? GetChapterImage(string? tag, int? index, Guid? parentId)
         {
-            var requestInformation = JellyfinApiClient.Items[parentId].Images["Chapter"][index].ToGetRequestInformation(param =>
+            if (tag == null || index == null || parentId == null) return null;
+            var requestInformation = JellyfinApiClient.Items[parentId.Value].Images["Chapter"][index.Value].ToGetRequestInformation(param =>
             {
                 param.QueryParameters = new Jellyfin.Sdk.Generated.Items.Item.Images.Item.Item.WithImageIndexItemRequestBuilder.WithImageIndexItemRequestBuilderGetQueryParameters
                 {
