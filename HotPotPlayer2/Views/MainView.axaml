@@ -5,6 +5,7 @@
              xmlns:vm="using:HotPotPlayer2.ViewModels"
 		     xmlns:cont="using:HotPotPlayer2.Controls"
 			 xmlns:local="using:HotPotPlayer2.Views"
+			 xmlns:pages="using:HotPotPlayer2.Views.Pages"
 			 xmlns:ext="using:HotPotPlayer2.Extensions"
              x:DataType="vm:MainWindowViewModel"
 			 x:Name="Self"
@@ -62,6 +63,16 @@
 				</Transitions>
 			</cont:PlayBar.Transitions>
 		</cont:PlayBar>
+
+		<pages:VideoPlayPage x:Name="VideoPlay"
+							 HorizontalAlignment="{Binding VideoPlayer.VisualState, Converter={x:Static local:MainViewConverters.GetVideoPlayHorizontalAlignment}}"
+							 VerticalAlignment="{Binding VideoPlayer.VisualState, Converter={x:Static local:MainViewConverters.GetVideoPlayVerticalAlignment}}"
+						     Margin="{Binding VideoPlayer.VisualState, Converter={x:Static local:MainViewConverters.GetVideoPlayMargin}}"
+						     Width="{Binding VideoPlayer.VisualState, Converter={x:Static local:MainViewConverters.GetVideoPlayWidth}}"
+						     Height="{Binding VideoPlayer.VisualState, Converter={x:Static local:MainViewConverters.GetVideoPlayHeight}}"
+							 >
+
+		</pages:VideoPlayPage>
 
 		<cont:Toast x:Name="Toast" 
 					VerticalAlignment="Top" 
