@@ -1,4 +1,5 @@
-﻿using Avalonia.Controls;
+﻿using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Platform;
 using System;
 using System.Collections.Generic;

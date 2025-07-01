@@ -36,7 +36,7 @@ namespace HotPotPlayer2.Service
         }
 
 #if WINDOWS
-        private DisplayInfo? _displayInfo;
+        //private DisplayInfo? _displayInfo;
 #endif
 
         public override async void PlayNext(BaseItemDto? video)
@@ -77,26 +77,26 @@ namespace HotPotPlayer2.Service
 #if WINDOWS
         protected override void BeforePlayerStarter()
         {
-            if (_displayInfo == null && !Config.HasConfig("target-prim"))
-            {
-                if (OperatingSystem.IsWindowsVersionAtLeast(10, 0, 22621, 0))
-                {
-                    var display = DisplayInformationInterop.GetForWindow(App.MainWindowHandle);
-                    var colorInfo = display.GetAdvancedColorInfo();
-                    _displayInfo = new DisplayInfo
-                    {
-                        IsHDR = colorInfo.CurrentAdvancedColorKind == AdvancedColorKind.HighDynamicRange,
-                        MaxLuminanceInNits = colorInfo.MaxLuminanceInNits.ToString()
-                    };
-                }
-                else
-                {
-                    _displayInfo = new DisplayInfo
-                    {
-                        IsHDR = false,
-                    };
-                }
-            }
+            //if (_displayInfo == null && !Config.HasConfig("target-prim"))
+            //{
+            //    if (OperatingSystem.IsWindowsVersionAtLeast(10, 0, 22621, 0))
+            //    {
+            //        var display = DisplayInformationInterop.GetForWindow(App.MainWindowHandle);
+            //        var colorInfo = display.GetAdvancedColorInfo();
+            //        _displayInfo = new DisplayInfo
+            //        {
+            //            IsHDR = colorInfo.CurrentAdvancedColorKind == AdvancedColorKind.HighDynamicRange,
+            //            MaxLuminanceInNits = colorInfo.MaxLuminanceInNits.ToString()
+            //        };
+            //    }
+            //    else
+            //    {
+            //        _displayInfo = new DisplayInfo
+            //        {
+            //            IsHDR = false,
+            //        };
+            //    }
+            //}
         }
 #endif
 
@@ -112,23 +112,23 @@ namespace HotPotPlayer2.Service
             //_mpv.API.SetPropertyString("d3d11-composition", "yes");
             //_mpv.API.SetPropertyString("icc-profile-auto", "yes");
 
-            string peak = "auto";
-            string prim = "bt.709";
-            string trc = "bt.1886";
+            //string peak = "auto";
+            //string prim = "bt.709";
+            //string trc = "bt.1886";
 #if WINDOWS
-            if (_displayInfo != null && !Config.HasConfig("target-prim"))
-            {
-                if (_displayInfo.IsHDR)
-                {
-                    peak = _displayInfo.MaxLuminanceInNits!;
-                    prim = "bt.2020";
-                    trc = "pq";
-                }
-            }
+            //if (_displayInfo != null && !Config.HasConfig("target-prim"))
+            //{
+            //    if (_displayInfo.IsHDR)
+            //    {
+            //        peak = _displayInfo.MaxLuminanceInNits!;
+            //        prim = "bt.2020";
+            //        trc = "pq";
+            //    }
+            //}
 #endif
-            _mpv.API.SetPropertyString("target-peak", Config.GetConfig("target-peak", peak, true));
-            _mpv.API.SetPropertyString("target-prim", Config.GetConfig("target-prim", prim, true));
-            _mpv.API.SetPropertyString("target-trc", Config.GetConfig("target-trc", trc, true));
+            //_mpv.API.SetPropertyString("target-peak", Config.GetConfig("target-peak", peak, true));
+            //_mpv.API.SetPropertyString("target-prim", Config.GetConfig("target-prim", prim, true));
+            //_mpv.API.SetPropertyString("target-trc", Config.GetConfig("target-trc", trc, true));
             //_mpv.API.SetPropertyString("target-colorspace-hint", "yes"); //HDR passthrough
             _mpv.API.SetPropertyString("loop-playlist", "inf");
 

@@ -34,7 +34,9 @@
 					<Border CornerRadius="4" Background="#8c44f1" Margin="4,4,0,4" Padding="8,0" >
 						
 					</Border>
-				    <Button x:Name="PlayButton" Classes="VideoPlayOtherButton" Command="{Binding PlayButtonClickCommand}"/>
+				    <Button x:Name="PlayButton" Classes="VideoPlayOtherButton" Command="{Binding PlayButtonClickCommand}">
+						<Label Classes="LabelIcon" Content="{Binding VideoPlayer.IsPlaying, Converter={x:Static cont:PlayBarConverters.GetPlayButtonIconFill}}" />
+					</Button>
                     <Button Classes="VideoPlayOtherButton" Command="{Binding PlayNextButtonClickCommand}">
                         <Label Classes="LabelIcon" Content="&#xF8AD;" />
                     </Button>

@@ -22,6 +22,7 @@ public partial class Video : UserControl
     private void PlaySeriesClick(object sender, RoutedEventArgs e)
     {
         (DataContext as VideoPageViewModel)?.PlaySeriesClick(sender, e);
+        e.Handled = true;
     }
 
     private void SuppressTap(object sender, TappedEventArgs e)

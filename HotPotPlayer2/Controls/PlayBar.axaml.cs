@@ -86,6 +86,11 @@ public static class PlayBarConverters
         return i ? "\uE769" : "\uE768";
     });
 
+    public static FuncValueConverter<bool, string> GetPlayButtonIconFill = new(i =>
+    {
+        return i ? "\uE769" : "\uF5B0";
+    });
+
     const string Loop = "\uE1CD";
     const string SingleLoop = "\uE1CC";
     const string Shuffle = "\uE8B1";

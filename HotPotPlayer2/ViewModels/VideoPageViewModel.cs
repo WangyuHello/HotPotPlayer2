@@ -113,7 +113,8 @@ namespace HotPotPlayer2.ViewModels
 
         public void PlaySeriesClick(object sender, RoutedEventArgs e)
         {
-
+            var video = (sender as Control)?.Tag as BaseItemDto;
+            VideoPlayer.PlayNext(video);
         }
     }
 }
