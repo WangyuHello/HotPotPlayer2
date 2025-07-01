@@ -777,8 +777,9 @@ namespace HotPotPlayer2.Service
             return result?.Items;
         }
 
-        public async Task<List<BaseItemDto>?> GetEpisodes(BaseItemDto season)
+        public async Task<List<BaseItemDto>?> GetEpisodes(BaseItemDto? season)
         {
+            if (season == null) return null;
             var result = await JellyfinApiClient.Shows[season.Id!.Value].Episodes.GetAsync(param =>
             {
                 param.QueryParameters = new Jellyfin.Sdk.Generated.Shows.Item.Episodes.EpisodesRequestBuilder.EpisodesRequestBuilderGetQueryParameters

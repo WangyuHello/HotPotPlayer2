@@ -17,6 +17,7 @@ namespace HotPotPlayer2.Base
         public JellyfinMusicService JellyfinMusicService => App.JellyfinMusicService;
 
         public MusicPlayerService MusicPlayer => App.MusicPlayer;
+        public VideoPlayerService VideoPlayer => App.VideoPlayer;
 
         public void NavigateBack(bool force = false)
         {

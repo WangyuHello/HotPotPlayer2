@@ -180,6 +180,20 @@
 		<Setter Property="BorderBrush" Value="#576CCF"/>
 	</Style>
 
+	<Style Selector="Button.VideoPlayOtherButton">
+		<Setter Property="Width" Value="36"/>
+		<Setter Property="Height" Value="36"/>
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="Foreground" Value="#b2b2b2"/>
+		<Setter Property="BorderThickness" Value="0"/>
+		<Setter Property="Padding" Value="0"/>
+		<Setter Property="CornerRadius" Value="18"/>
+	</Style>
+
+	<Style Selector="Button.VideoPlayOtherButton:pressed /template/ ContentPresenter">
+		<!--<Setter Property="Background" Value="#d1d6e1"/>-->
+	</Style>
+
 	<Style Selector="Button.VolumeButton">
 		<Setter Property="Width" Value="72"/>
 		<Setter Property="Height" Value="36"/>

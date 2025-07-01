@@ -17,6 +17,7 @@ namespace HotPotPlayer2.Base
 
         public JellyfinMusicService JellyfinMusicService { get; }
         public MusicPlayerService MusicPlayer { get; }
+        public VideoPlayerService VideoPlayer { get; }
 
         public void ShowToast(ToastInfo toast);
         public void NavigateTo(string name, object? parameter = default);

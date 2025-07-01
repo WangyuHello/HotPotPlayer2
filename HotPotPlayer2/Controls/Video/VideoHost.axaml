@@ -1,0 +1,118 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:local="using:HotPotPlayer2.Controls.Video"
+			 xmlns:cont="using:HotPotPlayer2.Controls"
+			 xmlns:vm="using:HotPotPlayer2.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 x:DataType="vm:VideoHostViewModel"
+             x:Class="HotPotPlayer2.Controls.Video.VideoHost">
+    <Grid>
+		<local:VideoNativeControlHost x:Name="Host" />
+	
+        <Grid x:Name="DanmakuHost" Margin="1"/>
+	
+        <!--PlayBar-->
+	    <Border Background="#e0424047"
+                CornerRadius="8" 
+                VerticalAlignment="Bottom" 
+                HorizontalAlignment="Stretch" 
+                MaxWidth="840" 
+                Margin="16,0,16,16" 
+                Padding="8,6" 
+				>
+			<Grid>
+			    <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+			
+		        <StackPanel Margin="0,0,8,0" Orientation="Horizontal" Spacing="4">
+					<Border CornerRadius="4" Background="#8c44f1" Margin="4,4,0,4" Padding="8,0" >
+						
+					</Border>
+				    <Button x:Name="PlayButton" Classes="VideoPlayOtherButton" Command="{Binding PlayButtonClickCommand}"/>
+                    <Button Classes="VideoPlayOtherButton" Command="{Binding PlayNextButtonClickCommand}">
+                        <Label Classes="LabelIcon" Content="&#xF8AD;" />
+                    </Button>
+                    <Button Classes="VideoPlayOtherButton" Command="{Binding PlayModeButtonClickCommand}">
+						<Label Classes="LabelIcon" Content="{Binding VideoPlayer.PlayMode, Converter={x:Static cont:PlayBarConverters.GetPlayModeIcon}}" />
+                    </Button>
+		        </StackPanel>
+			
+				<Slider x:Name="PlaySlider"
+						Margin="0,0,0,-10"
+						Classes="PlaySliderStyle"
+						Grid.Column="1"
+						>
+					<Slider.Value>
+						<MultiBinding Converter="{x:Static cont:PlayBarConverters.GetSliderValue}">
+							<Binding Path="VideoPlayer.CurrentTime" />
+							<Binding Path="VideoPlayer.CurrentPlayingDuration" />
+						</MultiBinding>
+					</Slider.Value>
+				</Slider>
+
+				<StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="0">
+					<TextBlock VerticalAlignment="Center" Text="{Binding VideoPlayer.CurrentTime, StringFormat='mm\\:ss'}" FontSize="13" Foreground="#b2b2b2"/>
+					<TextBlock Margin="0,0,2,0" Text="/" VerticalAlignment="Center" FontFamily="{StaticResource MiSansRegular}" FontSize="13" Foreground="#b2b2b2"/>
+					<TextBlock VerticalAlignment="Center" Text="{Binding VideoPlayer.CurrentPlayingDuration, StringFormat='mm\\:ss'}" FontSize="13" Foreground="#b2b2b2"/>
+				</StackPanel>
+				
+			    <StackPanel Margin="16,0,0,0" Grid.Column="3" Orientation="Horizontal" >
+					<Button Classes="VolumeButton">
+						<cont:VolumePresenter Volume="{Binding VideoPlayer.Volume}"/>
+						<Button.Flyout>
+							<Flyout Placement="Top">
+								<Slider Margin="0,-6,0,0" Classes="VolumeSliderStyle" Value="{Binding VideoPlayer.Volume, Mode=TwoWay}"/>
+							</Flyout>
+						</Button.Flyout>
+					</Button>
+                    <Button Margin="8,0,0,0" Classes="VideoPlayOtherButton" >
+                        <Label Classes="LabelIcon" Content="&#xE946;" />
+                    </Button>
+                    <Button Margin="8,0,0,0" Classes="VideoPlayOtherButton">
+                        <!--<Label Classes="LabelIcon" Content="{x:Bind GetFullScreenIcon(IsFullScreen), Mode=OneWay}" />-->
+                    </Button>
+                    <Button Margin="8,0,0,0" Classes="VideoPlayOtherButton">
+                        <Label Classes="LabelIcon" Content="&#xE762;" />
+                    </Button>
+                    <Button Margin="8,0,0,0" Classes="VideoPlayOtherButton" >
+                        <!--<Label Classes="LabelIcon" Content="{x:Bind GetFullPageIcon(IsFullPage)}" />-->
+                    </Button>
+				</StackPanel>
+			</Grid>
+		</Border>
+	
+		<Border VerticalAlignment="Top"
+				Padding="8,8">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+
+				<Button Classes="VideoPlayOtherButton" Command="{Binding NavigateBackClickCommand}">
+					<Label Classes="LabelIcon" Content="&#xE72B;" />
+				</Button>
+
+				<Button Grid.Column="1" Classes="VideoPlayOtherButton" Command="{Binding ToggleSmallWindowClickCommand}">
+					<Label Classes="LabelIcon" Content="&#xE66C;" />
+				</Button>
+			
+				<TextBlock Margin="8,0" 
+						   Grid.Column="2" 
+						   Foreground="White" 
+						   VerticalAlignment="Center" 
+						   Text="{Binding VideoPlayer.CurrentPlaying.Name}" 
+						   FontFamily="{StaticResource MiSansRegular}" 
+						   FontSize="14"/>
+			</Grid>
+		</Border>
+	</Grid>
+</UserControl>
