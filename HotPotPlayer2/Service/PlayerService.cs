@@ -530,7 +530,7 @@ namespace HotPotPlayer2.Service
                     {
                         AutoPlay = false,
                         Volume = Volume,
-                        LogLevel = MpvLogLevel.None,
+                        LogLevel = MpvLogLevel.Debug,
                         Loop = false,
                         LoopPlaylist = false,
                     };

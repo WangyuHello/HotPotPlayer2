@@ -100,18 +100,22 @@ namespace HotPotPlayer2.Service
         }
 #endif
 
-        public Func<nint>? GetNativeHost;
         protected override void SetupMpvInitProperty(MpvPlayer _mpv)
         {
             //_mpv.API.SetPropertyDouble("display-fps-override", 120d);
             //_mpv.API.SetPropertyString("gpu-debug", "yes");
             //_mpv.API.SetPropertyString("vo", "gpu-next");
-            _mpv.API.SetPropertyString("vo", "gpu");
-            _mpv.API.SetPropertyString("gpu-context", "d3d11");
-            _mpv.API.SetPropertyString("hwdec", "d3d11va");
+            _mpv.API.SetPropertyString("vo", "libmpv");
+            _mpv.API.SetPropertyString("gpu-context", "auto");
+            _mpv.API.SetPropertyString("hwdec", "auto");
             //_mpv.API.SetPropertyString("d3d11-composition", "yes");
             //_mpv.API.SetPropertyString("icc-profile-auto", "yes");
-
+            SetupRenderUpdate?.Invoke(_mpv.API);
+            SetupGetProcAddress?.Invoke(_mpv.API);
+            Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                _mpv.API.EnsureRenderContextCreated();
+            }).Wait();
             //string peak = "auto";
             //string prim = "bt.709";
             //string trc = "bt.1886";
@@ -131,13 +135,10 @@ namespace HotPotPlayer2.Service
             //_mpv.API.SetPropertyString("target-trc", Config.GetConfig("target-trc", trc, true));
             //_mpv.API.SetPropertyString("target-colorspace-hint", "yes"); //HDR passthrough
             _mpv.API.SetPropertyString("loop-playlist", "inf");
-
-            var host = GetNativeHost?.Invoke();
-            if (host != null && host != nint.Zero)
-            {
-                _mpv.API.SetPropertyLong("wid", host.Value.ToInt64());
-            }
         }
+
+        public Action<Mpv.NET.API.Mpv>? SetupRenderUpdate;
+        public Action<Mpv.NET.API.Mpv>? SetupGetProcAddress;
 
         protected override void SetupMpvPropertyBeforePlay(MpvPlayer mpv, BaseItemDto media)
         {
@@ -388,6 +389,21 @@ namespace HotPotPlayer2.Service
                 Width = width,
                 Height = height
             };
+        }
+
+        public void OpenGLRender(int width, int height, int fbo, int format = 0, int flipY = 0)
+        {
+            _mpv?.API.OpenGLRender(width, height, fbo, format, flipY);
+        }
+
+        public void EnsureRenderContextCreated()
+        {
+            
+        }
+
+        public void ReleaseRenderContext()
+        {
+            _mpv?.API?.ReleaseRenderContext();
         }
     }
 }

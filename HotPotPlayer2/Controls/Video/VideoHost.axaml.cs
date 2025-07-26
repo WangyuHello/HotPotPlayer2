@@ -11,12 +11,5 @@ public partial class VideoHost : UserControl
     public VideoHost()
     {
         InitializeComponent();
-        DataContext = new VideoHostViewModel();
-        (DataContext as VideoHostViewModel)?.VideoPlayer.GetNativeHost = GetNativeHost;
-    }
-
-    private nint GetNativeHost()
-    {
-        return Host.Hwnd;
     }
 }
