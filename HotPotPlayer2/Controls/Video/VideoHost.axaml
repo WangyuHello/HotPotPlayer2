@@ -11,7 +11,7 @@
     <Grid>
 		<local:VideoNativeControlHost x:Name="Host" />
 	
-        <Grid x:Name="DanmakuHost" Margin="1"/>
+        <!--<Grid x:Name="DanmakuHost" Margin="1"/>-->
 	
         <!--PlayBar-->
 	    <Border Background="#e0424047"
@@ -88,7 +88,8 @@
 				</StackPanel>
 			</Grid>
 		</Border>
-	
+		
+		<!--Title-->
 		<Border VerticalAlignment="Top"
 				Padding="8,8">
 			<Grid>

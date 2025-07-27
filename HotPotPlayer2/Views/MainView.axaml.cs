@@ -99,4 +99,9 @@ public static class MainViewConverters
             _ => double.NaN,
         };
     });
+
+    public static FuncValueConverter<VideoPlayVisualState, bool> GetVideoPlayVisible = new(i =>
+    {
+        return i != VideoPlayVisualState.TinyHidden;
+    });
 }

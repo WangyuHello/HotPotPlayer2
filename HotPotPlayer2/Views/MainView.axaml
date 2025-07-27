@@ -70,6 +70,7 @@
 						     Margin="{Binding VideoPlayer.VisualState, Converter={x:Static local:MainViewConverters.GetVideoPlayMargin}}"
 						     Width="{Binding VideoPlayer.VisualState, Converter={x:Static local:MainViewConverters.GetVideoPlayWidth}}"
 						     Height="{Binding VideoPlayer.VisualState, Converter={x:Static local:MainViewConverters.GetVideoPlayHeight}}"
+							 IsVisible="{Binding VideoPlayer.VisualState, Converter={x:Static local:MainViewConverters.GetVideoPlayVisible}}"
 							 >
 
 		</pages:VideoPlayPage>

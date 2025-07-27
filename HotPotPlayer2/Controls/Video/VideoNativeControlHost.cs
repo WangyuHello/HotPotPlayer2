@@ -22,13 +22,10 @@ namespace HotPotPlayer2.Controls.Video
         protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
         {
             base.OnAttachedToVisualTree(e);
-            if (VideoPlayer != null)
+            VideoPlayer?.SetupRenderUpdate = mpv =>
             {
-                VideoPlayer.SetupRenderUpdate = mpv =>
-                {
-                    mpv.UpdateCallback = OpenGLUpdateCallback;
-                };
-            }
+                mpv.UpdateCallback = OpenGLUpdateCallback;
+            };
         }
 
         protected override void OnOpenGlRender(GlInterface gl, int fb)
@@ -46,6 +43,8 @@ namespace HotPotPlayer2.Controls.Video
         {
             _getProcAddress = (ctx, name) => gl.GetProcAddress(name);
             VideoPlayer.SetupGetProcAddress = mpv => mpv.GetProcAddress = _getProcAddress;
+            VideoPlayer.WaitForMpvCreate();
+            VideoPlayer.EnsureRenderContextCreated();
         }
 
         protected override void OnOpenGlDeinit(GlInterface gl)

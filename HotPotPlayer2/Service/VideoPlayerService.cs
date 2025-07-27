@@ -110,12 +110,6 @@ namespace HotPotPlayer2.Service
             _mpv.API.SetPropertyString("hwdec", "auto");
             //_mpv.API.SetPropertyString("d3d11-composition", "yes");
             //_mpv.API.SetPropertyString("icc-profile-auto", "yes");
-            SetupRenderUpdate?.Invoke(_mpv.API);
-            SetupGetProcAddress?.Invoke(_mpv.API);
-            Dispatcher.UIThread.InvokeAsync(() =>
-            {
-                _mpv.API.EnsureRenderContextCreated();
-            }).Wait();
             //string peak = "auto";
             //string prim = "bt.709";
             //string trc = "bt.1886";
@@ -135,6 +129,8 @@ namespace HotPotPlayer2.Service
             //_mpv.API.SetPropertyString("target-trc", Config.GetConfig("target-trc", trc, true));
             //_mpv.API.SetPropertyString("target-colorspace-hint", "yes"); //HDR passthrough
             _mpv.API.SetPropertyString("loop-playlist", "inf");
+            _mpvCreateEvent.Set();
+            _mpvRenderCreateEvent.WaitOne();
         }
 
         public Action<Mpv.NET.API.Mpv>? SetupRenderUpdate;
@@ -396,9 +392,19 @@ namespace HotPotPlayer2.Service
             _mpv?.API.OpenGLRender(width, height, fbo, format, flipY);
         }
 
+        private AutoResetEvent _mpvCreateEvent = new AutoResetEvent(false);
+        private AutoResetEvent _mpvRenderCreateEvent = new AutoResetEvent(false);
+        public void WaitForMpvCreate()
+        {
+            _mpvCreateEvent.WaitOne();
+        }
+
         public void EnsureRenderContextCreated()
         {
-            
+            SetupRenderUpdate?.Invoke(_mpv!.API);
+            SetupGetProcAddress?.Invoke(_mpv!.API);
+            _mpv?.API?.EnsureRenderContextCreated();
+            _mpvRenderCreateEvent.Set();
         }
 
         public void ReleaseRenderContext()
